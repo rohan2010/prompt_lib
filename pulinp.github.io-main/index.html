@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulin Prabhu — Product Manager</title>
+  <meta name="description" content="Pulin Prabhu is a Product Manager based in Sunnyvale, CA. Specializing in mobile, data, and AI-driven products.">
+  <link rel="icon" href="assets/images/logo.ico">
+
+  <!-- Preload hover images for dual-state cards -->
+  <link rel="preload" as="image" href="assets/images/apollo-2.png">
+  <link rel="preload" as="image" href="assets/images/hertz-2.png">
+  <link rel="preload" as="image" href="assets/images/eventvol-5.png">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- ROTATE PROMPT (portrait mobile) -->
+  <div class="rotate-prompt" aria-hidden="true">
+    <div class="rotate-icon">↻</div>
+    <p>Please rotate your device.<br>This is a horizontal experience.</p>
+    <div class="rotate-brand">Pulin Prabhu</div>
+  </div>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-bg-text" aria-hidden="true">PRABHU</div>
+    <div class="loader-inner">
+      <span class="loader-eyebrow">Product Manager · Sunnyvale, CA</span>
+      <h1 class="loader-name">Pulin<br>Prabhu</h1>
+      <button id="loader-enter">Enter</button>
+    </div>
+    <div class="loader-bottom" aria-hidden="true">
+      <span>Portfolio 2025</span>
+      <span>Strategy · AI · Product</span>
+    </div>
+  </div>
+
+  <!-- FIXED NAVIGATION -->
+  <header class="site-header" id="site-header">
+    <a class="logo" href="#hero" aria-label="Pulin Prabhu Home">
+      <span class="logo-text">Pulin Prabhu</span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+    <a class="header-store-link" href="https://drive.google.com/file/d/13S4RebOj6an3I0DSTXd2G1W-MsrJAPIr/view?usp=sharing" target="_blank" rel="noopener">Resume</a>
+  </header>
+
+  <!-- FULL-SCREEN MENU OVERLAY -->
+  <nav class="menu-overlay" id="menu-overlay" aria-hidden="true">
+    <div class="menu-grid">
+      <div class="menu-links">
+        <a class="menu-link" href="#hero"     data-index="01">Home</a>
+        <a class="menu-link" href="#bio"      data-index="02">About</a>
+        <a class="menu-link" href="#gallery"  data-index="03">Case Studies</a>
+        <a class="menu-link" href="#showcase" data-index="04">Projects</a>
+        <a class="menu-link" href="#experience" data-index="05">Experience</a>
+        <a class="menu-link" href="#contact"  data-index="06">Contact</a>
+        <div class="menu-meta">
+          <a href="mailto:p@pulinpprabhu.com">business enquiries</a>
+          <div class="menu-socials">
+            <a href="https://www.linkedin.com/in/pulinprabhu/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://www.instagram.com/pulinprabhu/" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+      </div>
+      <div class="menu-photos">
+        <div class="menu-photo-item">
+          <img src="assets/images/my-avatar.png" alt="Pulin Prabhu" loading="eager">
+        </div>
+        <div class="menu-photo-item">
+          <img src="assets/images/avatar-1.png" alt="Pulin Prabhu" loading="eager">
+        </div>
+        <div class="menu-photo-item">
+          <img src="assets/images/avatar-2.png" alt="Pulin Prabhu" loading="eager">
+        </div>
+        <div class="menu-photo-item">
+          <img src="assets/images/IMG_8174.png" alt="Pulin Prabhu" loading="eager">
+        </div>
+      </div>
+    </div>
+    <button class="menu-close" id="menu-close" aria-label="Close menu">✕</button>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="hero">
+    <div class="hero-blob hero-blob--1" aria-hidden="true"></div>
+    <div class="hero-blob hero-blob--2" aria-hidden="true"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Product Manager · Est. 2020</span>
+      <h1 class="hero-name">
+        <span class="hero-name-first">Pulin</span>
+        <span class="hero-name-last">Prabhu</span>
+      </h1>
+      <p class="hero-subtitle">Building products that matter · AI · Mobile · Data</p>
+    </div>
+    <div class="hero-avatar">
+      <img src="assets/images/my-avatar.png" alt="Pulin Prabhu" class="hero-img">
+    </div>
+    <div class="hero-next-event">
+      <span class="next-label">Currently</span>
+      <a href="https://www.linkedin.com/in/pulinprabhu/" class="next-event-name" target="_blank" rel="noopener">StableCoupons · Founders Office</a>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">scroll ↓</div>
+  </section>
+
+  <!-- BIO / MANIFESTO SECTION -->
+  <section class="bio-section" id="bio">
+    <div class="bio-inner">
+      <p class="bio-statement">
+        Building products that <strong>scale</strong>. Driven by data, obsessed with
+        <strong>users</strong>, and focused on outcomes that actually
+        <strong>move</strong> the business forward.
+        From zero-to-one launches to AI-powered features — this is what I do.
+      </p>
+      <div class="bio-stats">
+        <div class="bio-stat">
+          <span class="bio-stat-num">1M+</span>
+          <span class="bio-stat-label">Users onboarded</span>
+        </div>
+        <div class="bio-stat">
+          <span class="bio-stat-num">85%</span>
+          <span class="bio-stat-label">Faster deployments</span>
+        </div>
+        <div class="bio-stat">
+          <span class="bio-stat-num">40%</span>
+          <span class="bio-stat-label">Dev productivity gain</span>
+        </div>
+        <div class="bio-stat">
+          <span class="bio-stat-num">4</span>
+          <span class="bio-stat-label">Certifications</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HORIZONTAL SCROLL GALLERY — Case Studies -->
+  <section class="gallery-section" id="gallery">
+    <div class="gallery-track" id="gallery-track">
+
+      <div class="gallery-item" data-caption="Credit Karma · UX Analysis">
+        <img src="assets/images/article-1.png" alt="Credit Karma case study">
+        <span class="gallery-caption">Credit Karma · UX Analysis</span>
+      </div>
+
+      <div class="gallery-item" data-caption="SHEIN · Mobile Shopping">
+        <img src="assets/images/article-2.png" alt="SHEIN case study">
+        <span class="gallery-caption">SHEIN · Mobile Shopping</span>
+      </div>
+
+      <div class="gallery-quote">
+        <blockquote>"Great products don't just solve problems — they change behavior."</blockquote>
+        <span class="gallery-quote-sig">— Pulin Prabhu</span>
+      </div>
+
+      <div class="gallery-item" data-caption="DoorDash · Convenience UX">
+        <img src="assets/images/article-3.png" alt="DoorDash case study">
+        <span class="gallery-caption">DoorDash · Convenience UX</span>
+      </div>
+
+      <div class="gallery-item" data-caption="Shazam · Discovery Design">
+        <img src="assets/images/article-4.png" alt="Shazam case study">
+        <span class="gallery-caption">Shazam · Discovery Design</span>
+      </div>
+
+      <div class="gallery-item" data-caption="Myntra · Cognitive Design">
+        <img src="assets/images/article-5.png" alt="Myntra case study">
+        <span class="gallery-caption">Myntra · Cognitive Design</span>
+      </div>
+
+      <div class="gallery-item" data-caption="Airbnb · Home Experience">
+        <img src="assets/images/article-6.png" alt="Airbnb case study">
+        <span class="gallery-caption">Airbnb · Home Experience</span>
+      </div>
+
+      <div class="gallery-item" data-caption="Back Market · Sustainable Tech">
+        <img src="assets/images/article-7.png" alt="Back Market case study">
+        <span class="gallery-caption">Back Market · Sustainable Tech</span>
+      </div>
+
+      <div class="gallery-item" data-caption="Duolingo · Gamification">
+        <img src="assets/images/article-8.png" alt="Duolingo case study">
+        <span class="gallery-caption">Duolingo · Gamification</span>
+      </div>
+
+      <div class="gallery-item" data-caption="Headspace · Mindfulness Design">
+        <img src="assets/images/article-9.png" alt="Headspace case study">
+        <span class="gallery-caption">Headspace · Mindfulness Design</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTENT SPLIT SECTION -->
+  <section class="content-split" id="content-split">
+    <a class="split-item split-item--left" href="#showcase">
+      <div class="split-label">
+        <span class="split-word-1">Product</span>
+        <span class="split-word-2">Strategy</span>
+      </div>
+      <p class="split-desc">Roadmaps, GTM, and launches that <strong>drive revenue</strong> at scale.</p>
+    </a>
+    <a class="split-item split-item--right" href="#bio">
+      <div class="split-label">
+        <span class="split-word-1">Data</span>
+        <span class="split-word-2">&amp; AI</span>
+      </div>
+      <p class="split-desc">Power BI, GPT agents, and analytics that <strong>move the needle</strong>.</p>
+    </a>
+  </section>
+
+  <!-- SHOWCASE CARD GRID — Projects (Dual-State Hover) -->
+  <section class="showcase-section" id="showcase">
+    <div class="showcase-header">
+      <span class="showcase-eyebrow">Selected Work</span>
+      <h2 class="showcase-title">Projects<br><em>&amp; Designs</em></h2>
+      <p class="showcase-desc">Hover each card to see a second view of the work.</p>
+    </div>
+    <div class="showcase-grid">
+
+      <div class="showcase-card">
+        <div class="card-images">
+          <img class="card-base"  src="assets/images/apollo-1.png" alt="Apollo — initial design">
+          <img class="card-hover" src="assets/images/apollo-2.png" alt="Apollo — refined design">
+          <div class="card-mask card-mask--grey"></div>
+          <div class="card-mask card-mask--accent"></div>
+        </div>
+        <div class="card-meta">
+          <span class="card-name">Apollo</span>
+          <span class="card-year">UI/UX</span>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="card-images">
+          <img class="card-base"  src="assets/images/hertz-1.png" alt="Hertz redesign — before">
+          <img class="card-hover" src="assets/images/hertz-2.png" alt="Hertz redesign — after">
+          <div class="card-mask card-mask--grey"></div>
+          <div class="card-mask card-mask--accent"></div>
+        </div>
+        <div class="card-meta">
+          <span class="card-name">Hertz App Redesign</span>
+          <span class="card-year">Product</span>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="card-images">
+          <img class="card-base"  src="assets/images/eventvol-1.png" alt="EventVol — concept">
+          <img class="card-hover" src="assets/images/eventvol-5.png" alt="EventVol — screens">
+          <div class="card-mask card-mask--grey"></div>
+          <div class="card-mask card-mask--accent"></div>
+        </div>
+        <div class="card-meta">
+          <span class="card-name">EventVol</span>
+          <span class="card-year">Mobile</span>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="card-images">
+          <img class="card-base"  src="assets/images/apollo-4.png" alt="Apollo v4">
+          <img class="card-hover" src="assets/images/apollo-5.png" alt="Apollo v5">
+          <div class="card-mask card-mask--grey"></div>
+          <div class="card-mask card-mask--accent"></div>
+        </div>
+        <div class="card-meta">
+          <span class="card-name">Apollo v2</span>
+          <span class="card-year">UI/UX</span>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="card-images">
+          <img class="card-base"  src="assets/images/article-9.png" alt="Headspace design">
+          <img class="card-hover" src="assets/images/article-10.png" alt="Good Notes design">
+          <div class="card-mask card-mask--grey"></div>
+          <div class="card-mask card-mask--accent"></div>
+        </div>
+        <div class="card-meta">
+          <span class="card-name">Mindfulness Apps</span>
+          <span class="card-year">Analysis</span>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="card-images">
+          <img class="card-base"  src="assets/images/ppt-1.png" alt="Presentation 1">
+          <img class="card-hover" src="assets/images/ppt-2.png" alt="Presentation 2">
+          <div class="card-mask card-mask--grey"></div>
+          <div class="card-mask card-mask--accent"></div>
+        </div>
+        <div class="card-meta">
+          <span class="card-name">Research Presentations</span>
+          <span class="card-year">Academic</span>
+        </div>
+      </div>
+
+    </div>
+    <a class="showcase-cta" href="https://www.linkedin.com/in/pulinprabhu/" target="_blank" rel="noopener">View full profile</a>
+  </section>
+
+  <!-- EXPERIENCE SECTION (repurposed "Store") -->
+  <section class="experience-section" id="experience">
+    <div class="experience-content">
+      <span class="experience-eyebrow">Work Experience</span>
+      <h2 class="experience-headline">Where I've<br>built things.</h2>
+      <p class="experience-desc">From insurance platforms serving 1M+ users to AI-powered e-commerce at a startup — I've shipped products end-to-end across industries.</p>
+      <a class="experience-cta" href="https://drive.google.com/file/d/13S4RebOj6an3I0DSTXd2G1W-MsrJAPIr/view?usp=sharing" target="_blank" rel="noopener">Download Resume</a>
+    </div>
+    <div class="experience-timeline">
+      <div class="exp-item">
+        <div class="exp-header">
+          <img src="assets/images/logo-1-color.png" alt="StableCoupons" class="exp-logo">
+          <div class="exp-info">
+            <span class="exp-company">StableCoupons, Inc.</span>
+            <span class="exp-role">Product Strategy Manager · Founders Office</span>
+            <span class="exp-date">Jul 2024 – Present · Sunnyvale, CA</span>
+          </div>
+        </div>
+        <p class="exp-highlight">Defined payment API workflows (Stripe, Adyen, Shopify) and built AI agent systems improving dev productivity by <strong>40%</strong>.</p>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <img src="assets/images/logo-2-color.png" alt="Carrier" class="exp-logo">
+          <div class="exp-info">
+            <span class="exp-company">Carrier</span>
+            <span class="exp-role">Product Management Intern · Data & Analytics</span>
+            <span class="exp-date">May 2023 – Aug 2023 · Atlanta, GA</span>
+          </div>
+        </div>
+        <p class="exp-highlight">Built OCR-based AI chatbot with Azure Cognitive Search, improving tool adoption by <strong>30%</strong> across 85+ stakeholders.</p>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <img src="assets/images/logo-3-color.png" alt="ICICI Lombard" class="exp-logo">
+          <div class="exp-info">
+            <span class="exp-company">ICICI Lombard</span>
+            <span class="exp-role">Technical Product Manager</span>
+            <span class="exp-date">Jan 2021 – Jul 2022 · Mumbai, India</span>
+          </div>
+        </div>
+        <p class="exp-highlight">Launched zero-to-one mobile platform onboarding <strong>1M+ users</strong> with 99.9% uptime. Cut deployment time by 85%.</p>
+      </div>
+      <div class="exp-item">
+        <div class="exp-header">
+          <img src="assets/images/logo-3-SnapOn.png" alt="Snap-On" class="exp-logo">
+          <div class="exp-info">
+            <span class="exp-company">Snap-On Tools India</span>
+            <span class="exp-role">Data Analysis Intern</span>
+            <span class="exp-date">Jan 2020 – Jan 2021 · Mumbai, India</span>
+          </div>
+        </div>
+        <p class="exp-highlight">Designed ETL pipeline combining 8 databases, improving performance by <strong>92%</strong>. Drove 1.89% YoY revenue increase.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS SECTION — Certifications & Logos Marquee -->
+  <section class="partners-section" id="partners">
+    <div class="partners-header">
+      <h2 class="partners-title">credentials<br><em>&amp; companies</em></h2>
+      <p class="partners-desc">Certified, experienced, and trusted by teams across fintech, logistics, and e-commerce.</p>
+      <a class="partners-cta" href="https://www.linkedin.com/in/pulinprabhu/" target="_blank" rel="noopener">view LinkedIn</a>
+    </div>
+
+    <div class="partners-marquee-wrap">
+      <div class="marquee-row marquee-row--left">
+        <div class="marquee-track" id="marquee-left">
+          <div class="logo-item">
+            <img src="assets/images/certifications/cspo.png" alt="CSPO" class="partner-logo cert-logo">
+          </div>
+          <div class="logo-item">
+            <img src="assets/images/certifications/csm.png" alt="CSM" class="partner-logo cert-logo">
+          </div>
+          <div class="logo-item">
+            <img src="assets/images/certifications/aipm.png" alt="AI PM" class="partner-logo cert-logo">
+          </div>
+          <div class="logo-item">
+            <img src="assets/images/certifications/cyberbadge.png" alt="Cybersecurity" class="partner-logo cert-logo">
+          </div>
+          <div class="logo-item">
+            <img src="assets/images/certifications/cloud.png" alt="Cloud" class="partner-logo cert-logo">
+          </div>
+          <!-- Duplicate for seamless loop -->
+          <div class="logo-item">
+            <img src="assets/images/certifications/cspo.png" alt="CSPO" class="partner-logo cert-logo">
+          </div>
+          <div class="logo-item">
+            <img src="assets/images/certifications/csm.png" alt="CSM" class="partner-logo cert-logo">
+          </div>
+          <div class="logo-item">
+            <img src="assets/images/certifications/aipm.png" alt="AI PM" class="partner-logo cert-logo">
+          </div>
+          <div class="logo-item">
+            <img src="assets/images/certifications/cyberbadge.png" alt="Cybersecurity" class="partner-logo cert-logo">
+          </div>
+          <div class="logo-item">
+            <img src="assets/images/certifications/cloud.png" alt="Cloud" class="partner-logo cert-logo">
+          </div>
+        </div>
+      </div>
+      <div class="marquee-row marquee-row--right">
+        <div class="marquee-track" id="marquee-right">
+          <div class="logo-item"><span class="partner-text">StableCoupons</span></div>
+          <div class="logo-item"><span class="partner-text">Carrier</span></div>
+          <div class="logo-item"><span class="partner-text">ICICI Lombard</span></div>
+          <div class="logo-item"><span class="partner-text">Snap-On Tools</span></div>
+          <div class="logo-item"><span class="partner-text">Texas A&amp;M</span></div>
+          <div class="logo-item"><span class="partner-text">University of Mumbai</span></div>
+          <!-- Duplicate -->
+          <div class="logo-item"><span class="partner-text">StableCoupons</span></div>
+          <div class="logo-item"><span class="partner-text">Carrier</span></div>
+          <div class="logo-item"><span class="partner-text">ICICI Lombard</span></div>
+          <div class="logo-item"><span class="partner-text">Snap-On Tools</span></div>
+          <div class="logo-item"><span class="partner-text">Texas A&amp;M</span></div>
+          <div class="logo-item"><span class="partner-text">University of Mumbai</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills grid -->
+    <div class="skills-grid" id="skills">
+      <div class="skill-card">
+        <span class="skill-icon">◈</span>
+        <h3 class="skill-name">Product Strategy</h3>
+        <p class="skill-tags">Roadmaps · GTM · A/B Testing · User Personas · Agile · Scrum</p>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">◉</span>
+        <h3 class="skill-name">AI &amp; Data</h3>
+        <p class="skill-tags">GPT · RAG · Power BI · SQL · Python · ETL Pipelines · Azure AI</p>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">◑</span>
+        <h3 class="skill-name">Tools &amp; Platforms</h3>
+        <p class="skill-tags">Jira · Figma · Confluence · Postman · AWS · Docker · Miro · Notion</p>
+      </div>
+      <div class="skill-card">
+        <span class="skill-icon">◐</span>
+        <h3 class="skill-name">Leadership</h3>
+        <p class="skill-tags">Cross-functional teams · Stakeholder management · OKRs · PI Planning</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL / TOOLS GRID -->
+  <section class="social-section" id="contact">
+    <h2 class="social-title">tools I<br><em>use daily</em></h2>
+    <div class="social-grid">
+      <div class="social-item social-item--tall">
+        <img src="assets/images/figma-logo.png" alt="Figma">
+        <span class="social-platform">Design</span>
+      </div>
+      <div class="social-item">
+        <img src="assets/images/jira-logo.png" alt="Jira">
+        <span class="social-platform">PM Tool</span>
+      </div>
+      <div class="social-item">
+        <img src="assets/images/powerbi-logo.png" alt="Power BI">
+        <span class="social-platform">Analytics</span>
+      </div>
+      <div class="social-item social-item--tall">
+        <img src="assets/images/aws-logo.png" alt="AWS">
+        <span class="social-platform">Cloud</span>
+      </div>
+      <div class="social-item">
+        <img src="assets/images/confluence-logo.png" alt="Confluence">
+        <span class="social-platform">Docs</span>
+      </div>
+      <div class="social-item">
+        <img src="assets/images/notion-logo.png" alt="Notion">
+        <span class="social-platform">Notes</span>
+      </div>
+      <div class="social-item">
+        <img src="assets/images/docker-logo.png" alt="Docker">
+        <span class="social-platform">DevOps</span>
+      </div>
+      <div class="social-item">
+        <img src="assets/images/miro-logo.png" alt="Miro">
+        <span class="social-platform">Whiteboard</span>
+      </div>
+    </div>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/pulinprabhu/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.instagram.com/pulinprabhu/" target="_blank" rel="noopener">Instagram</a>
+      <a href="mailto:p@pulinpprabhu.com">Email</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-hero">
+      <h2 class="footer-tagline">Let's build<br>something <em>great.</em></h2>
+      <div class="footer-hero-img">
+        <img src="assets/images/my-avatar.png" alt="Pulin Prabhu">
+      </div>
+      <a class="footer-business" href="mailto:p@pulinpprabhu.com">p@pulinpprabhu.com →</a>
+    </div>
+
+    <div class="footer-sponsors">
+      <img src="assets/images/logos/tamu.jpg" alt="Texas A&M" class="sponsor-logo">
+      <img src="assets/images/logos/mu.jpg" alt="University of Mumbai" class="sponsor-logo">
+    </div>
+
+    <div class="footer-nav">
+      <div class="footer-nav-col">
+        <span class="footer-col-label">explore</span>
+        <a href="#bio">About</a>
+        <a href="#gallery">Case Studies</a>
+        <a href="#showcase">Projects</a>
+        <a href="#experience">Experience</a>
+      </div>
+      <div class="footer-nav-col">
+        <span class="footer-col-label">connect</span>
+        <a href="https://www.linkedin.com/in/pulinprabhu/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/pulinprabhu/" target="_blank" rel="noopener">Instagram</a>
+        <a href="mailto:p@pulinpprabhu.com">Email</a>
+      </div>
+      <div class="footer-logo">
+        <span class="footer-logo-text">PP</span>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Pulin Pramod Prabhu. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+
+    <div class="footer-blob" aria-hidden="true"></div>
+  </footer>
+
+  <!-- CDN Stack -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

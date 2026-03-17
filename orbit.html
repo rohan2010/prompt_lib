@@ -1,0 +1,1996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orbit — US Market Entry for International Brands</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────────────── */
+    :root {
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+
+      --brand-hue: 16;
+
+      /* Palette — warm dark */
+      --color-bg:           #0E0D0B;
+      --color-surface:      #161513;
+      --color-surface-2:    #1D1B18;
+      --color-surface-3:    #252320;
+      --color-text:         #EAE4DA;
+      --color-muted:        #7A7368;
+      --color-muted-2:      #4A4640;
+      --color-border:       #2D2B27;
+      --color-border-2:     #3A3833;
+      --color-brand:        #FF5533;
+      --color-brand-dim:    rgba(255, 85, 51, 0.12);
+      --color-brand-border: rgba(255, 85, 51, 0.3);
+      --color-accent:       #C9FF3F;
+      --color-accent-dim:   rgba(201, 255, 63, 0.1);
+
+      /* Spacing — 8-point */
+      --space-1:  8px;
+      --space-2:  16px;
+      --space-3:  24px;
+      --space-4:  32px;
+      --space-6:  48px;
+      --space-8:  64px;
+      --space-12: 96px;
+      --space-16: 128px;
+
+      /* Radii */
+      --radius-sm:   2px;
+      --radius-md:   8px;
+      --radius-lg:   12px;
+      --radius-xl:   16px;
+      --radius-pill: 999px;
+
+      /* Shadows */
+      --shadow-sm:    0 1px 3px rgba(0,0,0,0.5);
+      --shadow-md:    0 4px 20px rgba(0,0,0,0.5);
+      --shadow-lg:    0 12px 40px rgba(0,0,0,0.6);
+      --shadow-brand: 0 0 0 1px var(--color-brand-border), 0 4px 20px rgba(255,85,51,0.12);
+
+      /* Animation */
+      --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+      --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+      --duration-micro: 200ms;
+      --duration-enter: 360ms;
+      --duration-page:  500ms;
+    }
+
+    /* ─── RESET ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; border: none; background: none; font-family: inherit; }
+    input, textarea { font-family: inherit; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* ─── GRAIN TEXTURE ─────────────────────────────────────── */
+    .has-grain { position: relative; }
+    .has-grain::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+    .has-grain > * { position: relative; z-index: 1; }
+
+    /* ─── SCROLL REVEAL ─────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition:
+        opacity var(--duration-enter) var(--ease-out-quart),
+        transform var(--duration-enter) var(--ease-out-quart);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 60ms; }
+    .d2 { transition-delay: 120ms; }
+    .d3 { transition-delay: 180ms; }
+    .d4 { transition-delay: 240ms; }
+    .d5 { transition-delay: 300ms; }
+    .d6 { transition-delay: 360ms; }
+
+    /* ─── TYPOGRAPHY HELPERS ────────────────────────────────── */
+    .label-mono {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--color-muted);
+    }
+    .label-upper {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+    .text-brand { color: var(--color-brand); }
+    .text-accent { color: var(--color-accent); }
+
+    /* ─── LAYOUT ────────────────────────────────────────────── */
+    .container { max-width: 1140px; margin: 0 auto; }
+    .section { padding: var(--space-16) var(--space-8); }
+
+    /* ─── NAVBAR ────────────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px var(--space-6);
+      transition:
+        background var(--duration-enter) var(--ease-out-quart),
+        border-bottom var(--duration-enter) var(--ease-out-quart);
+    }
+    .navbar.scrolled {
+      background: rgba(14, 13, 11, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .nav-logo {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .nav-logo-mark {
+      width: 24px;
+      height: 24px;
+      background: var(--color-brand);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-logo-mark svg { display: block; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-muted);
+      transition: color var(--duration-micro) var(--ease-out-quart);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1px;
+      background: var(--color-brand);
+      transition: width var(--duration-micro) var(--ease-out-quart);
+    }
+    .nav-links a:hover { color: var(--color-text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      padding: 9px 20px;
+      background: var(--color-brand);
+      color: white;
+      border-radius: var(--radius-pill);
+      transition:
+        background var(--duration-micro) var(--ease-out-quart),
+        transform var(--duration-micro) var(--ease-spring);
+    }
+    .nav-cta:hover { background: #E64420; transform: translateY(-1px); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: var(--space-1);
+    }
+    .hamburger span {
+      display: block;
+      width: 20px; height: 1.5px;
+      background: var(--color-text);
+      transition: transform var(--duration-micro) var(--ease-out-quart), opacity var(--duration-micro);
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .mobile-drawer {
+      display: none;
+      position: fixed; inset: 0;
+      background: var(--color-surface);
+      z-index: 150;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: var(--space-8);
+      gap: var(--space-4);
+      transform: translateX(100%);
+      transition: transform var(--duration-enter) var(--ease-out-quart);
+    }
+    .mobile-drawer.open { transform: translateX(0); }
+    .mobile-drawer a {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--color-text);
+      letter-spacing: -0.02em;
+      transition: color var(--duration-micro);
+    }
+    .mobile-drawer a:hover { color: var(--color-brand); }
+
+    /* ─── HERO ──────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: var(--space-8);
+      padding: var(--space-16) var(--space-8) var(--space-12);
+      border-bottom: 1px solid var(--color-border);
+      background:
+        radial-gradient(ellipse 50% 80% at 0% 50%, rgba(255,85,51,0.04) 0%, transparent 60%),
+        var(--color-bg);
+    }
+    .hero-copy { }
+    .hero-overline {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+    .hero-overline-rule {
+      width: 24px; height: 1px;
+      background: var(--color-brand);
+    }
+    .hero h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(44px, 5.5vw, 76px);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--color-brand);
+    }
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--color-muted);
+      max-width: 440px;
+      line-height: 1.75;
+      margin-bottom: var(--space-6);
+    }
+    .hero-actions {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-8);
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      padding: 13px var(--space-4);
+      background: var(--color-brand);
+      color: white;
+      border-radius: var(--radius-pill);
+      transition:
+        background var(--duration-micro) var(--ease-out-quart),
+        transform var(--duration-micro) var(--ease-spring);
+    }
+    .btn-primary:hover { background: #E64420; transform: translateY(-2px); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 13px var(--space-4);
+      background: transparent;
+      color: var(--color-muted);
+      border: 1px solid var(--color-border-2);
+      border-radius: var(--radius-pill);
+      transition:
+        border-color var(--duration-micro) var(--ease-out-quart),
+        color var(--duration-micro) var(--ease-out-quart),
+        transform var(--duration-micro) var(--ease-spring);
+    }
+    .btn-ghost:hover { border-color: var(--color-brand); color: var(--color-text); transform: translateY(-2px); }
+    .hero-proof {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-border);
+    }
+    .hero-proof-flags {
+      font-size: 20px;
+      letter-spacing: 4px;
+    }
+    .hero-proof-text {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--color-muted);
+    }
+
+    /* ─── MODULE MAP ────────────────────────────────────────── */
+    .module-map {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 1px;
+      background: var(--color-border);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+    .mod {
+      background: var(--color-surface);
+      padding: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 110px;
+      transition: background var(--duration-micro) var(--ease-out-quart);
+      cursor: default;
+    }
+    .mod:hover { background: var(--color-surface-2); }
+    .mod-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+    .mod-num {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--color-muted-2);
+      letter-spacing: 0.04em;
+    }
+    .mod-status {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+    }
+    .mod-status-live {
+      background: rgba(52, 211, 153, 0.12);
+      color: #34D399;
+      border: 1px solid rgba(52, 211, 153, 0.25);
+    }
+    .mod-status-active {
+      background: var(--color-brand-dim);
+      color: var(--color-brand);
+      border: 1px solid var(--color-brand-border);
+    }
+    .mod-name {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text);
+      letter-spacing: -0.01em;
+      margin-top: var(--space-2);
+    }
+    .mod-desc {
+      font-size: 11px;
+      color: var(--color-muted);
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+    /* Module grid positions */
+    .mod-intelligence {
+      grid-column: 1 / -1;
+      min-height: 130px;
+      background: var(--color-surface-2);
+      border-bottom: 1px solid var(--color-brand-border);
+    }
+    .mod-intelligence .mod-name { font-size: 16px; }
+    .mod-compliance { grid-column: 1; }
+    .mod-logistics { grid-column: 2; }
+    .mod-warehousing { grid-column: 1; }
+    .mod-ecommerce { grid-column: 2; }
+    .mod-marketing { grid-column: 1 / -1; min-height: 80px; }
+    .mod-marketing .mod-name { font-size: 14px; }
+
+    .mod-intel-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .mod-intel-stat {
+      font-family: var(--font-heading);
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--color-brand);
+      line-height: 1;
+    }
+    .mod-intel-stat-label {
+      font-size: 11px;
+      color: var(--color-muted);
+      margin-top: 4px;
+    }
+
+    /* ─── STATS BAND ────────────────────────────────────────── */
+    .stats-band {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-6) var(--space-8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: var(--space-3) var(--space-4);
+      border-right: 1px solid var(--color-border);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: var(--font-heading);
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--color-text);
+      display: block;
+    }
+    .stat-number-accent { color: var(--color-brand); }
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* ─── PROBLEM SECTION ───────────────────────────────────── */
+    .problem-section {
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .problem-section-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+    .problem-header {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: var(--space-12);
+      align-items: start;
+      margin-bottom: var(--space-12);
+      padding-bottom: var(--space-8);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .problem-header-left { }
+    .problem-section-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-muted-2);
+      margin-bottom: var(--space-2);
+    }
+    .problem-header h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+    }
+    .problem-header-right {
+      padding-top: var(--space-6);
+    }
+    .problem-header-right p {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--color-muted);
+      line-height: 1.75;
+      max-width: 540px;
+    }
+    .problem-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .problem-item {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr;
+      gap: var(--space-6);
+      align-items: start;
+      padding: var(--space-6) 0;
+      border-bottom: 1px solid var(--color-border);
+      transition: background var(--duration-micro) var(--ease-out-quart);
+    }
+    .problem-item:last-child { border-bottom: none; }
+    .problem-item:hover { background: rgba(255,255,255,0.01); }
+    .problem-item-num {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-muted-2);
+      padding-top: 4px;
+    }
+    .problem-item-title {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
+    .problem-item-title-sub {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--color-muted);
+      margin-top: 6px;
+      font-style: italic;
+    }
+    .problem-item-desc {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--color-muted);
+      line-height: 1.7;
+    }
+    .problem-item-issues {
+      list-style: none;
+      margin-top: var(--space-2);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .problem-item-issues li {
+      font-size: 13px;
+      color: var(--color-muted);
+      display: flex;
+      gap: var(--space-1);
+    }
+    .issue-dash {
+      color: var(--color-muted-2);
+      flex-shrink: 0;
+    }
+    .problem-bridge {
+      margin-top: var(--space-8);
+      padding: var(--space-6);
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--color-brand);
+      border-radius: var(--radius-md);
+    }
+    .problem-bridge p {
+      font-family: var(--font-heading);
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+    }
+
+    /* ─── FUNCTIONS BENTO ───────────────────────────────────── */
+    .functions-section {
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .functions-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+      align-items: end;
+      margin-bottom: var(--space-8);
+    }
+    .functions-header h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+      line-height: 1.06;
+    }
+    .functions-header-right {
+      padding-bottom: 6px;
+    }
+    .functions-header-right p {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--color-muted);
+      line-height: 1.7;
+    }
+    /* Asymmetric bento */
+    .fn-bento {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      grid-template-rows: auto auto auto;
+      gap: 1px;
+      background: var(--color-border);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+    .fn-tile {
+      background: var(--color-surface);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: background var(--duration-micro) var(--ease-out-quart);
+    }
+    .fn-tile:hover { background: var(--color-surface-2); }
+    .fn-tile-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: var(--space-4);
+    }
+    .fn-index {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--color-muted-2);
+      letter-spacing: 0.04em;
+    }
+    .fn-category {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-brand);
+      background: var(--color-brand-dim);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+    }
+    .fn-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: var(--space-1);
+    }
+    .fn-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--color-muted);
+      line-height: 1.65;
+    }
+    .fn-footer {
+      margin-top: var(--space-4);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .fn-footer-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-muted-2);
+      letter-spacing: 0.06em;
+    }
+    .fn-footer-status {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--color-brand);
+      letter-spacing: 0.06em;
+    }
+    /* Grid positions — asymmetric */
+    .fn-intelligence {
+      grid-column: 1;
+      grid-row: 1 / 3;
+      background: var(--color-surface-2);
+    }
+    .fn-intelligence .fn-title { font-size: 26px; }
+    .fn-intelligence .fn-desc { font-size: 14px; }
+    .fn-compliance   { grid-column: 2; grid-row: 1; }
+    .fn-logistics    { grid-column: 3; grid-row: 1; }
+    .fn-warehousing  { grid-column: 2 / 4; grid-row: 2; }
+    .fn-warehousing .fn-title { font-size: 24px; }
+    .fn-ecommerce    { grid-column: 1 / 3; grid-row: 3; }
+    .fn-marketing    { grid-column: 3; grid-row: 3; }
+
+    .fn-large-stat {
+      font-family: var(--font-heading);
+      font-size: 56px;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      color: var(--color-brand);
+      line-height: 1;
+      margin-top: var(--space-4);
+    }
+    .fn-large-stat-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-muted);
+      margin-top: 4px;
+    }
+
+    /* ─── PROCESS ───────────────────────────────────────────── */
+    .process-section {
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .process-inner { max-width: 1140px; margin: 0 auto; }
+    .process-section h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+      margin-bottom: var(--space-12);
+    }
+    .process-track {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      background: var(--color-border);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+    .process-step {
+      background: var(--color-surface-2);
+      padding: var(--space-6);
+      border-right: 1px solid var(--color-border);
+      transition: background var(--duration-micro) var(--ease-out-quart);
+    }
+    .process-step:last-child { border-right: none; }
+    .process-step:hover { background: var(--color-surface-3); }
+    .step-num-display {
+      font-family: var(--font-heading);
+      font-size: 64px;
+      font-weight: 700;
+      letter-spacing: -0.06em;
+      color: var(--color-border-2);
+      line-height: 1;
+      margin-bottom: var(--space-4);
+    }
+    .process-step-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-brand);
+      letter-spacing: 0.06em;
+      margin-bottom: var(--space-2);
+    }
+    .process-step h4 {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+    .process-step p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--color-muted);
+      line-height: 1.7;
+    }
+    .process-step-footer {
+      margin-top: var(--space-4);
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--color-border);
+    }
+    .process-step-time {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-brand);
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── DIFFERENTIATORS (2x2 bento) ──────────────────────── */
+    .diff-section {
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .diff-inner { max-width: 1140px; margin: 0 auto; }
+    .diff-header {
+      margin-bottom: var(--space-8);
+    }
+    .diff-header h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+      max-width: 600px;
+    }
+    .diff-bento {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1px;
+      background: var(--color-border);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+    .diff-tile {
+      background: var(--color-surface);
+      padding: var(--space-8);
+      transition: background var(--duration-micro) var(--ease-out-quart);
+    }
+    .diff-tile:hover { background: var(--color-surface-2); }
+    .diff-tile-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-brand);
+      margin-bottom: var(--space-3);
+    }
+    .diff-tile h4 {
+      font-family: var(--font-heading);
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+    .diff-tile p {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--color-muted);
+      line-height: 1.7;
+    }
+    .diff-big-stat {
+      font-family: var(--font-heading);
+      font-size: 72px;
+      font-weight: 700;
+      letter-spacing: -0.06em;
+      line-height: 1;
+      margin-top: var(--space-6);
+    }
+    .diff-big-stat-unit {
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--color-muted);
+    }
+    .diff-tile-speed .diff-big-stat { color: var(--color-brand); }
+    .diff-tile-full { grid-column: 2; grid-row: 1 / 3; background: var(--color-surface-2); }
+    .diff-tile-full h4 { font-size: 26px; }
+    .diff-tile-full p { font-size: 15px; }
+    .diff-functions-display {
+      margin-top: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+    .diff-fn-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: 12px var(--space-3);
+      background: var(--color-surface-3);
+      border-radius: var(--radius-sm);
+      transition: background var(--duration-micro);
+    }
+    .diff-fn-row:hover { background: rgba(255,85,51,0.06); }
+    .diff-fn-check {
+      width: 18px; height: 18px;
+      background: var(--color-brand-dim);
+      border: 1px solid var(--color-brand-border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .diff-fn-check svg { display: block; }
+    .diff-fn-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    /* ─── PROOF / TESTIMONIALS ──────────────────────────────── */
+    .proof-section {
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .proof-inner { max-width: 1140px; margin: 0 auto; }
+    .proof-numbers {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      margin-bottom: var(--space-12);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .proof-num-item {
+      padding: var(--space-6);
+      border-right: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+    }
+    .proof-num-item:last-child { border-right: none; }
+    .proof-num-value {
+      font-family: var(--font-heading);
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      color: var(--color-text);
+      line-height: 1;
+      display: block;
+    }
+    .proof-num-brand { color: var(--color-brand); }
+    .proof-num-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      display: block;
+      margin-top: var(--space-1);
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 1px;
+      background: var(--color-border);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+    .testimonial {
+      background: var(--color-surface-2);
+      padding: var(--space-8);
+      transition: background var(--duration-micro);
+    }
+    .testimonial:hover { background: var(--color-surface-3); }
+    .testimonial-quote-mark {
+      font-family: var(--font-heading);
+      font-size: 56px;
+      line-height: 1;
+      color: var(--color-brand);
+      opacity: 0.35;
+      margin-bottom: var(--space-3);
+    }
+    .testimonial-text {
+      font-family: var(--font-heading);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--color-text);
+      line-height: 1.55;
+      font-style: italic;
+      margin-bottom: var(--space-6);
+    }
+    .testimonial-compact .testimonial-text { font-size: 15px; }
+    .testimonial-byline {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding-top: var(--space-3);
+      border-top: 1px solid var(--color-border);
+    }
+    .byline-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .byline-role {
+      font-size: 12px;
+      color: var(--color-muted);
+    }
+    .byline-metric {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-brand);
+      letter-spacing: 0.04em;
+      margin-top: 4px;
+    }
+
+    /* ─── CONTACT / CTA ─────────────────────────────────────── */
+    .cta-section {
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .cta-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+      align-items: start;
+    }
+    .cta-copy { }
+    .cta-section-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-muted-2);
+      margin-bottom: var(--space-2);
+    }
+    .cta-copy h2 {
+      font-family: var(--font-heading);
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+      line-height: 1.06;
+      margin-bottom: var(--space-4);
+    }
+    .cta-copy p {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--color-muted);
+      line-height: 1.75;
+      margin-bottom: var(--space-6);
+    }
+    .cta-promise-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .cta-promise-list li {
+      display: flex;
+      gap: var(--space-2);
+      align-items: flex-start;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--color-text);
+    }
+    .promise-icon {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--color-brand);
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+    .contact-form-wrap {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+    }
+    .form-title {
+      font-family: var(--font-heading);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-4);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-2);
+    }
+    .form-group {
+      margin-bottom: var(--space-3);
+    }
+    .form-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      margin-bottom: 7px;
+    }
+    .form-input {
+      width: 100%;
+      padding: 11px 14px;
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 14px;
+      color: var(--color-text);
+      outline: none;
+      transition:
+        border-color var(--duration-micro) var(--ease-out-quart),
+        background var(--duration-micro) var(--ease-out-quart);
+    }
+    .form-input::placeholder { color: var(--color-muted-2); }
+    .form-input:focus {
+      border-color: var(--color-brand);
+      background: rgba(255,85,51,0.04);
+    }
+    .form-submit {
+      width: 100%;
+      padding: 14px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      color: white;
+      background: var(--color-brand);
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      margin-top: var(--space-2);
+      letter-spacing: 0.01em;
+      transition:
+        background var(--duration-micro) var(--ease-out-quart),
+        transform var(--duration-micro) var(--ease-spring);
+    }
+    .form-submit:hover { background: #E64420; transform: translateY(-1px); }
+    .form-footnote {
+      text-align: center;
+      font-size: 11px;
+      color: var(--color-muted-2);
+      margin-top: var(--space-2);
+      font-family: var(--font-mono);
+    }
+
+    /* ─── FOOTER ────────────────────────────────────────────── */
+    footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+    }
+    .footer-cta-band {
+      background: var(--color-surface-2);
+      border-bottom: 1px solid var(--color-border);
+      padding: var(--space-8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-6);
+    }
+    .footer-cta-band h3 {
+      font-family: var(--font-heading);
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+      max-width: 600px;
+    }
+    .footer-main {
+      padding: var(--space-12) var(--space-8);
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: var(--space-8);
+    }
+    .footer-brand-col { }
+    .footer-logo {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: var(--space-3);
+    }
+    .footer-logo-mark {
+      width: 22px; height: 22px;
+      background: var(--color-brand);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .footer-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--color-muted);
+      line-height: 1.7;
+      margin-bottom: var(--space-4);
+    }
+    .footer-tagline {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-brand);
+    }
+    .footer-col h5 {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-muted-2);
+      margin-bottom: var(--space-3);
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--color-muted);
+      transition: color var(--duration-micro) var(--ease-out-quart);
+    }
+    .footer-links a:hover { color: var(--color-text); }
+    .footer-bottom {
+      padding: var(--space-4) var(--space-8);
+      border-top: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-bottom p {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-muted-2);
+    }
+    .footer-legal {
+      display: flex;
+      gap: var(--space-4);
+    }
+    .footer-legal a {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-muted-2);
+      transition: color var(--duration-micro);
+    }
+    .footer-legal a:hover { color: var(--color-muted); }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .mobile-drawer { display: flex; }
+
+      .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 100px; }
+      .module-map { max-width: 100%; }
+
+      .problem-header { grid-template-columns: 1fr; gap: var(--space-4); }
+      .problem-item { grid-template-columns: 60px 1fr; }
+      .problem-item-desc { grid-column: 2; }
+
+      .fn-bento {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+      }
+      .fn-intelligence { grid-column: 1 / -1; grid-row: auto; }
+      .fn-warehousing  { grid-column: 1 / -1; grid-row: auto; }
+      .fn-ecommerce    { grid-column: 1 / -1; grid-row: auto; }
+
+      .diff-bento { grid-template-columns: 1fr; }
+      .diff-tile-full { grid-column: 1; grid-row: auto; }
+
+      .testimonials-grid { grid-template-columns: 1fr; }
+
+      .cta-inner { grid-template-columns: 1fr; gap: var(--space-8); }
+
+      .footer-main { grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+      .footer-cta-band { flex-direction: column; align-items: flex-start; }
+
+      .proof-numbers { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .section { padding: var(--space-12) var(--space-3); }
+      .stats-band { flex-direction: column; gap: 0; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--color-border); width: 100%; }
+      .stat-item:last-child { border-bottom: none; }
+      .process-track { grid-template-columns: 1fr; }
+      .process-step { border-right: none; border-bottom: 1px solid var(--color-border); }
+      .process-step:last-child { border-bottom: none; }
+      .proof-numbers { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-main { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: var(--space-2); text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── NAVBAR ─────────────────────────────────────────────── -->
+  <nav class="navbar" id="navbar">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <circle cx="6" cy="6" r="4" stroke="white" stroke-width="1.5"/>
+          <circle cx="6" cy="6" r="1.5" fill="white"/>
+        </svg>
+      </div>
+      Orbit
+    </a>
+    <ul class="nav-links">
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#functions">Functions</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#proof">Results</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Book Intake Call</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ─── MOBILE DRAWER ─────────────────────────────────────── -->
+  <div class="mobile-drawer" id="mobile-drawer" role="dialog" aria-modal="true">
+    <a href="#problem">Problem</a>
+    <a href="#functions">Functions</a>
+    <a href="#process">Process</a>
+    <a href="#proof">Results</a>
+    <a href="#contact">Book a Call →</a>
+  </div>
+
+  <!-- ─── HERO ───────────────────────────────────────────────── -->
+  <section class="hero has-grain" id="home">
+    <div class="hero-copy">
+      <div class="hero-overline reveal">
+        <div class="hero-overline-rule"></div>
+        <span class="label-mono">US Market Entry Platform</span>
+      </div>
+      <h1 class="reveal d1">
+        You bring<br/>
+        the brand.<br/>
+        We bring the<br/>
+        <em>operations.</em>
+      </h1>
+      <p class="hero-sub reveal d2">
+        Orbit is a full-stack US market entry platform for international brands. Compliance, logistics, warehousing, e-commerce, and marketing — under one contract.
+      </p>
+      <div class="hero-actions reveal d3">
+        <a href="#contact" class="btn-primary">
+          Book Intake Call
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5h8M7.5 3.5l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </a>
+        <a href="#process" class="btn-ghost">See How It Works</a>
+      </div>
+      <div class="hero-proof reveal d4">
+        <span class="hero-proof-flags">🇰🇷 🇮🇳 🇹🇭</span>
+        <span class="hero-proof-text">Cohort 1 — brands from Korea, India &amp; Thailand</span>
+      </div>
+    </div>
+
+    <div class="module-map reveal d3">
+      <!-- Intelligence — hero module -->
+      <div class="mod mod-intelligence">
+        <div class="mod-header">
+          <span class="mod-num">01 / MARKET_INTELLIGENCE</span>
+          <span class="mod-status mod-status-live">● LIVE</span>
+        </div>
+        <div class="mod-intel-inner">
+          <div>
+            <div class="mod-name">Market Intelligence</div>
+            <div class="mod-desc">AI-powered competitive analysis &amp; US consumer positioning</div>
+          </div>
+          <div>
+            <div class="mod-intel-stat">14</div>
+            <div class="mod-intel-stat-label">Days to live</div>
+          </div>
+        </div>
+      </div>
+      <!-- Compliance -->
+      <div class="mod mod-compliance">
+        <div class="mod-header">
+          <span class="mod-num">02</span>
+          <span class="mod-status mod-status-active">ACTIVE</span>
+        </div>
+        <div class="mod-name">Compliance</div>
+        <div class="mod-desc">FDA / FCC / CPSC — fully managed</div>
+      </div>
+      <!-- Logistics -->
+      <div class="mod mod-logistics">
+        <div class="mod-header">
+          <span class="mod-num">03</span>
+        </div>
+        <div class="mod-name">Logistics</div>
+        <div class="mod-desc">Customs brokerage &amp; freight</div>
+      </div>
+      <!-- Warehousing -->
+      <div class="mod mod-warehousing">
+        <div class="mod-header">
+          <span class="mod-num">04</span>
+        </div>
+        <div class="mod-name">Warehousing</div>
+        <div class="mod-desc">Flexible US fulfilment — no minimums</div>
+      </div>
+      <!-- E-commerce -->
+      <div class="mod mod-ecommerce">
+        <div class="mod-header">
+          <span class="mod-num">05</span>
+        </div>
+        <div class="mod-name">E-commerce</div>
+        <div class="mod-desc">Amazon, Shopify &amp; DTC</div>
+      </div>
+      <!-- Marketing -->
+      <div class="mod mod-marketing">
+        <div class="mod-header">
+          <span class="mod-num">06 / MARKETING</span>
+        </div>
+        <div class="mod-name">Marketing — Performance &amp; Brand</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── STATS BAND ─────────────────────────────────────────── -->
+  <div class="stats-band">
+    <div class="stat-item">
+      <span class="stat-number stat-number-accent">14</span>
+      <span class="stat-label">Days to US Launch</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">6</span>
+      <span class="stat-label">Functions Handled</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">1</span>
+      <span class="stat-label">Contract. Not Seven.</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number">3</span>
+      <span class="stat-label">Brands Launched — Cohort 1</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-number stat-number-accent">100%</span>
+      <span class="stat-label">Compliance Rate</span>
+    </div>
+  </div>
+
+  <!-- ─── PROBLEM ──────────────────────────────────────────────── -->
+  <section class="section problem-section" id="problem">
+    <div class="problem-section-inner">
+      <div class="problem-header">
+        <div class="problem-header-left reveal">
+          <div class="problem-section-num">01 / PROBLEM</div>
+          <h2>Three ways founders burn time entering the US</h2>
+        </div>
+        <div class="problem-header-right reveal d1">
+          <p>International brands doing $500K–5M at home are stuck choosing between broken options. Every path costs months of founder attention and still doesn't guarantee US market traction.</p>
+        </div>
+      </div>
+
+      <div class="problem-list">
+        <div class="problem-item reveal">
+          <div class="problem-item-num">001</div>
+          <div>
+            <div class="problem-item-title">Scattered Consultants</div>
+            <div class="problem-item-title-sub">"Seven vendors, zero coordination"</div>
+          </div>
+          <div>
+            <p class="problem-item-desc">You hire a compliance firm, a 3PL, a marketing agency, and an Amazon specialist — and then spend all your time on coordination calls that none of them attend together. The cost of misalignment falls on you.</p>
+            <ul class="problem-item-issues">
+              <li><span class="issue-dash">—</span> No single point of accountability</li>
+              <li><span class="issue-dash">—</span> Optimised individually, not for your outcome</li>
+              <li><span class="issue-dash">—</span> 4–6 months to get everything aligned</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="problem-item reveal d1">
+          <div class="problem-item-num">002</div>
+          <div>
+            <div class="problem-item-title">Full DIY</div>
+            <div class="problem-item-title-sub">"I'll figure it out myself"</div>
+          </div>
+          <div>
+            <p class="problem-item-desc">FDA filings, tariff codes, warehouse contracts, Amazon PPC — you're doing seven jobs none of which is building your brand. Compliance errors are costly. The learning curve is 6–12 months. You lose the market window.</p>
+            <ul class="problem-item-issues">
+              <li><span class="issue-dash">—</span> Founders burn out on logistics</li>
+              <li><span class="issue-dash">—</span> Compliance mistakes cost $50K+</li>
+              <li><span class="issue-dash">—</span> No leverage — every task is manual</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="problem-item reveal d2">
+          <div class="problem-item-num">003</div>
+          <div>
+            <div class="problem-item-title">Single-Function Providers</div>
+            <div class="problem-item-title-sub">"Great at one thing, blind to the rest"</div>
+          </div>
+          <div>
+            <p class="problem-item-desc">You find a best-in-class 3PL and a great compliance partner — then discover they've never worked together and you're the integration layer. You've reduced the vendor count but not the coordination problem.</p>
+            <ul class="problem-item-issues">
+              <li><span class="issue-dash">—</span> Handoff gaps fall through the cracks</li>
+              <li><span class="issue-dash">—</span> Difficult to pivot when one part breaks</li>
+              <li><span class="issue-dash">—</span> Still running 5 projects instead of 7</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="problem-bridge reveal">
+        <p>What every international brand actually needs is a single operations team that's already wired together, already understands US compliance, and is ready to move on day one — not day ninety.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FUNCTIONS BENTO ────────────────────────────────────── -->
+  <section class="section functions-section" id="functions">
+    <div class="container">
+      <div class="functions-header">
+        <div class="reveal">
+          <div class="label-mono" style="margin-bottom:var(--space-2)">02 / WHAT WE HANDLE</div>
+          <h2>Six functions.<br/>One contract.</h2>
+        </div>
+        <div class="functions-header-right reveal d1">
+          <p>Every critical function for US market entry, owned end-to-end. Not brokered out, not subcontracted — our team, our accountability, your brand.</p>
+        </div>
+      </div>
+
+      <div class="fn-bento reveal d1">
+        <!-- Intelligence — tall left -->
+        <div class="fn-tile fn-intelligence">
+          <div>
+            <div class="fn-tile-header">
+              <span class="fn-index">01</span>
+              <span class="fn-category">Core</span>
+            </div>
+            <div class="fn-title">Market Intelligence</div>
+            <div class="fn-desc">AI-powered competitive analysis, US consumer trend mapping, and category positioning research. You arrive in the US market already knowing where to play and who's buying — not guessing after the fact.</div>
+          </div>
+          <div>
+            <div class="fn-large-stat">AI</div>
+            <div class="fn-large-stat-label">Powered analysis</div>
+            <div class="fn-footer">
+              <span class="fn-footer-label">Delivered pre-launch</span>
+              <span class="fn-footer-status">Running</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Compliance -->
+        <div class="fn-tile fn-compliance">
+          <div>
+            <div class="fn-tile-header">
+              <span class="fn-index">02</span>
+            </div>
+            <div class="fn-title">Compliance</div>
+            <div class="fn-desc">FDA, FCC, CPSC — every requirement for your product category, flagged and filed before you ship a unit. No customs holds.</div>
+          </div>
+          <div class="fn-footer">
+            <span class="fn-footer-label">All categories</span>
+            <span class="fn-footer-status">100% rate</span>
+          </div>
+        </div>
+
+        <!-- Logistics -->
+        <div class="fn-tile fn-logistics">
+          <div>
+            <div class="fn-tile-header">
+              <span class="fn-index">03</span>
+            </div>
+            <div class="fn-title">Logistics</div>
+            <div class="fn-desc">Inbound freight, customs brokerage, and last-mile — fully coordinated. Your product arrives on time, every time.</div>
+          </div>
+          <div class="fn-footer">
+            <span class="fn-footer-label">Door to warehouse</span>
+          </div>
+        </div>
+
+        <!-- Warehousing — wide right -->
+        <div class="fn-tile fn-warehousing">
+          <div class="fn-tile-header">
+            <span class="fn-index">04</span>
+          </div>
+          <div class="fn-title">Warehousing &amp; Fulfilment</div>
+          <div class="fn-desc">Flexible US warehouse infrastructure. No long-term contracts, no volume minimums. Scale as your US sales grow — not based on a forecast you made before you launched.</div>
+          <div class="fn-footer">
+            <span class="fn-footer-label">No minimums · Flexible terms</span>
+            <span class="fn-footer-status">US-based</span>
+          </div>
+        </div>
+
+        <!-- E-commerce -->
+        <div class="fn-tile fn-ecommerce">
+          <div>
+            <div class="fn-tile-header">
+              <span class="fn-index">05</span>
+              <span class="fn-category">Revenue</span>
+            </div>
+            <div class="fn-title">E-commerce Setup</div>
+            <div class="fn-desc">Amazon marketplace, Shopify storefront, and DTC channel — built and optimised for US buyers. Listings, A+ content, conversion architecture, and launch campaigns ready before day one.</div>
+          </div>
+          <div class="fn-footer">
+            <span class="fn-footer-label">Amazon · Shopify · DTC</span>
+            <span class="fn-footer-status">Ready day 1</span>
+          </div>
+        </div>
+
+        <!-- Marketing -->
+        <div class="fn-tile fn-marketing">
+          <div>
+            <div class="fn-tile-header">
+              <span class="fn-index">06</span>
+            </div>
+            <div class="fn-title">Marketing</div>
+            <div class="fn-desc">Performance campaigns and brand positioning calibrated to US consumers — not a translated version of what worked at home.</div>
+          </div>
+          <div class="fn-footer">
+            <span class="fn-footer-label">Performance + Brand</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROCESS ──────────────────────────────────────────────── -->
+  <section class="section process-section" id="process">
+    <div class="process-inner">
+      <div class="reveal">
+        <div class="label-mono" style="margin-bottom:var(--space-2)">03 / PROCESS</div>
+        <h2>From first call<br/>to first US sale.</h2>
+      </div>
+      <div class="process-track reveal d1">
+        <div class="process-step">
+          <div class="step-num-display">01</div>
+          <div class="process-step-num">INTAKE</div>
+          <h4>Tell Us About Your Brand</h4>
+          <p>One intake session. We learn your product, your home market position, your target US customer, and your timeline. No lengthy questionnaires — 90 minutes and we have what we need.</p>
+          <div class="process-step-footer">
+            <span class="process-step-time">Day 0 → Day 1</span>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num-display">02</div>
+          <div class="process-step-num">PLANNING</div>
+          <h4>We Build Your US Launch Plan</h4>
+          <p>Within 48 hours: a compliance checklist for your product, logistics routing, warehousing setup, and a 90-day e-commerce and marketing roadmap. Reviewed together before we execute.</p>
+          <div class="process-step-footer">
+            <span class="process-step-time">Day 1 → Day 3</span>
+          </div>
+        </div>
+        <div class="process-step">
+          <div class="step-num-display">03</div>
+          <div class="process-step-num">LAUNCH</div>
+          <h4>Live in the US in 14 Days</h4>
+          <p>Your product is compliant, warehoused in the US, listed on the right channels, and backed by a live marketing programme. You brief us on the brand. We run the operations.</p>
+          <div class="process-step-footer">
+            <span class="process-step-time">Day 3 → Day 14</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── DIFFERENTIATORS ──────────────────────────────────────── -->
+  <section class="section diff-section" id="why">
+    <div class="diff-inner">
+      <div class="diff-header reveal">
+        <div class="label-mono" style="margin-bottom:var(--space-2)">04 / WHY ORBIT</div>
+        <h2>Four things<br/>no one else offers.</h2>
+      </div>
+      <div class="diff-bento reveal d1">
+        <!-- Speed -->
+        <div class="diff-tile diff-tile-speed">
+          <div class="diff-tile-eyebrow">Speed</div>
+          <h4>14 Days, Not 6 Months</h4>
+          <p>The average international brand takes 4–6 months to establish US operations from scratch. We've pre-built the infrastructure, pre-negotiated the logistics contracts, and pre-tested the compliance pathways. You get the result of 18 months of groundwork on day one.</p>
+          <div class="diff-big-stat">14<span class="diff-big-stat-unit"> days</span></div>
+        </div>
+
+        <!-- Full stack — tall right -->
+        <div class="diff-tile diff-tile-full">
+          <div class="diff-tile-eyebrow">Full-Stack</div>
+          <h4>The Entire Chain. Not Just One Piece.</h4>
+          <p>We own all six functions — market intelligence through marketing. That means no handoff gaps, no finger-pointing between vendors, and one SLA that covers everything from port entry to customer purchase.</p>
+          <div class="diff-functions-display">
+            <div class="diff-fn-row">
+              <span class="diff-fn-check">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#FF5533" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              <span class="diff-fn-name">Market Intelligence</span>
+            </div>
+            <div class="diff-fn-row">
+              <span class="diff-fn-check">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#FF5533" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              <span class="diff-fn-name">Compliance</span>
+            </div>
+            <div class="diff-fn-row">
+              <span class="diff-fn-check">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#FF5533" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              <span class="diff-fn-name">Logistics</span>
+            </div>
+            <div class="diff-fn-row">
+              <span class="diff-fn-check">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#FF5533" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              <span class="diff-fn-name">Warehousing</span>
+            </div>
+            <div class="diff-fn-row">
+              <span class="diff-fn-check">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#FF5533" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              <span class="diff-fn-name">E-commerce</span>
+            </div>
+            <div class="diff-fn-row">
+              <span class="diff-fn-check">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#FF5533" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </span>
+              <span class="diff-fn-name">Marketing</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cultural Fit -->
+        <div class="diff-tile">
+          <div class="diff-tile-eyebrow">Cultural Fit</div>
+          <h4>We Speak Both Languages</h4>
+          <p>Our team has worked with brands from Korea, India, and Thailand navigating US consumer culture. We know what translates and what needs reframing before you invest in the wrong message for the wrong audience.</p>
+        </div>
+
+        <!-- AI-Powered -->
+        <div class="diff-tile">
+          <div class="diff-tile-eyebrow">AI-Powered</div>
+          <h4>Agents Catch What Humans Miss</h4>
+          <p>Compliance and market intelligence agents monitor regulatory changes and competitive shifts in real time — flagging issues the moment they appear, not in your quarterly review.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── PROOF ─────────────────────────────────────────────────── -->
+  <section class="section proof-section has-grain" id="proof">
+    <div class="proof-inner">
+      <div class="reveal" style="margin-bottom:var(--space-8)">
+        <div class="label-mono" style="margin-bottom:var(--space-2)">05 / RESULTS</div>
+        <h2 style="font-family:var(--font-heading);font-size:clamp(32px,4vw,52px);font-weight:700;letter-spacing:-0.03em;color:var(--color-text)">Early cohort.<br/>Real numbers.</h2>
+      </div>
+
+      <div class="proof-numbers reveal d1">
+        <div class="proof-num-item">
+          <span class="proof-num-value proof-num-brand">3</span>
+          <span class="proof-num-label">Brands Launched</span>
+        </div>
+        <div class="proof-num-item">
+          <span class="proof-num-value">11.4</span>
+          <span class="proof-num-label">Avg. Days to Live</span>
+        </div>
+        <div class="proof-num-item">
+          <span class="proof-num-value proof-num-brand">100%</span>
+          <span class="proof-num-label">Compliance Rate</span>
+        </div>
+        <div class="proof-num-item">
+          <span class="proof-num-value">3</span>
+          <span class="proof-num-label">Countries in Cohort 1</span>
+        </div>
+      </div>
+
+      <div class="testimonials-grid reveal d2">
+        <div class="testimonial">
+          <div class="testimonial-quote-mark">"</div>
+          <p class="testimonial-text">We'd been trying to crack the US market for eighteen months. We had a great product, a team that believed in it, and no idea how to navigate FDA requirements at the same time as an Amazon launch. Orbit had us live in twelve days. I still don't fully understand how they moved that fast.</p>
+          <div class="testimonial-byline">
+            <span class="byline-name">Ji-Hoon K.</span>
+            <span class="byline-role">Founder, Premium Skincare Brand — Seoul, Korea</span>
+            <span class="byline-metric">→ $82K US revenue, month one</span>
+          </div>
+        </div>
+        <div class="testimonial testimonial-compact">
+          <div class="testimonial-quote-mark">"</div>
+          <p class="testimonial-text">I interviewed seven different consultants. None of them owned the full picture. Orbit was the first team that said "we handle all of it" and meant it. That single point of accountability was worth every dollar.</p>
+          <div class="testimonial-byline">
+            <span class="byline-name">Priya M.</span>
+            <span class="byline-role">CEO, Home Goods Brand — Bangalore, India</span>
+            <span class="byline-metric">→ Live in the US in 11 days</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ───────────────────────────────────────────────── -->
+  <section class="section cta-section" id="contact">
+    <div class="cta-inner">
+      <div class="cta-copy reveal">
+        <div class="cta-section-num">06 / GET STARTED</div>
+        <h2>Ready to bring your brand to the US?</h2>
+        <p>Fill in the form and we'll send you a custom US launch plan within 48 hours — market intelligence, compliance checklist, and a 90-day revenue projection for your category.</p>
+        <ul class="cta-promise-list">
+          <li>
+            <span class="promise-icon">→</span>
+            Full compliance audit for your product category
+          </li>
+          <li>
+            <span class="promise-icon">→</span>
+            Recommended logistics and warehousing setup
+          </li>
+          <li>
+            <span class="promise-icon">→</span>
+            90-day revenue projection based on your category
+          </li>
+          <li>
+            <span class="promise-icon">→</span>
+            No commitment required to receive the plan
+          </li>
+        </ul>
+      </div>
+
+      <div class="contact-form-wrap reveal d2">
+        <div class="form-title">Intake Form — Cohort 2</div>
+        <form onsubmit="handleFormSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="f-name">Full Name</label>
+              <input class="form-input" id="f-name" type="text" placeholder="Your name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f-email">Email</label>
+              <input class="form-input" id="f-email" type="email" placeholder="you@brand.com" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-brand">Brand Website</label>
+            <input class="form-input" id="f-brand" type="url" placeholder="https://yourbrand.com" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="f-country">Home Market</label>
+              <input class="form-input" id="f-country" type="text" placeholder="Korea / India / Thailand" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="f-revenue">Annual Revenue</label>
+              <input class="form-input" id="f-revenue" type="text" placeholder="e.g. $1.2M" />
+            </div>
+          </div>
+          <button class="form-submit" type="submit">Request US Launch Plan →</button>
+          <p class="form-footnote">48h turnaround · No sales call without your consent</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─────────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-cta-band">
+      <h3>You build the brand.<br/>We run the US operation.</h3>
+      <a href="#contact" class="btn-primary">
+        Book Intake Call
+        <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M2.5 6.5h8M7.5 3.5l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+    <div class="footer-main">
+      <div class="footer-brand-col">
+        <div class="footer-logo">
+          <div class="footer-logo-mark">
+            <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+              <circle cx="6" cy="6" r="4" stroke="white" stroke-width="1.5"/>
+              <circle cx="6" cy="6" r="1.5" fill="white"/>
+            </svg>
+          </div>
+          Orbit
+        </div>
+        <p class="footer-desc">Full-stack US market entry for international brands. Six functions, one contract, fourteen days to launch.</p>
+        <div class="footer-tagline">US Market Entry Platform</div>
+      </div>
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <ul class="footer-links">
+          <li><a href="#functions">Market Intelligence</a></li>
+          <li><a href="#functions">Compliance</a></li>
+          <li><a href="#functions">Logistics</a></li>
+          <li><a href="#functions">Warehousing</a></li>
+          <li><a href="#functions">E-commerce</a></li>
+          <li><a href="#functions">Marketing</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul class="footer-links">
+          <li><a href="#">About</a></li>
+          <li><a href="#why">Why Orbit</a></li>
+          <li><a href="#proof">Results</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul class="footer-links">
+          <li><a href="#contact">Intake Form</a></li>
+          <li><a href="#">Partnership</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Orbit Labs Inc. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── SCRIPTS ────────────────────────────────────────────── -->
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) {
+      new IntersectionObserver(
+        ([e]) => navbar.classList.toggle('scrolled', !e.isIntersecting),
+        { threshold: 0.05 }
+      ).observe(heroSection);
+    }
+
+    // Mobile drawer
+    const burger = document.getElementById('hamburger');
+    const drawer = document.getElementById('mobile-drawer');
+    let open = false;
+    burger.addEventListener('click', () => {
+      open = !open;
+      burger.classList.toggle('open', open);
+      drawer.classList.toggle('open', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      open = false;
+      burger.classList.remove('open');
+      drawer.classList.remove('open');
+      document.body.style.overflow = '';
+    }));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && open) {
+        open = false;
+        burger.classList.remove('open');
+        drawer.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Scroll reveal
+    const revealObserver = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Form
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = '✓ Received — plan arriving within 48h';
+      btn.style.background = '#1A7A4A';
+      btn.disabled = true;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keshida Layone — BreatheArt</title>
+  <meta name="description" content="Keshida Layone is a contemporary visual artist. Founder of BreatheArt. Creating work that moves you to breathe deeper.">
+
+  <!-- Preload hover images for dual-state cards -->
+  <link rel="preload" as="image" href="keshida_asset/Attention at Home.jpg">
+  <link rel="preload" as="image" href="keshida_asset/Exhaustion in Home.jpg">
+  <link rel="preload" as="image" href="keshida_asset/Growing Together in Office.jpg">
+  <link rel="preload" as="image" href="keshida_asset/Merge in Dining Room.jpg">
+  <link rel="preload" as="image" href="keshida_asset/Nature_s Kiss in Reading room.jpg">
+  <link rel="preload" as="image" href="keshida_asset/Wonder at Home.jpg">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ROTATE PROMPT (portrait mobile) -->
+  <div class="rotate-prompt" aria-hidden="true">
+    <div class="rotate-icon">↻</div>
+    <p>Please rotate your device.<br>This is a horizontal experience.</p>
+    <div class="rotate-brand">BreatheArt</div>
+  </div>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-bg-text" aria-hidden="true">LAYONE</div>
+    <div class="loader-inner">
+      <span class="loader-eyebrow">BreatheArt · Visual Artist</span>
+      <h1 class="loader-name">Keshida<br>Layone</h1>
+      <button id="loader-enter">Enter</button>
+    </div>
+    <div class="loader-bottom" aria-hidden="true">
+      <span>Contemporary Art</span>
+      <span>Original Works · Prints · Murals</span>
+    </div>
+  </div>
+
+  <!-- FIXED NAVIGATION -->
+  <header class="site-header" id="site-header">
+    <a class="logo" href="#hero" aria-label="BreatheArt Home">
+      <img src="keshida_asset/BreatheArt-wordmark.jpg" alt="BreatheArt">
+    </a>
+    <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+    <a class="header-store-link" href="#store">Shop</a>
+  </header>
+
+  <!-- FULL-SCREEN MENU OVERLAY -->
+  <nav class="menu-overlay" id="menu-overlay" aria-hidden="true">
+    <div class="menu-grid">
+      <div class="menu-links">
+        <a class="menu-link" href="#hero" data-index="01">Home</a>
+        <a class="menu-link" href="#gallery" data-index="02">Gallery</a>
+        <a class="menu-link" href="#showcase" data-index="03">Collections</a>
+        <a class="menu-link" href="#store" data-index="04">Shop</a>
+        <a class="menu-link" href="#partners" data-index="05">Partnerships</a>
+        <a class="menu-link" href="#contact" data-index="06">Contact</a>
+        <div class="menu-meta">
+          <a href="mailto:hello@breatheart.com">business enquiries</a>
+          <div class="menu-socials">
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <a href="#" aria-label="TikTok">TikTok</a>
+            <a href="#" aria-label="YouTube">YouTube</a>
+          </div>
+        </div>
+      </div>
+      <div class="menu-photos">
+        <div class="menu-photo-item">
+          <img src="keshida_asset/Keshida Layone in studio.jpg" alt="Keshida Layone in studio" loading="eager">
+        </div>
+        <div class="menu-photo-item">
+          <img src="keshida_asset/KL HEADSHOT.jpg" alt="Keshida Layone" loading="eager">
+        </div>
+        <div class="menu-photo-item">
+          <img src="keshida_asset/Keshida painting his studio.png" alt="Keshida painting" loading="eager">
+        </div>
+        <div class="menu-photo-item">
+          <img src="keshida_asset/KeshidaLayone_Distractions_2025.jpg" alt="Keshida Layone" loading="eager">
+        </div>
+      </div>
+    </div>
+    <button class="menu-close" id="menu-close" aria-label="Close menu">✕</button>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="keshida_asset/Keshida Layone in studio.jpg" alt="Keshida Layone" class="hero-img">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">BreatheArt · Est. 2018</span>
+      <h1 class="hero-name">
+        <span class="hero-name-first">Keshida</span>
+        <span class="hero-name-last">Layone</span>
+      </h1>
+      <p class="hero-subtitle">Contemporary Visual Artist · Original Works &amp; Limited Prints</p>
+    </div>
+    <div class="hero-next-event">
+      <span class="next-label">Coming</span>
+      <a href="#" class="next-event-name">Soft Life Exhibition — 2025</a>
+    </div>
+    <div class="hero-signature" aria-hidden="true">
+      <img src="keshida_asset/KeshidaLAyone.png" alt="Keshida Layone">
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">scroll ↓</div>
+  </section>
+
+  <!-- BIO / MANIFESTO SECTION -->
+  <section class="bio-section" id="bio">
+    <div class="bio-inner">
+      <p class="bio-statement">
+        Making art that <strong>moves</strong> you. Creating work that forces you to
+        <strong>stop</strong>, to feel, to <strong>breathe</strong> deeper.
+        Every canvas is an invitation to encounter something <strong>true</strong>.
+      </p>
+      <div class="bio-signature">
+        <img src="keshida_asset/KeshidaLAyone.png" alt="Keshida Layone signature">
+      </div>
+    </div>
+  </section>
+
+  <!-- HORIZONTAL PHOTO SCROLL GALLERY -->
+  <section class="gallery-section" id="gallery">
+    <div class="gallery-track" id="gallery-track">
+
+      <div class="gallery-item" data-caption="Growing Together, 2024">
+        <img src="keshida_asset/Growing Together in Office.jpg" alt="Growing Together in an office">
+        <span class="gallery-caption">Growing Together, 2024</span>
+      </div>
+
+      <div class="gallery-item" data-caption="Attention, 2023">
+        <img src="keshida_asset/Attention at Home.jpg" alt="Attention at home">
+        <span class="gallery-caption">Attention, 2023</span>
+      </div>
+
+      <div class="gallery-quote">
+        <blockquote>"Every piece is a breath you didn't know you needed."</blockquote>
+        <img src="keshida_asset/KeshidaLAyone.png" alt="signature">
+      </div>
+
+      <div class="gallery-item" data-caption="Drift Series · Restaurant Installation">
+        <img src="keshida_asset/Drift Series at a resturant.jpg" alt="Drift series in restaurant">
+        <span class="gallery-caption">Drift Series · Restaurant Install</span>
+      </div>
+
+      <div class="gallery-item" data-caption="Future on Fire, Hotel Installation, 2024">
+        <img src="keshida_asset/Future on fire in hotel Both.jpg" alt="Future on Fire at hotel">
+        <span class="gallery-caption">Future on Fire, Hotel, 2024</span>
+      </div>
+
+      <div class="gallery-item" data-caption="His Presence Mural · ArtHaus">
+        <img src="keshida_asset/ArtHaus _ His Presence Mural.png" alt="His Presence mural at ArtHaus">
+        <span class="gallery-caption">His Presence Mural · ArtHaus</span>
+      </div>
+
+      <div class="gallery-item" data-caption="Merge · Dining Room Install">
+        <img src="keshida_asset/Merge in Dining Room.jpg" alt="Merge in dining room">
+        <span class="gallery-caption">Merge · Dining Room Install</span>
+      </div>
+
+      <div class="gallery-item" data-caption="Night Blossom · Private Residence">
+        <img src="keshida_asset/night blossom in home.jpg" alt="Night Blossom in home">
+        <span class="gallery-caption">Night Blossom · Private Residence</span>
+      </div>
+
+      <div class="gallery-item" data-caption="Wonder · Home Collection">
+        <img src="keshida_asset/Wonder at Home.jpg" alt="Wonder at home">
+        <span class="gallery-caption">Wonder · Home Collection</span>
+      </div>
+
+      <div class="gallery-item" data-caption="Oceans of the Moon · Private">
+        <img src="keshida_asset/Oceans of the moon at home.jpg" alt="Oceans of the Moon at home">
+        <span class="gallery-caption">Oceans of the Moon · Private</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTENT SPLIT SECTION -->
+  <section class="content-split" id="content-split">
+    <a class="split-item split-item--left" href="#showcase">
+      <div class="split-label">
+        <span class="split-word-1">Original</span>
+        <span class="split-word-2">Works</span>
+      </div>
+      <p class="split-desc">One-of-a-kind canvases that <strong>transform</strong> any space they inhabit.</p>
+    </a>
+    <a class="split-item split-item--right" href="#store">
+      <div class="split-label">
+        <span class="split-word-1">Limited</span>
+        <span class="split-word-2">Prints</span>
+      </div>
+      <p class="split-desc">Museum-quality prints that bring <strong>breath</strong> into everyday living.</p>
+    </a>
+  </section>
+
+  <!-- SHOWCASE CARD GRID (Dual-State Hover) -->
+  <section class="showcase-section" id="showcase">
+    <div class="showcase-header">
+      <span class="showcase-eyebrow">The Collection</span>
+      <h2 class="showcase-title">Originals<br><em>&amp; Installations</em></h2>
+      <p class="showcase-desc">Each work shown alongside its living environment.</p>
+    </div>
+    <div class="showcase-grid">
+
+      <div class="showcase-card">
+        <div class="card-images">
+          <img class="card-base" src="keshida_asset/Attention Both.jpg" alt="Attention — original">
+          <img class="card-hover" src="keshida_asset/Attention at Home.jpg" alt="Attention — installed">
+          <div class="card-mask card-mask--grey"></div>
+          <div class="card-mask card-mask--accent"></div>
+        </div>
+        <div class="card-meta">
+          <span class="card-name">Attention</span>
+          <span class="card-year">2023</span>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="card-images">
+          <img class="card-base" src="keshida_asset/Growing Together Both.jpg" alt="Growing Together — original">
+          <img class="card-hover" src="keshida_asset/Growing Together in Office.jpg" alt="Growing Together — installed">
+          <div class="card-mask card-mask--grey"></div>
+          <div class="card-mask card-mask--accent"></div>
+        </div>
+        <div class="card-meta">
+          <span class="card-name">Growing Together</span>
+          <span class="card-year">2024</span>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="card-images">
+          <img class="card-base" src="keshida_asset/Exhaustion Both.jpg" alt="Exhaustion — original">
+          <img class="card-hover" src="keshida_asset/Exhaustion in Home.jpg" alt="Exhaustion — installed">
+          <div class="card-mask card-mask--grey"></div>
+          <div class="card-mask card-mask--accent"></div>
+        </div>
+        <div class="card-meta">
+          <span class="card-name">Exhaustion</span>
+          <span class="card-year">2023</span>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="card-images">
+          <img class="card-base" src="keshida_asset/Nature_s Kiss Both.jpg" alt="Nature's Kiss — original">
+          <img class="card-hover" src="keshida_asset/Nature_s Kiss in Reading room.jpg" alt="Nature's Kiss — installed">
+          <div class="card-mask card-mask--grey"></div>
+          <div class="card-mask card-mask--accent"></div>
+        </div>
+        <div class="card-meta">
+          <span class="card-name">Nature's Kiss</span>
+          <span class="card-year">2023</span>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="card-images">
+          <img class="card-base" src="keshida_asset/Wonder. BOTHjpg.jpg" alt="Wonder — original">
+          <img class="card-hover" src="keshida_asset/Wonder at Home.jpg" alt="Wonder — installed">
+          <div class="card-mask card-mask--grey"></div>
+          <div class="card-mask card-mask--accent"></div>
+        </div>
+        <div class="card-meta">
+          <span class="card-name">Wonder</span>
+          <span class="card-year">2023</span>
+        </div>
+      </div>
+
+      <div class="showcase-card">
+        <div class="card-images">
+          <img class="card-base" src="keshida_asset/Merge Both.png" alt="Merge — original">
+          <img class="card-hover" src="keshida_asset/Merge in Dining Room.jpg" alt="Merge — installed">
+          <div class="card-mask card-mask--grey"></div>
+          <div class="card-mask card-mask--accent"></div>
+        </div>
+        <div class="card-meta">
+          <span class="card-name">Merge</span>
+          <span class="card-year">2024</span>
+        </div>
+      </div>
+
+    </div>
+    <a class="showcase-cta" href="#store">View all works</a>
+  </section>
+
+  <!-- STORE SECTION -->
+  <section class="store-section" id="store">
+    <div class="store-content">
+      <span class="store-eyebrow">BreatheArt Shop</span>
+      <h2 class="store-headline">Art for<br>your walls,<br>your world.</h2>
+      <p class="store-desc">Museum-quality limited prints and original works. Every piece is made to move into your space and stay there.</p>
+      <a class="store-cta" href="#">Visit the store</a>
+    </div>
+    <div class="store-images">
+      <div class="store-img store-img--1">
+        <img src="keshida_asset/Affection Print ONLY.jpg" alt="Affection print">
+      </div>
+      <div class="store-img store-img--2">
+        <img src="keshida_asset/Serenity Print ONLY.png" alt="Serenity print">
+      </div>
+      <div class="store-img store-img--3">
+        <img src="keshida_asset/Oceans of the Moon Print Only.jpg" alt="Oceans of the Moon print">
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS SECTION -->
+  <section class="partners-section" id="partners">
+    <div class="partners-header">
+      <h2 class="partners-title">exhibitions<br><em>&amp; features</em></h2>
+      <p class="partners-desc">From hotel lobbies to corporate offices — BreatheArt works live where people need to pause.</p>
+      <a class="partners-cta" href="#">view all placements</a>
+    </div>
+    <div class="partners-marquee-wrap">
+      <div class="marquee-row marquee-row--left">
+        <div class="marquee-track" id="marquee-left">
+          <div class="logo-item"><span class="partner-text">ArtHaus Gallery</span></div>
+          <div class="logo-item"><span class="partner-text">Bold Journey Magazine</span></div>
+          <div class="logo-item"><span class="partner-text">Hotel Collections</span></div>
+          <div class="logo-item"><span class="partner-text">Corporate Art</span></div>
+          <div class="logo-item"><span class="partner-text">Private Residences</span></div>
+          <div class="logo-item"><span class="partner-text">Restaurant Installs</span></div>
+          <div class="logo-item"><span class="partner-text">ArtHaus Gallery</span></div>
+          <div class="logo-item"><span class="partner-text">Bold Journey Magazine</span></div>
+          <div class="logo-item"><span class="partner-text">Hotel Collections</span></div>
+          <div class="logo-item"><span class="partner-text">Corporate Art</span></div>
+          <div class="logo-item"><span class="partner-text">Private Residences</span></div>
+          <div class="logo-item"><span class="partner-text">Restaurant Installs</span></div>
+        </div>
+      </div>
+      <div class="marquee-row marquee-row--right">
+        <div class="marquee-track" id="marquee-right">
+          <div class="logo-item"><span class="partner-text">Soft Life Exhibition</span></div>
+          <div class="logo-item"><span class="partner-text">Greeting Card Series</span></div>
+          <div class="logo-item"><span class="partner-text">Wonderment Mural</span></div>
+          <div class="logo-item"><span class="partner-text">His Presence Mural</span></div>
+          <div class="logo-item"><span class="partner-text">Limited Edition Prints</span></div>
+          <div class="logo-item"><span class="partner-text">Office Collections</span></div>
+          <div class="logo-item"><span class="partner-text">Soft Life Exhibition</span></div>
+          <div class="logo-item"><span class="partner-text">Greeting Card Series</span></div>
+          <div class="logo-item"><span class="partner-text">Wonderment Mural</span></div>
+          <div class="logo-item"><span class="partner-text">His Presence Mural</span></div>
+          <div class="logo-item"><span class="partner-text">Limited Edition Prints</span></div>
+          <div class="logo-item"><span class="partner-text">Office Collections</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="partners-featured">
+      <div class="partners-img">
+        <img src="keshida_asset/ArtHaus _ His Presence Mural.png" alt="His Presence mural">
+        <span class="partners-img-label">His Presence — ArtHaus</span>
+      </div>
+      <div class="partners-img">
+        <img src="keshida_asset/Bold Journey Magazine.jpg" alt="Bold Journey Magazine feature">
+        <span class="partners-img-label">Bold Journey Magazine</span>
+      </div>
+      <div class="partners-img">
+        <img src="keshida_asset/Drift Series at a resturant.jpg" alt="Drift series installation">
+        <span class="partners-img-label">Drift Series — Restaurant</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL FEED GRID -->
+  <section class="social-section" id="social">
+    <h2 class="social-title">in the<br><em>studio</em></h2>
+    <div class="social-grid">
+      <div class="social-item social-item--tall">
+        <img src="keshida_asset/KeshidaLayone_Distractions_2025.jpg" alt="Distractions 2025">
+        <span class="social-platform">Instagram</span>
+      </div>
+      <div class="social-item">
+        <img src="keshida_asset/KeshidaLayone_Fertile Ground_2025.jpg" alt="Fertile Ground 2025">
+        <span class="social-platform">Instagram</span>
+      </div>
+      <div class="social-item">
+        <img src="keshida_asset/Serenity at Home.jpg" alt="Serenity at home">
+        <span class="social-platform">Studio</span>
+      </div>
+      <div class="social-item social-item--tall">
+        <img src="keshida_asset/Queens at home.jpg" alt="Queens at home">
+        <span class="social-platform">Instagram</span>
+      </div>
+      <div class="social-item">
+        <img src="keshida_asset/Red Light at home.jpg" alt="Red Light">
+        <span class="social-platform">Studio</span>
+      </div>
+      <div class="social-item">
+        <img src="keshida_asset/In Between Love at Home.jpg" alt="In Between Love">
+        <span class="social-platform">Instagram</span>
+      </div>
+      <div class="social-item">
+        <img src="keshida_asset/Slow Burn in Living Room.jpg" alt="Slow Burn">
+        <span class="social-platform">Studio</span>
+      </div>
+      <div class="social-item">
+        <img src="keshida_asset/Heaven.png" alt="Heaven">
+        <span class="social-platform">Instagram</span>
+      </div>
+    </div>
+    <div class="social-links" id="contact">
+      <a href="#">Instagram</a>
+      <a href="#">TikTok</a>
+      <a href="#">YouTube</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-hero">
+      <h2 class="footer-tagline">Art that makes<br>you <em>breathe.</em></h2>
+      <div class="footer-hero-img">
+        <img src="keshida_asset/Keshida painting his studio.png" alt="Keshida Layone at work">
+      </div>
+      <a class="footer-business" href="mailto:hello@breatheart.com">business enquiries →</a>
+    </div>
+
+    <div class="footer-sponsors">
+      <img src="keshida_asset/BreatheArt-wordmark.jpg" alt="BreatheArt" class="sponsor-logo">
+    </div>
+
+    <div class="footer-nav">
+      <div class="footer-nav-col">
+        <span class="footer-col-label">explore</span>
+        <a href="#gallery">Gallery</a>
+        <a href="#showcase">Collections</a>
+        <a href="#store">Shop</a>
+        <a href="#partners">Exhibitions</a>
+      </div>
+      <div class="footer-nav-col">
+        <span class="footer-col-label">follow</span>
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+        <a href="#">YouTube</a>
+      </div>
+      <div class="footer-logo">
+        <img src="keshida_asset/KeshidaLAyone.png" alt="Keshida Layone">
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2025 Keshida Layone / BreatheArt. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+
+    <div class="footer-blob" aria-hidden="true"></div>
+  </footer>
+
+  <!-- CDN Stack -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js"></script>
+  <script src="js/loader.js"></script>
+  <script src="js/menu.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/marquee.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Avatar</title>
+    <style>
+        /* --- Base Styles --- */
+        body, html {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- Animation Container --- */
+        .animation-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-width: 80px;
+            min-height: 80px;
+        }
+
+        /* --- Center Circle (Memoji) --- */
+        .center-circle {
+            width: 60%;
+            height: 60%;
+            min-width: 60px;
+            min-height: 60px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .center-circle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .center-circle video {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background-color: #fff;
+        }
+
+        /* --- Orbiting Icons --- */
+        .orbit-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: rotate 25s linear infinite; 
+        }
+
+        .app-icon-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55), opacity 0.5s ease-out;
+        }
+
+        .app-icon {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            animation: rotate-reverse 25s linear infinite;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 12%;
+            box-sizing: border-box;
+        }
+
+        .app-icon svg, .app-icon .icon-text, .app-icon img {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        /* --- Keyframe Animations --- */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotate-reverse {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+        
+        /* Fade in/out classes for the center element */
+        .fade-out {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .animation-container,
+            .center-circle,
+            .app-icon-wrapper,
+            .app-icon {
+                transform: scale(0.9);
+            }
+
+            .app-icon svg, .app-icon .icon-text {
+                font-size: 6px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="animation-container">
+        <div class="center-circle" id="center-element">
+            <video id="center-video" muted loop playsinline preload="metadata" webkit-playsinline>
+                <source src="./assets/images/imageMovie/EmojiMovie779932665.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="orbit-container" id="orbit-container"></div>
+    </div>
+
+    <script>
+        // --- DATA FOR THE ANIMATION ---
+        const usersData = [
+            {
+                // Persona: Product Manager & Developer
+                memoji: "./assets/images/imageMovie/EmojiMovie779932665.mp4",
+                apps: [
+                    { name: 'Jira', color: '#0052CC' },
+                    { name: 'Python', color: '#3776AB' },
+                    { name: 'Docker', color: '#2496ED' },
+                    { name: 'SQL', color: '#00758F' },
+                    { name: 'Slack', color: '#4A154B' },
+                    { name: 'AWS', color: '#232F3E' },
+                    { name: 'Tableau', color: '#E97627' }
+                ]
+            },
+            {
+                // Persona: Data Analytics Focus
+                memoji: "./assets/images/imageMovie/EmojiMovie779932701.mp4",
+                apps: [
+                    { name: 'Tableau', color: '#E97627' },
+                    { name: 'PowerBI', color: '#F2C811' },
+                    { name: 'Python', color: '#3776AB' },
+                    { name: 'SQL', color: '#00758F' },
+                    { name: 'Excel', color: '#217346' },
+                    { name: 'Azure', color: '#0089D6' }
+                ]
+            },
+            {
+                // Persona: Technical PM
+                memoji: "./assets/images/imageMovie/EmojiMovie779932788.mp4",
+                apps: [
+                    { name: 'Confluence', color: '#172B4D' },
+                    { name: 'Postman', color: '#FF6C37' },
+                    { name: 'Git', color: '#F05032' },
+                    { name: 'Miro', color: '#F2C94C' },
+                    { name: 'Figma', color: '#F24E1E' },
+                    { name: 'Notion', color: '#000000' }
+                ]
+            }
+        ];
+
+        // --- DOM ELEMENTS ---
+        const centerElement = document.getElementById('center-element');
+        const centerVideo = document.getElementById('center-video');
+        const orbitContainer = document.getElementById('orbit-container');
+        
+        let currentUserIndex = 0;
+        let ORBIT_RADIUS = 40; // Will be calculated based on container size
+
+        // --- FUNCTIONS ---
+        function calculateOrbitRadius() {
+            const container = document.querySelector('.animation-container');
+            const containerSize = Math.min(container.offsetWidth, container.offsetHeight);
+            ORBIT_RADIUS = containerSize * 0.38; // 45% of container size for better spacing
+        }
+
+        function startVideo() {
+            const playPromise = centerVideo.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    console.log('Video started playing');
+                }).catch(error => {
+                    console.log('Autoplay failed, will try on user interaction:', error);
+                    // Show a play button or handle autoplay restriction
+                });
+            }
+        }
+
+        function setupOrbitingIcons(apps) {
+            orbitContainer.innerHTML = '';
+            calculateOrbitRadius();
+            
+            const angleStep = (2 * Math.PI) / apps.length;
+            
+            const icons = apps.map((app, index) => {
+                const minSize = 42; // Minimum 42px
+                const maxSize = 54; // Maximum 64px
+                const size = Math.random() * (maxSize - minSize) + minSize;
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'app-icon-wrapper';
+                
+                wrapper.style.width = `${size}px`;
+                wrapper.style.height = `${size}px`;
+                wrapper.style.marginTop = `-${size / 2}px`;
+                wrapper.style.marginLeft = `-${size / 2}px`;
+                wrapper.style.transform = 'translate(0px, 0px) scale(0.1)';
+                wrapper.style.opacity = '0';
+
+                const iconDiv = document.createElement('div');
+                iconDiv.className = 'app-icon';
+                const iconContent = getIconLogo(app.name);
+                iconDiv.innerHTML = iconContent;
+
+                wrapper.appendChild(iconDiv);
+                
+                return { element: wrapper, size, originalIndex: index };
+            });
+
+            // Sort by size for proper z-index layering
+            [...icons].sort((a, b) => b.size - a.size).forEach((icon, i) => {
+                icon.element.style.zIndex = i;
+            });
+
+            icons.forEach((icon) => {
+                const baseAngle = icon.originalIndex * angleStep;
+                const randomAngleOffset = (Math.random() - 0.5) * (angleStep * 0.3); 
+                const angle = baseAngle + randomAngleOffset;
+
+                const finalX = ORBIT_RADIUS * Math.cos(angle);
+                const finalY = ORBIT_RADIUS * Math.sin(angle);
+
+                orbitContainer.appendChild(icon.element);
+                
+                setTimeout(() => {
+                    icon.element.style.transform = `translate(${finalX}px, ${finalY}px) scale(1)`;
+                    icon.element.style.opacity = '1';
+                }, 50); 
+            });
+        }
+
+        function switchUser() {
+            centerElement.classList.add('fade-out');
+            
+            const currentIcons = orbitContainer.querySelectorAll('.app-icon-wrapper');
+            currentIcons.forEach(icon => {
+                icon.style.transform = 'translate(0px, 0px) scale(0.1)';
+                icon.style.opacity = '0';
+            });
+
+            setTimeout(() => {
+                // Reset orbit animation
+                orbitContainer.style.animation = 'none';
+                void orbitContainer.offsetHeight; 
+                orbitContainer.style.animation = ''; 
+
+                currentUserIndex = (currentUserIndex + 1) % usersData.length;
+                const nextUser = usersData[currentUserIndex];
+
+                // Update video source with error handling
+                try {
+                    const sources = centerVideo.querySelectorAll('source');
+                    sources.forEach(source => {
+                        source.src = nextUser.memoji;
+                    });
+                    
+                    centerVideo.load(); // Reload the video with new source
+                    
+                    // Add event listener for when video is ready to play
+                    centerVideo.addEventListener('canplay', function onCanPlay() {
+                        startVideo();
+                        centerVideo.removeEventListener('canplay', onCanPlay);
+                    });
+                    
+                } catch (error) {
+                    console.error('Error loading video:', error);
+                }
+                
+                setupOrbitingIcons(nextUser.apps);
+
+                centerElement.classList.remove('fade-out');
+                centerElement.classList.add('fade-in');
+
+                setTimeout(() => centerElement.classList.remove('fade-in'), 400);
+
+            }, 500);
+        }
+
+        /**
+         * A utility function to get logo images for different tools.
+         * If a specific logo isn't found, it returns the name as text.
+         */
+        function getIconLogo(name) {
+            const logoMapping = {
+                'Jira': './assets/images/jira-logo.png',
+                'Python': './assets/images/python-logo.png',
+                'Figma': './assets/images/figma-logo.png',
+                'SQL': './assets/images/sql-logo.png',
+                'Slack': './assets/images/slack-logo.png',
+                'AWS': './assets/images/aws-logo.png',
+                'Tableau': './assets/images/tableau-logo.png',
+                'PowerBI': './assets/images/powerbi-logo.png',
+                'Excel': './assets/images/excel-logo.png',
+                'Azure': './assets/images/azure-logo.png',
+                'Confluence': './assets/images/confluence-logo.png',
+                'Postman': './assets/images/postman-logo.png',
+                'Git': './assets/images/git-logo.png',
+                'Docker': './assets/images/docker-logo.png',
+                'Miro': './assets/images/miro-logo.png',
+                'Notion': './assets/images/notion-logo.png'
+            };
+            
+            // If we have a logo for this tool, return an img tag
+            if (logoMapping[name]) {
+                return `<img src="${logoMapping[name]}" alt="${name}" style="width: 100%; height: 100%; object-fit: contain;" />`;
+            }
+            
+            // For tools without a specific logo, display their name as text.
+            const initials = name.split(' ').map(n => n[0]).join('');
+            return `<div class="icon-text">${initials.length > 0 ? initials : name.substring(0, 2)}</div>`;
+        }
+
+        // --- RESIZE HANDLER ---
+        function handleResize() {
+            calculateOrbitRadius();
+            if (orbitContainer.children.length > 0) {
+                setupOrbitingIcons(usersData[currentUserIndex].apps);
+            }
+        }
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const firstUser = usersData[0];
+            setupOrbitingIcons(firstUser.apps);
+            // Set initial video source and start playing with error handling
+            try {
+                const sources = centerVideo.querySelectorAll('source');
+                sources.forEach(source => {
+                    source.src = firstUser.memoji;
+                });
+                centerVideo.load();
+                // Add event listeners for video loading
+                centerVideo.addEventListener('loadeddata', () => {
+                    startVideo();
+                });
+                centerVideo.addEventListener('canplaythrough', () => {
+                    startVideo();
+                });
+                // Fallback: show backup image if video fails
+                centerVideo.addEventListener('error', function() {
+                    centerVideo.style.display = 'none';
+                    if (!centerElement.querySelector('img')) {
+                        const fallbackImg = document.createElement('img');
+                        fallbackImg.src = './assets/images/my-avatar.png';
+                        fallbackImg.alt = 'Pulin Prabhu';
+                        fallbackImg.style.width = '100%';
+                        fallbackImg.style.height = '100%';
+                        fallbackImg.style.borderRadius = '50%';
+                        fallbackImg.style.objectFit = 'cover';
+                        centerElement.appendChild(fallbackImg);
+                    }
+                });
+                if (centerVideo.readyState >= 3) {
+                    startVideo();
+                }
+            } catch (error) {
+                // Fallback: show backup image if video fails
+                centerVideo.style.display = 'none';
+                if (!centerElement.querySelector('img')) {
+                    const fallbackImg = document.createElement('img');
+                    fallbackImg.src = './assets/images/my-avatar.png';
+                    fallbackImg.alt = 'Pulin Prabhu';
+                    fallbackImg.style.width = '100%';
+                    fallbackImg.style.height = '100%';
+                    fallbackImg.style.borderRadius = '50%';
+                    fallbackImg.style.objectFit = 'cover';
+                    centerElement.appendChild(fallbackImg);
+                }
+            }
+            
+            setInterval(switchUser, 6000); // Change every 6 seconds
+            
+            // Handle window resize
+            window.addEventListener('resize', handleResize);
+            
+            // Add click handler to play video if autoplay fails
+            centerElement.addEventListener('click', () => {
+                if (centerVideo.paused) {
+                    startVideo();
+                }
+            });
+            
+            // Try to enable autoplay on any user interaction with the page
+            document.addEventListener('click', function enableAutoplay() {
+                if (centerVideo.paused) {
+                    startVideo();
+                }
+                document.removeEventListener('click', enableAutoplay);
+            }, { once: true });
+        });
+
+    </script>
+</body>
+</html>
