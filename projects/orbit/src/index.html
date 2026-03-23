@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Orbit is open infrastructure for commerce operations — AI-orchestrated specialists handling every operational layer so merchants can focus on brand, product, and creative." />
+  <meta name="theme-color" content="#060a14" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Orbit — Vibe-commerce rails for the next generation of global merchants" />
+  <meta property="og:description" content="Open infrastructure marketplace for commerce operations. Merchants bring brand vision. Orbit handles everything else." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/images/orbit-og.jpg" />
+
+  <title>Orbit — Vibe-commerce rails for global merchants</title>
+
+  <!-- Preconnect for Google Fonts performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Preload Space Grotesk (primary heading font — critical path) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700;800&display=swap" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <!-- Skip to main content (accessibility) -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SECTION 1 — Navigation
+       STYLE: Transparent → solid on scroll, 72px height
+       ANIMATION TYPE: fade-in on load
+       LAYOUT: wordmark left, links center-right, CTA right
+       TOKENS USED: --color-bg, --color-text, --color-accent, --z-nav, --font-heading, --font-mono
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="nav__inner">
+
+      <!-- Wordmark -->
+      <a href="/" class="nav__wordmark" aria-label="Orbit — home">ORBIT</a>
+
+      <!-- Desktop links -->
+      <ul class="nav__links" role="list">
+        <li><a href="#problem" class="nav__link">For Merchants</a></li>
+        <li><a href="#specialists" class="nav__link">For Specialists</a></li>
+        <li><a href="#cta" class="nav__link">Login</a></li>
+      </ul>
+
+      <!-- CTA + mobile toggle -->
+      <div class="nav__cta">
+        <a href="#cta" class="btn btn--primary">Get Early Access</a>
+        <button
+          class="nav__toggle"
+          id="nav-toggle"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="nav-mobile"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile nav overlay -->
+  <div class="nav__mobile" id="nav-mobile" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button
+      id="nav-mobile-close"
+      class="nav__mobile-close"
+      aria-label="Close navigation menu"
+    >&#x2715;</button>
+    <ul class="nav__mobile-list" role="list">
+      <li><a href="#problem" class="nav__link">For Merchants</a></li>
+      <li><a href="#specialists" class="nav__link">For Specialists</a></li>
+      <li><a href="#cta" class="nav__link">Login</a></li>
+      <li class="nav__mobile-cta-item"><a href="#cta" class="btn btn--primary">Get Early Access</a></li>
+    </ul>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════════════════════════════════════ -->
+  <main id="main-content">
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SECTION 2 — Hero
+         STYLE: Full-bleed dark, orbital diagram background
+         ANIMATION TYPE: stagger reveal on load (headline, sub, CTA)
+         LAYOUT: centered text group, orbital canvas full-bleed behind
+         TOKENS USED: --color-bg, --color-text, --color-text-muted, --color-accent,
+                      --text-display, --text-subheading, --font-heading, --font-body,
+                      --gradient-radial-hero, --z-orbital
+    ═══════════════════════════════════════════════════════════════════ -->
+
+    <section class="hero" aria-label="Hero — Orbit platform introduction">
+
+      <!-- Animated orbital canvas background -->
+      <div class="hero__canvas-wrap" aria-hidden="true">
+        <canvas id="hero-canvas"></canvas>
+      </div>
+
+      <!-- Radial gradient overlay for text legibility -->
+      <div class="hero__overlay" aria-hidden="true"></div>
+      <div class="hero__vignette" aria-hidden="true"></div>
+
+      <!-- Hero content -->
+      <div class="hero__content">
+        <span class="hero__eyebrow">Early Access — 2026</span>
+
+        <h1 class="hero__headline">
+          Your brand deserves<br><span class="text-gradient">your full attention.</span>
+        </h1>
+
+        <p class="hero__subheadline">
+          Orbit is open infrastructure for commerce operations. Merchants bring vision.
+          AI-orchestrated specialists handle the rest — all seven operational layers,
+          running in parallel, while you stay in your vibe zone.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#cta" class="btn btn--primary">Get Early Access</a>
+          <a href="#layers" class="btn btn--ghost">See How It Works</a>
+        </div>
+      </div>
+
+      <!-- Scroll hint -->
+      <div class="hero__scroll-hint" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+
+    </section>
+
+    <!-- Layer codes marquee ticker -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-unit">
+          <span class="marquee-code marquee-code--mia">MIA</span>
+          <span class="marquee-label">Market Intelligence</span>
+          <span class="marquee-div">·</span>
+          <span class="marquee-code marquee-code--cia">CIA</span>
+          <span class="marquee-label">Compliance</span>
+          <span class="marquee-div">·</span>
+          <span class="marquee-code marquee-code--ops">OPS</span>
+          <span class="marquee-label">Operations</span>
+          <span class="marquee-div">·</span>
+          <span class="marquee-code marquee-code--ecom">ECOM</span>
+          <span class="marquee-label">E-commerce</span>
+          <span class="marquee-div">·</span>
+          <span class="marquee-code marquee-code--mkt">MKT</span>
+          <span class="marquee-label">Marketing</span>
+          <span class="marquee-div">·</span>
+          <span class="marquee-code marquee-code--log">LOG</span>
+          <span class="marquee-label">Logistics</span>
+          <span class="marquee-div">·</span>
+          <span class="marquee-code marquee-code--whs">WHS</span>
+          <span class="marquee-label">Warehousing</span>
+          <span class="marquee-div">·</span>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="marquee-unit" aria-hidden="true">
+          <span class="marquee-code marquee-code--mia">MIA</span>
+          <span class="marquee-label">Market Intelligence</span>
+          <span class="marquee-div">·</span>
+          <span class="marquee-code marquee-code--cia">CIA</span>
+          <span class="marquee-label">Compliance</span>
+          <span class="marquee-div">·</span>
+          <span class="marquee-code marquee-code--ops">OPS</span>
+          <span class="marquee-label">Operations</span>
+          <span class="marquee-div">·</span>
+          <span class="marquee-code marquee-code--ecom">ECOM</span>
+          <span class="marquee-label">E-commerce</span>
+          <span class="marquee-div">·</span>
+          <span class="marquee-code marquee-code--mkt">MKT</span>
+          <span class="marquee-label">Marketing</span>
+          <span class="marquee-div">·</span>
+          <span class="marquee-code marquee-code--log">LOG</span>
+          <span class="marquee-label">Logistics</span>
+          <span class="marquee-div">·</span>
+          <span class="marquee-code marquee-code--whs">WHS</span>
+          <span class="marquee-label">Warehousing</span>
+          <span class="marquee-div">·</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SECTION 3 — The Problem
+         STYLE: Surface background, two-column comparison
+         ANIMATION TYPE: slide-left (old column) + slide-right (new column)
+         LAYOUT: two-column grid, clear separator between old/new
+         TOKENS USED: --color-surface, --color-destructive, --color-accent,
+                      --color-border, --font-heading, --font-body, --font-mono
+    ═══════════════════════════════════════════════════════════════════ -->
+
+    <section class="section problem" id="problem" aria-labelledby="problem-title">
+      <div class="container">
+
+        <div class="problem__header">
+          <span class="section-label">The Problem</span>
+          <h2 class="section-title" id="problem-title">
+            Operations are eating your brand alive.
+          </h2>
+          <p class="problem__intro">
+            Every merchant who started a brand because they had taste ends up managing 15 freelancers,
+            chasing compliance updates, and doing the work they never signed up for.
+          </p>
+        </div>
+
+        <div class="problem__grid" role="region" aria-label="Traditional model vs Orbit model comparison">
+
+          <!-- Left column: The Old Way -->
+          <div class="problem__col problem__col--old">
+            <div class="problem__col-label" aria-label="The traditional model">
+              The Old Way
+            </div>
+            <div class="problem__rows" role="list">
+
+              <div class="problem__row" role="listitem">
+                <div class="problem__row-indicator" aria-hidden="true"></div>
+                <div class="problem__row-text">
+                  <div class="problem__row-title">Scattered freelancers</div>
+                  <div class="problem__row-desc">No coordination layer. Every vendor is a separate relationship, a separate invoice, a separate context to maintain.</div>
+                </div>
+              </div>
+
+              <div class="problem__row" role="listitem">
+                <div class="problem__row-indicator" aria-hidden="true"></div>
+                <div class="problem__row-text">
+                  <div class="problem__row-title">You become the operations manager</div>
+                  <div class="problem__row-desc">The merchant becomes the connective tissue between every specialist. That was not the job they signed up for.</div>
+                </div>
+              </div>
+
+              <div class="problem__row" role="listitem">
+                <div class="problem__row-indicator" aria-hidden="true"></div>
+                <div class="problem__row-text">
+                  <div class="problem__row-title">High overhead, inconsistent quality</div>
+                  <div class="problem__row-desc">Every specialist works differently. No shared standards, no shared tooling, no institutional baseline.</div>
+                </div>
+              </div>
+
+              <div class="problem__row" role="listitem">
+                <div class="problem__row-indicator" aria-hidden="true"></div>
+                <div class="problem__row-text">
+                  <div class="problem__row-title">Custom integrations at every turn</div>
+                  <div class="problem__row-desc">Logistics doesn't talk to e-commerce. Compliance doesn't talk to logistics. Everything is stitched together manually.</div>
+                </div>
+              </div>
+
+              <div class="problem__row" role="listitem">
+                <div class="problem__row-indicator" aria-hidden="true"></div>
+                <div class="problem__row-text">
+                  <div class="problem__row-title">Knowledge disappears with every handoff</div>
+                  <div class="problem__row-desc">When a specialist leaves, the institutional memory goes with them. The next one starts from zero.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Right column: The Orbit Way -->
+          <div class="problem__col problem__col--new">
+            <div class="problem__col-label" aria-label="The Orbit model">
+              The Orbit Way
+            </div>
+            <div class="problem__rows" role="list">
+
+              <div class="problem__row" role="listitem">
+                <div class="problem__row-indicator" aria-hidden="true"></div>
+                <div class="problem__row-text">
+                  <div class="problem__row-title">Unified infrastructure</div>
+                  <div class="problem__row-desc">Seven operational functions. One platform. Everything connected by design, not by duct tape.</div>
+                </div>
+              </div>
+
+              <div class="problem__row" role="listitem">
+                <div class="problem__row-indicator" aria-hidden="true"></div>
+                <div class="problem__row-text">
+                  <div class="problem__row-title">AI-orchestrated coordination</div>
+                  <div class="problem__row-desc">The OPS agent routes work, flags conflicts, and keeps every layer synchronized — without the merchant as intermediary.</div>
+                </div>
+              </div>
+
+              <div class="problem__row" role="listitem">
+                <div class="problem__row-indicator" aria-hidden="true"></div>
+                <div class="problem__row-text">
+                  <div class="problem__row-title">Specialists matched to need</div>
+                  <div class="problem__row-desc">Platform-verified specialists plug in where expertise is needed, working within a standardized quality framework.</div>
+                </div>
+              </div>
+
+              <div class="problem__row" role="listitem">
+                <div class="problem__row-indicator" aria-hidden="true"></div>
+                <div class="problem__row-text">
+                  <div class="problem__row-title">Built-in integrations across all 7 layers</div>
+                  <div class="problem__row-desc">Every function shares data with every other. Logistics informs inventory. Compliance informs e-commerce listings. The system thinks end-to-end.</div>
+                </div>
+              </div>
+
+              <div class="problem__row" role="listitem">
+                <div class="problem__row-indicator" aria-hidden="true"></div>
+                <div class="problem__row-text">
+                  <div class="problem__row-title">Institutional memory via AI</div>
+                  <div class="problem__row-desc">Context accumulates and persists. The platform learns your operations. Nothing is lost between specialists or across time.</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SECTION 4 — The Vibe-Commerce Model
+         STYLE: Dark bg, 80/20 split bar visualization
+         ANIMATION TYPE: scale-up (bar grows from 0% to 20% on scroll)
+         LAYOUT: header left, concept grid, then full-width split bar
+         TOKENS USED: --color-bg, --color-accent, --color-violet,
+                      --gradient-accent, --font-heading, --font-mono, --font-body
+    ═══════════════════════════════════════════════════════════════════ -->
+
+    <section class="section model" id="model" aria-labelledby="model-title">
+      <div class="container">
+
+        <div class="model__header">
+          <span class="section-label">The Model</span>
+          <h2 class="section-title" id="model-title">The 80/20 split<br>that changes everything.</h2>
+        </div>
+
+        <div class="model__concept">
+          <div class="model__concept-text">
+            <p>
+              Merchants who thrive are the ones who spend <strong>100% of their energy on brand, product, and creative</strong> —
+              the things only they can do. But traditional commerce forces them to spend 80% of their time on
+              operations they never wanted to own.
+            </p>
+            <p>
+              Orbit inverts this. Merchants bring the 20% that matters most: their vision, their taste, their
+              product direction. Orbit's infrastructure — seven AI agents, seven specialist roles, one coordinating
+              layer — handles everything else.
+            </p>
+            <p>
+              This is <strong>vibe-commerce</strong>: staying in your creative zone while a purpose-built machine
+              runs the operation around you.
+            </p>
+          </div>
+
+          <div class="model__term">
+            <div class="model__vibe-word">vibe-commerce</div>
+            <div class="model__term-sub">/ n. / Operating a brand at full creative capacity<br>while infrastructure handles operational gravity.</div>
+          </div>
+        </div>
+
+        <!-- 80/20 split visualization -->
+        <div class="model__split" aria-label="80/20 split: 20% merchant, 80% Orbit">
+          <div class="model__split-label">Operational split</div>
+
+          <div class="model__bar-wrap" role="img" aria-label="Bar showing 20% merchant contribution and 80% Orbit infrastructure">
+            <div class="model__bar-merchant">
+              <span class="model__bar-label">20% — Merchant</span>
+            </div>
+            <div class="model__bar-orbit">
+              <span class="model__bar-label">80% — Orbit Infrastructure</span>
+            </div>
+          </div>
+
+          <div class="model__split-details">
+
+            <div class="model__split-col model__split-col--merchant">
+              <span class="model__split-col-head">Merchant brings — 20%</span>
+              <ul class="model__split-items" role="list">
+                <li class="model__split-item">Brand vision and positioning</li>
+                <li class="model__split-item">Product decisions and direction</li>
+                <li class="model__split-item">Creative decisions and taste</li>
+                <li class="model__split-item">Strategic priorities</li>
+                <li class="model__split-item">Final approval on key outputs</li>
+              </ul>
+            </div>
+
+            <div class="model__split-col model__split-col--orbit">
+              <span class="model__split-col-head">Orbit handles — 80%</span>
+              <ul class="model__split-items" role="list">
+                <li class="model__split-item">Market intelligence and competitive analysis</li>
+                <li class="model__split-item">Compliance, tariffs, and regulatory operations</li>
+                <li class="model__split-item">E-commerce management across all channels</li>
+                <li class="model__split-item">Marketing execution and performance</li>
+                <li class="model__split-item">Logistics, supply chain, and warehousing</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SECTION 5 — The 7 Layers
+         STYLE: Dark bg, canvas orbital diagram as centerpiece
+         ANIMATION TYPE: scale-up (diagram), then stagger for accessibility nodes
+         LAYOUT: full-width, canvas left + detail panel right on desktop
+         TOKENS USED: --color-bg, all --layer-* colors, --font-mono (system codes),
+                      --color-surface, --color-border, --shadow-md
+    ═══════════════════════════════════════════════════════════════════ -->
+
+    <section class="section layers" id="layers" aria-labelledby="layers-title">
+      <div class="container">
+
+        <div class="layers__header">
+          <span class="section-label">The 7 Layers</span>
+          <h2 class="section-title" id="layers-title">Seven functions.<br>One orbital system.</h2>
+          <p class="layers__intro">
+            Each layer is an AI agent paired with a vetted human specialist.
+            Together they cover every operational function a growing merchant needs.
+            Hover or click any node to explore the layer.
+          </p>
+        </div>
+
+        <div class="layers__stage">
+
+          <!-- Canvas orbital diagram -->
+          <div class="layers__canvas-wrap">
+            <canvas
+              id="layers-canvas"
+              width="580"
+              height="580"
+            ></canvas>
+
+            <!-- Accessible off-screen buttons for keyboard/screen reader users -->
+            <div class="layers__a11y-nodes" aria-hidden="false">
+              <button class="layers__a11y-node" data-index="0" aria-label="OPS — Operations Agent. Central orchestrator of all layers." tabindex="-1">OPS</button>
+              <button class="layers__a11y-node" data-index="1" aria-label="MIA — Market Intelligence Agent. Monitors trends and competitors." tabindex="-1">MIA</button>
+              <button class="layers__a11y-node" data-index="2" aria-label="CIA — Compliance Intelligence Agent. Tracks regulations and tariffs." tabindex="-1">CIA</button>
+              <button class="layers__a11y-node" data-index="3" aria-label="ECOM — E-commerce Agent. Manages listings and inventory." tabindex="-1">ECOM</button>
+              <button class="layers__a11y-node" data-index="4" aria-label="MKT — Marketing Agent. Handles content and campaigns." tabindex="-1">MKT</button>
+              <button class="layers__a11y-node" data-index="5" aria-label="LOG — Logistics Agent. Coordinates shipments and carriers." tabindex="-1">LOG</button>
+              <button class="layers__a11y-node" data-index="6" aria-label="WHS — Warehousing Agent. Manages inventory and fulfillment." tabindex="-1">WHS</button>
+            </div>
+          </div>
+
+          <!-- Hint / detail panel area -->
+          <div class="layers__panel-col">
+
+            <!-- Hint state (visible when nothing selected) -->
+            <div class="layers__hint" id="layers-hint">
+              <span class="section-label section-label--tight">Select a layer</span>
+              <p class="layers__hint-text">
+                Each node is an AI agent running continuously — monitoring, executing, and adapting —
+                paired with a human specialist who brings judgment and expertise.
+              </p>
+              <div class="layers__hint-nodes" role="list" aria-label="Layer shortcuts">
+                <button class="layers__hint-node layers__hint-node--ops" data-code="OPS" role="listitem">OPS</button>
+                <button class="layers__hint-node layers__hint-node--mia" data-code="MIA" role="listitem">MIA</button>
+                <button class="layers__hint-node layers__hint-node--cia" data-code="CIA" role="listitem">CIA</button>
+                <button class="layers__hint-node layers__hint-node--ecom" data-code="ECOM" role="listitem">ECOM</button>
+                <button class="layers__hint-node layers__hint-node--mkt" data-code="MKT" role="listitem">MKT</button>
+                <button class="layers__hint-node layers__hint-node--log" data-code="LOG" role="listitem">LOG</button>
+                <button class="layers__hint-node layers__hint-node--whs" data-code="WHS" role="listitem">WHS</button>
+              </div>
+            </div>
+
+            <!-- Detail panel (shown when a node is selected) -->
+            <div class="layers__detail-panel" id="layers-detail-panel" aria-live="polite" aria-atomic="true">
+              <div class="layers__detail-inner">
+                <div class="layers__detail-code" id="detail-code">OPS</div>
+                <div class="layers__detail-name" id="detail-name">Operations Agent</div>
+
+                <div class="layers__detail-section">
+                  <span class="layers__detail-section-label">AI Agent Role</span>
+                  <p class="layers__detail-section-text" id="detail-agent"></p>
+                </div>
+
+                <div class="layers__detail-section">
+                  <span class="layers__detail-section-label">Specialist Role</span>
+                  <p class="layers__detail-section-text" id="detail-specialist"></p>
+                </div>
+
+                <div class="layers__detail-benefit">
+                  <span class="layers__detail-benefit-label">Merchant Gets</span>
+                  <p class="layers__detail-benefit-text" id="detail-benefit"></p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Mobile fallback — sequential layer cards (hidden on desktop via CSS) -->
+        <div class="layers__mobile-fallback" aria-label="All 7 layers of the Orbit system">
+
+          <div class="layers__mobile-card layers__mobile-card--ops">
+            <div class="layers__mobile-card-head">
+              <span class="layers__mobile-card-code layers__mobile-card-code--ops">OPS</span>
+              <span class="layers__mobile-card-name">Operations Agent — Central Orchestrator</span>
+            </div>
+            <p class="layers__mobile-card-text">Routes tasks between all layers, manages workflows, and serves as the single command center. Merchant gets: one point of truth for all operations.</p>
+          </div>
+
+          <div class="layers__mobile-card layers__mobile-card--mia">
+            <div class="layers__mobile-card-head">
+              <span class="layers__mobile-card-code layers__mobile-card-code--mia">MIA</span>
+              <span class="layers__mobile-card-name">Market Intelligence Agent</span>
+            </div>
+            <p class="layers__mobile-card-text">Monitors trends, competitors, and pricing signals continuously. Merchant gets: live intelligence without hiring a research team.</p>
+          </div>
+
+          <div class="layers__mobile-card layers__mobile-card--cia">
+            <div class="layers__mobile-card-head">
+              <span class="layers__mobile-card-code layers__mobile-card-code--cia">CIA</span>
+              <span class="layers__mobile-card-name">Compliance Intelligence Agent</span>
+            </div>
+            <p class="layers__mobile-card-text">Tracks regulatory changes, tariffs, and import rules across all operating markets. Merchant gets: compliant operations without reading a regulation.</p>
+          </div>
+
+          <div class="layers__mobile-card layers__mobile-card--ecom">
+            <div class="layers__mobile-card-head">
+              <span class="layers__mobile-card-code layers__mobile-card-code--ecom">ECOM</span>
+              <span class="layers__mobile-card-name">E-commerce Agent</span>
+            </div>
+            <p class="layers__mobile-card-text">Manages listings, inventory sync, and platform optimization across all channels. Merchant gets: stores that run themselves.</p>
+          </div>
+
+          <div class="layers__mobile-card layers__mobile-card--mkt">
+            <div class="layers__mobile-card-head">
+              <span class="layers__mobile-card-code layers__mobile-card-code--mkt">MKT</span>
+              <span class="layers__mobile-card-name">Marketing Agent</span>
+            </div>
+            <p class="layers__mobile-card-text">Handles content, campaigns, and performance tracking continuously. Merchant gets: a growth engine running in the background.</p>
+          </div>
+
+          <div class="layers__mobile-card layers__mobile-card--log">
+            <div class="layers__mobile-card-head">
+              <span class="layers__mobile-card-code layers__mobile-card-code--log">LOG</span>
+              <span class="layers__mobile-card-name">Logistics Agent</span>
+            </div>
+            <p class="layers__mobile-card-text">Coordinates shipments, carriers, and delivery optimization. Merchant gets: supply chain on autopilot.</p>
+          </div>
+
+          <div class="layers__mobile-card layers__mobile-card--whs">
+            <div class="layers__mobile-card-head">
+              <span class="layers__mobile-card-code layers__mobile-card-code--whs">WHS</span>
+              <span class="layers__mobile-card-name">Warehousing Agent</span>
+            </div>
+            <p class="layers__mobile-card-text">Manages inventory positioning and fulfillment operations. Merchant gets: physical ops handled end to end.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SECTION 6 — For Specialists
+         STYLE: Surface background, violet accent
+         ANIMATION TYPE: stagger-up (cards)
+         LAYOUT: header, 3-column card grid, earnings model, CTA
+         TOKENS USED: --color-surface, --color-surface-raised, --color-violet,
+                      --color-border, --font-heading, --font-body, --font-mono
+    ═══════════════════════════════════════════════════════════════════ -->
+
+    <section class="section specialists" id="specialists" aria-labelledby="specialists-title">
+      <div class="container">
+
+        <div class="specialists__header">
+          <span class="section-label section-label--violet">For Specialists</span>
+          <h2 class="section-title" id="specialists-title">
+            Stop building your<br>own infrastructure.
+          </h2>
+          <p class="specialists__sub">
+            The best operators in compliance, logistics, marketing, and e-commerce spend half their time
+            on admin, business development, and tooling they had to build themselves.
+            Orbit eliminates all of that.
+          </p>
+        </div>
+
+        <div class="specialists__list" role="list" aria-label="Five reasons specialists choose Orbit">
+
+          <div class="specialists__item" role="listitem">
+            <span class="specialists__item-num" aria-hidden="true">01</span>
+            <div class="specialists__item-content">
+              <h3 class="specialists__item-title">Instant merchant pipeline</h3>
+              <p class="specialists__item-text">
+                Stop spending months on business development. Orbit matches you to merchants who need your
+                exact specialty — when they need it, at the scale they need it.
+              </p>
+            </div>
+          </div>
+
+          <div class="specialists__item" role="listitem">
+            <span class="specialists__item-num" aria-hidden="true">02</span>
+            <div class="specialists__item-content">
+              <h3 class="specialists__item-title">AI handles the operational burden</h3>
+              <p class="specialists__item-text">
+                Reporting, communication, task routing, documentation — your AI agent partner handles
+                the administrative layer so you do only the expert work.
+              </p>
+            </div>
+          </div>
+
+          <div class="specialists__item" role="listitem">
+            <span class="specialists__item-num" aria-hidden="true">03</span>
+            <div class="specialists__item-content">
+              <h3 class="specialists__item-title">Premium rates through platform efficiency</h3>
+              <p class="specialists__item-text">
+                Platform infrastructure reduces overhead on both sides. Specialists who earn through Orbit
+                command higher effective rates — because they deliver more per engagement.
+              </p>
+            </div>
+          </div>
+
+          <div class="specialists__item" role="listitem">
+            <span class="specialists__item-num" aria-hidden="true">04</span>
+            <div class="specialists__item-content">
+              <h3 class="specialists__item-title">Community and peer network</h3>
+              <p class="specialists__item-text">
+                Cross-functional peers in the same infrastructure. Logistics coordinators who know
+                the compliance brokers. Marketing specialists who can route issues to the right expert.
+                A professional network that actually works.
+              </p>
+            </div>
+          </div>
+
+          <div class="specialists__item" role="listitem">
+            <span class="specialists__item-num" aria-hidden="true">05</span>
+            <div class="specialists__item-content">
+              <h3 class="specialists__item-title">Infrastructure you didn't have to build</h3>
+              <p class="specialists__item-text">
+                Client management, invoicing, knowledge management, AI tooling, merchant onboarding —
+                all built. Plug in. Do your best work.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Earnings model hint -->
+        <div class="specialists__earnings" aria-label="Specialist earnings model overview">
+          <div class="specialists__earnings-text">
+            <h3>The earnings model</h3>
+            <p>
+              Specialists on Orbit earn more by doing less admin. The platform handles coordination,
+              reporting, and client communication — specialists focus purely on expert output.
+              Higher output per engagement means higher effective hourly returns.
+            </p>
+          </div>
+          <div class="specialists__earnings-model" role="list" aria-label="Earnings comparison">
+            <div class="specialists__earnings-row" role="listitem">
+              <span class="specialists__earnings-row-label">Time on expert work</span>
+              <span class="specialists__earnings-row-value">↑ 60–70%</span>
+            </div>
+            <div class="specialists__earnings-row" role="listitem">
+              <span class="specialists__earnings-row-label">Admin &amp; biz dev overhead</span>
+              <span class="specialists__earnings-row-value">↓ Absorbed by platform</span>
+            </div>
+            <div class="specialists__earnings-row" role="listitem">
+              <span class="specialists__earnings-row-label">Time to first engagement</span>
+              <span class="specialists__earnings-row-value">Days, not months</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="specialists__cta">
+          <a href="#cta" class="btn btn--ghost-violet">Join as a Specialist</a>
+          <span class="specialists__cta-note">Early access open now</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SECTION 7 — Why It Works
+         STYLE: Dark bg, three-column layout
+         ANIMATION TYPE: rotate-in (slight y + rotation per column)
+         LAYOUT: three equal columns, color-coded per audience
+         TOKENS USED: --color-bg, --color-accent, --color-violet,
+                      --gradient-accent, --font-heading, --font-body, --font-mono
+    ═══════════════════════════════════════════════════════════════════ -->
+
+    <section class="section why" id="why" aria-labelledby="why-title">
+      <div class="container">
+
+        <div class="why__header">
+          <span class="section-label">Why It Works</span>
+          <h2 class="section-title" id="why-title">
+            Three parties. One compounding system.
+          </h2>
+          <p class="why__intro">
+            Orbit's model creates value for merchants, specialists, and the platform simultaneously —
+            and those benefits compound with scale.
+          </p>
+        </div>
+
+        <div class="why__grid" role="list" aria-label="Why Orbit works for each party">
+
+          <!-- For Merchants -->
+          <div class="why__col why__col--merchants" role="listitem">
+            <span class="why__col-label">For Merchants</span>
+            <h3 class="why__col-title">Stay in your vibe zone.</h3>
+            <ul class="why__list" role="list">
+              <li class="why__list-item">Focus entirely on brand, product, and creative</li>
+              <li class="why__list-item">One platform — all seven operations handled</li>
+              <li class="why__list-item">AI + human specialist hybrid at every layer</li>
+              <li class="why__list-item">Cross-border ready from day one</li>
+              <li class="why__list-item">Scale without scaling headcount</li>
+            </ul>
+          </div>
+
+          <!-- For Specialists -->
+          <div class="why__col why__col--specialists" role="listitem">
+            <span class="why__col-label">For Specialists</span>
+            <h3 class="why__col-title">Do your best work.</h3>
+            <ul class="why__list" role="list">
+              <li class="why__list-item">Steady merchant pipeline from day one</li>
+              <li class="why__list-item">AI-assisted workflow reduces admin to near-zero</li>
+              <li class="why__list-item">Premium positioning through platform quality</li>
+              <li class="why__list-item">No tech stack to build or maintain</li>
+              <li class="why__list-item">Community of cross-functional peers</li>
+            </ul>
+          </div>
+
+          <!-- The Flywheel -->
+          <div class="why__col why__col--flywheel" role="listitem">
+            <span class="why__col-label">The Flywheel</span>
+            <h3 class="why__col-title">Network effects compound.</h3>
+            <ul class="why__list" role="list">
+              <li class="why__list-item">More merchants attract more specialists</li>
+              <li class="why__list-item">More specialists improve service quality for merchants</li>
+              <li class="why__list-item">AI learns from every operation across the network</li>
+              <li class="why__list-item">Data flywheel improves all seven agents</li>
+              <li class="why__list-item">Infrastructure becomes the category standard</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         SECTION 8 — Early Access CTA
+         STYLE: Dark bg with faded orbital background (bookend with hero)
+         ANIMATION TYPE: clip-reveal (headline) + fade-in (form)
+         LAYOUT: centered, max-width 640px, form row on desktop
+         TOKENS USED: --color-bg, --color-surface, --color-accent,
+                      --font-heading, --font-body, --font-mono, --radius-sm
+    ═══════════════════════════════════════════════════════════════════ -->
+
+    <section class="section cta-section" id="cta" aria-labelledby="cta-title">
+
+      <!-- Faded orbital diagram background -->
+      <div class="cta-section__canvas-wrap" aria-hidden="true">
+        <canvas id="cta-canvas"></canvas>
+      </div>
+      <div class="cta-section__overlay" aria-hidden="true"></div>
+
+      <div class="cta-section__content">
+        <span class="cta-section__eyebrow">Early Access — 2026</span>
+
+        <h2 class="cta-section__headline" id="cta-title">
+          The infrastructure is ready.<br>Are you?
+        </h2>
+
+        <p class="cta-section__sub">
+          Orbit is in early access. Merchants and specialists who join now
+          will shape the platform's first cohort — and get preferred onboarding
+          when we open to the general market.
+        </p>
+
+        <!-- Email capture form -->
+        <form class="cta-form" id="cta-form" novalidate>
+          <label class="cta-form__label" for="cta-email">Email address</label>
+          <label class="cta-form__label" for="cta-role">I am a</label>
+
+          <div class="cta-form__row">
+            <input
+              type="email"
+              id="cta-email"
+              name="email"
+              class="cta-form__input"
+              placeholder="your@email.com"
+              required
+              autocomplete="email"
+              aria-label="Your email address"
+            />
+            <select
+              id="cta-role"
+              name="role"
+              class="cta-form__select"
+              required
+              aria-label="Your role"
+            >
+              <option value="" disabled selected>I am a…</option>
+              <option value="merchant">Merchant</option>
+              <option value="specialist">Specialist</option>
+              <option value="other">Investor / Partner</option>
+            </select>
+            <button type="submit" class="btn btn--primary">Request Access</button>
+          </div>
+        </form>
+
+        <span class="cta-section__fine">No spam. Early access updates only.</span>
+
+        <div class="cta-section__access-note">
+          <span class="cta-section__access-label">What early access includes</span>
+          <p class="cta-section__access-text">
+            Platform preview and onboarding walkthrough. Direct line to the founding team.
+            Preferred specialist matching for early merchants. Founding rate for early specialists.
+            Input on feature priorities before general release.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       SECTION 9 — Footer
+       STYLE: Dark, minimal, single row on desktop
+       TOKENS USED: --color-bg, --color-border, --color-text-muted, --color-text-dim,
+                    --font-heading, --font-mono
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+
+        <!-- Wordmark + tagline -->
+        <div>
+          <a href="/" class="footer__wordmark" aria-label="Orbit — return to top">ORBIT</a>
+          <div class="footer__tagline">Vibe-commerce rails for the next generation of global merchants</div>
+        </div>
+
+        <!-- Navigation links -->
+        <nav class="footer__nav" aria-label="Footer navigation">
+          <a href="#problem" class="footer__link">For Merchants</a>
+          <a href="#specialists" class="footer__link">For Specialists</a>
+          <a href="#cta" class="footer__link">Privacy</a>
+          <a href="#cta" class="footer__link">Terms</a>
+        </nav>
+
+        <!-- Legal -->
+        <div class="footer__legal">
+          <span>&copy; 2026 Orbit. All rights reserved.</span>
+        </div>
+
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       Scripts — loaded at end of body, non-blocking
+  ═══════════════════════════════════════════════════════════════════════ -->
+
+  <!-- Lenis smooth scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+
+  <!-- GSAP core + ScrollTrigger + SplitText -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js"></script>
+
+  <!-- Register ScrollTrigger plugin -->
+  <script>
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+    }
+    if (typeof gsap !== 'undefined' && typeof SplitText !== 'undefined') {
+      gsap.registerPlugin(SplitText);
+    }
+  </script>
+
+  <!-- Orbital diagram engine -->
+  <script src="js/orbital.js"></script>
+
+  <!-- Main site script -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>

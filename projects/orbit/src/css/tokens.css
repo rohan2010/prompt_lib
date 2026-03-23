@@ -1,0 +1,189 @@
+/*
+  ORBIT — Design Token System
+  Source: docs/design-system.md
+  Generated: 2026-03-18
+
+  Import order: this file must be the first stylesheet loaded.
+  All CSS custom properties are defined here. No hardcoded values
+  in any other stylesheet — reference tokens only.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+/* ─── Typography ─────────────────────────────────────────────────────────── */
+:root {
+  --font-heading: 'Space Grotesk', system-ui, sans-serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-mono:    'Space Mono', 'Courier New', monospace;
+
+  /* Type scale — all display sizes use clamp() */
+  --text-display:   clamp(3.5rem, 9vw, 8rem);
+  --text-section:   clamp(2.25rem, 5vw, 4.5rem);
+  --text-subheading: clamp(1.15rem, 1.8vw, 1.75rem);
+  --text-body-lg:   clamp(1.05rem, 1.3vw, 1.2rem);
+  --text-body:      clamp(0.95rem, 1.1vw, 1.05rem);
+  --text-body-sm:   0.875rem;
+  --text-label:     0.7rem;
+  --text-system:    0.85rem;
+  --text-mono:      0.85rem;
+
+  /* Font weights */
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+  --weight-extrabold: 800;
+
+  /* Line heights */
+  --leading-tight:   0.95;
+  --leading-snug:    1.05;
+  --leading-normal:  1.3;
+  --leading-relaxed: 1.7;
+}
+
+/* ─── Color System ───────────────────────────────────────────────────────── */
+:root {
+  /* Primary palette */
+  --color-bg:              #060a14;
+  --color-surface:         #0d1424;
+  --color-surface-raised:  #131d33;
+  --color-text:            #e8edf5;
+  --color-text-muted:      #5a6a85;
+  --color-text-dim:        #3a4a65;
+  --color-accent:          #4a9eff;
+  --color-accent-dark:     #2d7be0;
+  --color-accent-glow:     rgba(74, 158, 255, 0.15);
+  --color-violet:          #8b5cf6;
+  --color-violet-glow:     rgba(139, 92, 246, 0.12);
+  --color-border:          rgba(74, 158, 255, 0.08);
+  --color-border-active:   rgba(74, 158, 255, 0.20);
+  --color-destructive:     #ef4444;
+  --color-success:         #22c55e;
+  --color-text-on-accent:  #060a14;
+
+  /* 7-Layer color system */
+  --layer-mia:      #4af0c8;
+  --layer-mia-glow: rgba(74, 240, 200, 0.15);
+  --layer-cia:      #4a9eff;
+  --layer-cia-glow: rgba(74, 158, 255, 0.15);
+  --layer-ops:      #e8edf5;
+  --layer-ops-glow: rgba(232, 237, 245, 0.20);
+  --layer-ecom:     #8b5cf6;
+  --layer-ecom-glow: rgba(139, 92, 246, 0.15);
+  --layer-mkt:      #f472b6;
+  --layer-mkt-glow: rgba(244, 114, 182, 0.15);
+  --layer-log:      #fb923c;
+  --layer-log-glow: rgba(251, 146, 60, 0.15);
+  --layer-whs:      #a78bfa;
+  --layer-whs-glow: rgba(167, 139, 250, 0.15);
+
+  /* Gradients */
+  --gradient-radial-hero: radial-gradient(ellipse 80% 50% at 50% 50%, rgba(74, 158, 255, 0.06) 0%, transparent 70%);
+  --gradient-section-fade: linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%);
+  --gradient-accent: linear-gradient(135deg, var(--color-accent) 0%, var(--color-violet) 100%);
+  --gradient-glow: radial-gradient(circle at center, var(--color-accent-glow) 0%, transparent 60%);
+}
+
+/* ─── Spacing System — 8pt grid ─────────────────────────────────────────── */
+:root {
+  --space-0:  4px;
+  --space-1:  8px;
+  --space-2:  16px;
+  --space-3:  24px;
+  --space-4:  32px;
+  --space-5:  40px;
+  --space-6:  48px;
+  --space-8:  64px;
+  --space-10: 80px;
+  --space-12: 96px;
+  --space-16: 128px;
+  --space-20: 160px;
+  --space-24: 192px;
+
+  /* Grid system */
+  --grid-max-width: 1280px;
+  --grid-padding:   clamp(1.5rem, 5vw, 4rem);
+  --grid-columns:   12;
+  --grid-gap:       var(--space-4);
+}
+
+/* ─── Border Radius ──────────────────────────────────────────────────────── */
+:root {
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-pill: 999px;
+}
+
+/* ─── Shadow / Elevation ─────────────────────────────────────────────────── */
+:root {
+  --shadow-sm:         0 1px 2px rgba(0, 0, 0, 0.3), 0 0 4px rgba(74, 158, 255, 0.03);
+  --shadow-md:         0 4px 12px rgba(0, 0, 0, 0.4), 0 0 8px rgba(74, 158, 255, 0.05);
+  --shadow-lg:         0 8px 32px rgba(0, 0, 0, 0.5), 0 0 16px rgba(74, 158, 255, 0.06);
+  --shadow-glow-accent: 0 0 20px rgba(74, 158, 255, 0.15), 0 0 60px rgba(74, 158, 255, 0.05);
+  --shadow-glow-violet: 0 0 20px rgba(139, 92, 246, 0.15), 0 0 60px rgba(139, 92, 246, 0.05);
+}
+
+/* ─── Z-Index Scale ──────────────────────────────────────────────────────── */
+:root {
+  --z-base:    0;
+  --z-raised:  10;
+  --z-dropdown: 20;
+  --z-sticky:  30;
+  --z-nav:     40;
+  --z-modal:   50;
+  --z-toast:   60;
+  --z-orbital: 5;
+}
+
+/* ─── RGB Channel Variables (for alpha compositing) ──────────────────────── */
+:root {
+  /* Core color channels */
+  --bg-rgb:           6, 10, 20;
+  --accent-rgb:       74, 158, 255;
+  --violet-rgb:       139, 92, 246;
+  --destructive-rgb:  239, 68, 68;
+
+  /* 7-Layer color channels */
+  --layer-mia-rgb:    74, 240, 200;
+  --layer-cia-rgb:    74, 158, 255;
+  --layer-ops-rgb:    232, 237, 245;
+  --layer-ecom-rgb:   139, 92, 246;
+  --layer-mkt-rgb:    244, 114, 182;
+  --layer-log-rgb:    251, 146, 60;
+  --layer-whs-rgb:    167, 139, 250;
+}
+
+/* ─── Layout Tokens ──────────────────────────────────────────────────────── */
+:root {
+  --nav-height:        72px;
+  --nav-height-mobile: 64px;
+  --blur-nav:          16px;
+  --min-touch:         44px;
+}
+
+/* ─── Motion Tokens ──────────────────────────────────────────────────────── */
+:root {
+  --ease-out:          cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-gravitational: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out:       cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-decel:        cubic-bezier(0.0, 0.0, 0.2, 1);
+  --duration-micro:    200ms;
+  --duration-base:     300ms;
+  --duration-enter:    500ms;
+  --duration-slow:     1000ms;
+  --duration-orbital:  60000ms;
+}
+
+/* ─── Reduced Motion Override ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

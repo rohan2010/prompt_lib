@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Orbit — open infrastructure for commerce operations. Merchants bring the vision. Orbit handles everything else." />
+  <title>Orbit — Vibe-commerce rails for global merchants</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Tokens ────────────────────────────────────────────────── */
+    :root {
+      --font-heading: 'Space Grotesk', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+      --font-mono:    'Space Mono', monospace;
+
+      --color-bg:             #060a14;
+      --color-surface:        #0d1424;
+      --color-surface-raised: #131d33;
+      --color-text:           #e8edf5;
+      --color-text-muted:     #5a6a85;
+      --color-text-dim:       #3a4a65;
+      --color-accent:         #4a9eff;
+      --color-violet:         #8b5cf6;
+      --color-border:         rgba(74,158,255,.08);
+      --color-border-active:  rgba(74,158,255,.22);
+      --color-destructive:    #ef4444;
+      --color-text-on-accent: #060a14;
+
+      --layer-mia:  #4af0c8;
+      --layer-cia:  #4a9eff;
+      --layer-ops:  #e8edf5;
+      --layer-ecom: #8b5cf6;
+      --layer-mkt:  #f472b6;
+      --layer-log:  #fb923c;
+      --layer-whs:  #a78bfa;
+
+      --bg-rgb:          6,10,20;
+      --accent-rgb:      74,158,255;
+      --violet-rgb:      139,92,246;
+      --destructive-rgb: 239,68,68;
+      --layer-mia-rgb:   74,240,200;
+      --layer-cia-rgb:   74,158,255;
+      --layer-ops-rgb:   232,237,245;
+      --layer-ecom-rgb:  139,92,246;
+      --layer-mkt-rgb:   244,114,182;
+      --layer-log-rgb:   251,146,60;
+      --layer-whs-rgb:   167,139,250;
+
+      --gradient-accent: linear-gradient(135deg, #4a9eff 0%, #8b5cf6 100%);
+      --gradient-radial:  radial-gradient(ellipse 80% 60% at 50% 50%, rgba(74,158,255,.06) 0%, transparent 70%);
+
+      --space-1:  8px;
+      --space-2:  16px;
+      --space-3:  24px;
+      --space-4:  32px;
+      --space-5:  40px;
+      --space-6:  48px;
+      --space-8:  64px;
+      --space-10: 80px;
+      --space-12: 96px;
+      --space-16: 128px;
+
+      --radius-sm:   4px;
+      --radius-md:   8px;
+      --radius-lg:   12px;
+      --radius-xl:   16px;
+      --radius-pill: 999px;
+
+      --shadow-glow-accent: 0 0 24px rgba(74,158,255,.18), 0 0 60px rgba(74,158,255,.06);
+      --shadow-glow-violet: 0 0 24px rgba(139,92,246,.18);
+      --shadow-md:          0 4px 12px rgba(0,0,0,.4);
+
+      --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+      --dur-micro:  200ms;
+      --dur-enter:  500ms;
+      --dur-base:   300ms;
+
+      --nav-h:      72px;
+      --nav-h-mob:  60px;
+      --blur-nav:   18px;
+      --min-touch:  44px;
+
+      --text-display:   clamp(3rem,8vw,8rem);
+      --text-section:   clamp(2rem,4.5vw,4rem);
+      --text-subhead:   clamp(1.1rem,1.8vw,1.6rem);
+      --text-body-lg:   clamp(1rem,1.2vw,1.15rem);
+      --text-body:      clamp(.93rem,1vw,1rem);
+      --text-sm:        .875rem;
+      --text-label:     .7rem;
+
+      --w-regular:  400;
+      --w-medium:   500;
+      --w-semibold: 600;
+      --w-bold:     700;
+      --w-xbold:    800;
+
+      --lead-tight:   .94;
+      --lead-snug:    1.05;
+      --lead-normal:  1.3;
+      --lead-relaxed: 1.72;
+
+      --grid-max: 1280px;
+      --grid-pad: clamp(1.25rem,5vw,4rem);
+    }
+
+    /* ── Reset ─────────────────────────────────────────────────── */
+    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+    html { font-size:16px; -webkit-font-smoothing:antialiased; scroll-behavior:smooth; }
+    body { background:var(--color-bg); color:var(--color-text); font-family:var(--font-body); font-size:var(--text-body); line-height:var(--lead-relaxed); overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    ul,ol { list-style:none; }
+    button { cursor:pointer; border:none; background:none; font-family:inherit; }
+    img,video { max-width:100%; height:auto; display:block; }
+
+    /* ── Scroll Progress ───────────────────────────────────────── */
+    .scroll-prog {
+      position:fixed; top:0; left:0; width:0%; height:2px;
+      background:var(--gradient-accent); z-index:100;
+      transition:width 80ms linear; pointer-events:none;
+    }
+
+    /* ── Skip Link ─────────────────────────────────────────────── */
+    .skip { position:absolute; top:-100%; left:var(--space-2); background:var(--color-accent); color:var(--color-text-on-accent); padding:var(--space-1) var(--space-3); border-radius:var(--radius-md); font-family:var(--font-mono); font-size:var(--text-sm); z-index:200; transition:top var(--dur-micro) var(--ease-out); }
+    .skip:focus { top:var(--space-2); }
+
+    /* ── Container ─────────────────────────────────────────────── */
+    .wrap { width:100%; max-width:var(--grid-max); margin-inline:auto; padding-inline:var(--grid-pad); }
+
+    /* ── Buttons ───────────────────────────────────────────────── */
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:var(--space-1);
+      min-height:var(--min-touch); padding:12px var(--space-4);
+      font-family:var(--font-heading); font-size:var(--text-sm); font-weight:var(--w-semibold);
+      letter-spacing:.02em; cursor:pointer; transition:all var(--dur-micro) var(--ease-out);
+      border:1px solid transparent; white-space:nowrap; border-radius:var(--radius-sm);
+    }
+    .btn:focus-visible { outline:2px solid var(--color-accent); outline-offset:2px; }
+    .btn--primary { background:var(--gradient-accent); color:var(--color-text-on-accent); }
+    .btn--primary:hover { filter:brightness(1.12); transform:translateY(-1px); box-shadow:var(--shadow-glow-accent); }
+    .btn--outline { background:transparent; border-color:var(--color-border-active); color:var(--color-text); }
+    .btn--outline:hover { border-color:var(--color-accent); color:var(--color-accent); background:rgba(var(--accent-rgb),.06); }
+
+    /* ── Typography utils ──────────────────────────────────────── */
+    .grad { background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+    /* ── Nav ───────────────────────────────────────────────────── */
+    .nav {
+      position:fixed; top:0; left:0; right:0; height:var(--nav-h);
+      display:flex; align-items:center; z-index:40;
+      transition:background var(--dur-enter) var(--ease-out), border-color var(--dur-enter) var(--ease-out);
+      border-bottom:1px solid transparent;
+    }
+    .nav.scrolled { background:rgba(var(--bg-rgb),.94); backdrop-filter:blur(var(--blur-nav)); -webkit-backdrop-filter:blur(var(--blur-nav)); border-bottom-color:var(--color-border); }
+    .nav__inner { display:flex; align-items:center; justify-content:space-between; width:100%; max-width:var(--grid-max); margin-inline:auto; padding-inline:var(--grid-pad); }
+    .nav__word { font-family:var(--font-heading); font-size:1rem; font-weight:var(--w-xbold); letter-spacing:.14em; text-transform:uppercase; display:flex; align-items:center; gap:var(--space-2); }
+    .nav__dot { width:6px; height:6px; border-radius:50%; background:var(--color-accent); animation:dot-pulse 2.4s ease-in-out infinite; }
+    @keyframes dot-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.35;transform:scale(.65)} }
+    .nav__links { display:flex; align-items:center; gap:var(--space-5); }
+    .nav__link { font-family:var(--font-heading); font-size:var(--text-sm); font-weight:var(--w-medium); color:var(--color-text-muted); transition:color var(--dur-micro) var(--ease-out); }
+    .nav__link:hover { color:var(--color-text); }
+    .nav__cta { display:flex; align-items:center; gap:var(--space-3); }
+    .nav__toggle { display:none; flex-direction:column; gap:5px; padding:var(--space-1); }
+    .nav__toggle span { display:block; width:22px; height:1.5px; background:var(--color-text); transition:all var(--dur-micro) var(--ease-out); }
+    .nav__mob { position:fixed; inset:0; background:var(--color-bg); z-index:39; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--space-5); opacity:0; pointer-events:none; transition:opacity var(--dur-enter) var(--ease-out); }
+    .nav__mob.open { opacity:1; pointer-events:all; }
+    .nav__mob-close { position:absolute; top:var(--space-4); right:var(--space-4); width:var(--min-touch); height:var(--min-touch); display:flex; align-items:center; justify-content:center; color:var(--color-text-muted); font-size:1.5rem; }
+    .nav__mob-list { display:flex; flex-direction:column; align-items:center; gap:var(--space-4); }
+    .nav__mob-list .nav__link { font-size:var(--text-subhead); font-weight:var(--w-bold); }
+    @media(max-width:768px) {
+      .nav { height:var(--nav-h-mob); }
+      .nav__links,.nav__cta .btn--outline { display:none; }
+      .nav__toggle { display:flex; }
+    }
+
+    /* ── Hero — Two Column ─────────────────────────────────────── */
+    .hero {
+      display:grid; grid-template-columns:1fr 1fr;
+      min-height:100svh; padding-top:var(--nav-h); position:relative; overflow:hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; inset:0; pointer-events:none; z-index:0;
+      background-image:linear-gradient(rgba(var(--accent-rgb),.025) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--accent-rgb),.025) 1px,transparent 1px);
+      background-size:72px 72px;
+    }
+    .hero__left { position:relative; z-index:1; padding:var(--space-16) var(--space-6) var(--space-16) var(--grid-pad); display:flex; flex-direction:column; gap:var(--space-4); justify-content:center; }
+    .hero__right { position:relative; z-index:1; border-left:1px solid var(--color-border); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:var(--space-8) var(--grid-pad) var(--space-8) var(--space-6); }
+
+    .hero__term { font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.14em; color:var(--color-accent); display:flex; align-items:center; gap:6px; opacity:0; }
+    .hero__term::before { content:'//'; color:var(--color-text-dim); }
+    .hero__cursor { display:inline-block; width:7px; height:13px; background:var(--color-accent); vertical-align:middle; animation:blink 1.1s step-end infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .hero__h1 { font-family:var(--font-heading); font-size:clamp(2.8rem,7vw,7rem); font-weight:var(--w-xbold); line-height:var(--lead-tight); letter-spacing:-.03em; opacity:0; }
+    .hero__sub { font-family:var(--font-body); font-size:var(--text-subhead); line-height:1.55; color:var(--color-text-muted); max-width:44ch; opacity:0; }
+    .hero__actions { display:flex; gap:var(--space-3); flex-wrap:wrap; opacity:0; }
+    .hero__stats { display:flex; gap:var(--space-4); flex-wrap:wrap; opacity:0; padding-top:var(--space-1); }
+    .hero__stat { display:flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.08em; color:var(--color-text-dim); }
+    .hero__stat-dot { width:5px; height:5px; border-radius:50%; background:var(--color-accent); opacity:.55; }
+
+    .hero__canvas-wrap { position:relative; width:100%; max-width:480px; }
+    .hero__canvas-wrap canvas { width:100%; height:auto; display:block; }
+    .hero__canvas-tag { margin-top:var(--space-3); font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-dim); text-align:center; display:flex; align-items:center; justify-content:center; gap:var(--space-2); }
+    .hero__canvas-tag::before,.hero__canvas-tag::after { content:''; flex:1; height:1px; background:var(--color-border); }
+
+    .hero__scroll { position:absolute; bottom:var(--space-6); left:var(--grid-pad); display:flex; flex-direction:column; gap:var(--space-1); opacity:0; z-index:1; }
+    .hero__scroll-line { width:40px; height:1px; background:linear-gradient(to right,var(--color-accent),transparent); animation:sline 2s ease-in-out infinite; }
+    .hero__scroll-text { font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.2em; text-transform:uppercase; color:var(--color-text-dim); }
+    @keyframes sline { 0%,100%{transform:scaleX(1);opacity:.4} 50%{transform:scaleX(1.6);opacity:1} }
+
+    @media(max-width:900px) {
+      .hero { grid-template-columns:1fr; padding-bottom:var(--space-12); }
+      .hero__left { padding:var(--space-12) var(--grid-pad) var(--space-6); }
+      .hero__right { border-left:none; border-top:1px solid var(--color-border); padding:var(--space-8) var(--grid-pad); }
+    }
+
+    /* ── Marquee ───────────────────────────────────────────────── */
+    .marquee { overflow:hidden; border-top:1px solid var(--color-border); border-bottom:1px solid var(--color-border); background:var(--color-surface); padding-block:13px; }
+    .marquee__track { display:flex; width:max-content; animation:mscroll 28s linear infinite; }
+    .marquee__track:hover { animation-play-state:paused; }
+    @keyframes mscroll { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+    .marquee__unit { display:flex; align-items:center; gap:var(--space-4); padding-inline:var(--space-4); }
+    .mc { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-bold); letter-spacing:.14em; }
+    .mc--mia{color:var(--layer-mia)} .mc--cia{color:var(--layer-cia)} .mc--ops{color:var(--layer-ops)}
+    .mc--ecom{color:var(--layer-ecom)} .mc--mkt{color:var(--layer-mkt)} .mc--log{color:var(--layer-log)} .mc--whs{color:var(--layer-whs)}
+    .ml { font-family:var(--font-mono); font-size:var(--text-label); color:var(--color-text-dim); letter-spacing:.06em; text-transform:uppercase; }
+    .md { font-family:var(--font-mono); font-size:var(--text-label); color:var(--color-border-active); }
+    @media(prefers-reduced-motion:reduce){ .marquee__track{animation:none} }
+
+    /* ── Section base ──────────────────────────────────────────── */
+    .section { padding-block:var(--space-16); position:relative; }
+    @media(max-width:768px){ .section{padding-block:var(--space-12)} }
+
+    /* ── Section eyebrow ───────────────────────────────────────── */
+    .eyebrow { display:flex; align-items:center; gap:var(--space-3); margin-bottom:var(--space-4); }
+    .eyebrow__num { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-bold); letter-spacing:.14em; color:var(--color-accent); }
+    .eyebrow__label { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-medium); letter-spacing:.16em; text-transform:uppercase; color:var(--color-text-dim); }
+    .eyebrow__line { flex:1; height:1px; background:var(--color-border); max-width:80px; }
+
+    .section-title { font-family:var(--font-heading); font-size:var(--text-section); font-weight:var(--w-bold); line-height:var(--lead-snug); letter-spacing:-.02em; color:var(--color-text); }
+    .section-sub { font-family:var(--font-body); font-size:var(--text-body-lg); color:var(--color-text-muted); max-width:56ch; line-height:var(--lead-relaxed); margin-top:var(--space-2); }
+
+    /* ── Problem — Mission Brief ───────────────────────────────── */
+    .problem { background:var(--color-surface); }
+
+    .brief {
+      margin-top:var(--space-8);
+      border:1px solid rgba(var(--destructive-rgb),.18);
+      border-radius:var(--radius-lg); overflow:hidden;
+    }
+    .brief__head {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:var(--space-3) var(--space-5);
+      border-bottom:1px solid rgba(var(--destructive-rgb),.1);
+      background:rgba(var(--destructive-rgb),.03);
+    }
+    .brief__head-title { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-bold); letter-spacing:.2em; text-transform:uppercase; color:rgba(var(--destructive-rgb),.65); }
+    .brief__head-badge { font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.1em; text-transform:uppercase; color:var(--color-text-dim); border:1px solid var(--color-border); padding:2px var(--space-1); border-radius:var(--radius-sm); }
+    .brief__cols { display:grid; grid-template-columns:1fr 1fr; }
+    .brief__col { padding:var(--space-5) var(--space-5) var(--space-6); }
+    .brief__col--b { border-right:1px solid var(--color-border); }
+    .brief__col-head { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-bold); letter-spacing:.18em; text-transform:uppercase; margin-bottom:var(--space-4); display:block; }
+    .brief__col--b .brief__col-head { color:rgba(var(--destructive-rgb),.6); }
+    .brief__col--a .brief__col-head { color:var(--color-accent); }
+    .brief-row { display:flex; align-items:flex-start; gap:var(--space-3); padding:var(--space-3) 0; border-bottom:1px solid var(--color-border); }
+    .brief-row:last-child { border-bottom:none; }
+    .brief-row__icon { flex-shrink:0; margin-top:3px; font-family:var(--font-mono); font-size:10px; font-weight:var(--w-bold); width:14px; height:14px; display:flex; align-items:center; justify-content:center; border-radius:var(--radius-sm); }
+    .brief__col--b .brief-row__icon { color:rgba(var(--destructive-rgb),.75); background:rgba(var(--destructive-rgb),.08); }
+    .brief__col--a .brief-row__icon { color:var(--color-accent); background:rgba(var(--accent-rgb),.08); }
+    .brief-row__title { font-family:var(--font-heading); font-size:var(--text-body); font-weight:var(--w-semibold); color:var(--color-text); margin-bottom:2px; }
+    .brief-row__desc { font-family:var(--font-body); font-size:var(--text-sm); color:var(--color-text-muted); line-height:var(--lead-relaxed); }
+    @media(max-width:768px){ .brief__cols{grid-template-columns:1fr} .brief__col--b{border-right:none;border-bottom:1px solid var(--color-border)} }
+
+    /* ── Model ─────────────────────────────────────────────────── */
+    .model { background:var(--color-bg); overflow:hidden; }
+    .model__wm { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-family:var(--font-heading); font-size:clamp(7rem,22vw,20rem); font-weight:var(--w-xbold); line-height:1; letter-spacing:-.05em; color:var(--color-text); opacity:.022; pointer-events:none; user-select:none; white-space:nowrap; }
+    .model__grid { position:relative; z-index:1; display:grid; grid-template-columns:1fr 1fr; gap:var(--space-12); align-items:center; margin-top:var(--space-10); }
+    .model__text p { font-size:var(--text-body-lg); color:var(--color-text-muted); line-height:var(--lead-relaxed); margin-bottom:var(--space-3); }
+    .model__text p:last-child { margin-bottom:0; }
+    .model__text strong { color:var(--color-accent); font-weight:var(--w-medium); }
+    .model__def { margin-top:var(--space-6); padding:var(--space-4); border-left:2px solid var(--color-accent); background:rgba(var(--accent-rgb),.03); border-radius:0 var(--radius-md) var(--radius-md) 0; }
+    .model__def-word { font-family:var(--font-heading); font-size:clamp(1.8rem,4vw,3.5rem); font-weight:var(--w-xbold); letter-spacing:-.03em; background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; line-height:1; margin-bottom:var(--space-2); }
+    .model__def-text { font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.1em; color:var(--color-text-dim); line-height:var(--lead-relaxed); }
+    .model__viz { display:flex; flex-direction:column; gap:var(--space-5); }
+    .model__bar-label { font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.18em; text-transform:uppercase; color:var(--color-text-dim); margin-bottom:var(--space-3); }
+    .model__bar { height:var(--space-8); border-radius:var(--radius-sm); border:1px solid var(--color-border); display:flex; overflow:hidden; }
+    .model__bar-m { width:0%; background:linear-gradient(135deg,rgba(var(--accent-rgb),.3),rgba(var(--accent-rgb),.1)); border-right:1px solid rgba(var(--accent-rgb),.25); display:flex; align-items:center; justify-content:center; overflow:hidden; transition:width 1.4s var(--ease-out); }
+    .model__bar-o { flex:1; background:linear-gradient(135deg,rgba(var(--violet-rgb),.2),rgba(var(--accent-rgb),.05)); display:flex; align-items:center; justify-content:center; }
+    .model__bar-txt { font-family:var(--font-mono); font-size:.75rem; font-weight:var(--w-bold); white-space:nowrap; padding-inline:var(--space-2); letter-spacing:.05em; }
+    .model__bar-m .model__bar-txt { color:var(--color-accent); }
+    .model__bar-o .model__bar-txt { color:var(--color-violet); }
+    .model__split { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4); }
+    .model__col { padding:var(--space-4); border-radius:var(--radius-lg); border:1px solid var(--color-border); }
+    .model__col--m { border-color:rgba(var(--accent-rgb),.15); background:rgba(var(--accent-rgb),.03); }
+    .model__col--o { border-color:rgba(var(--violet-rgb),.15); background:rgba(var(--violet-rgb),.03); }
+    .model__col-head { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-bold); letter-spacing:.18em; text-transform:uppercase; margin-bottom:var(--space-3); display:block; }
+    .model__col--m .model__col-head { color:var(--color-accent); }
+    .model__col--o .model__col-head { color:var(--color-violet); }
+    .model__col-items { display:flex; flex-direction:column; }
+    .model__col-item { font-family:var(--font-body); font-size:var(--text-sm); color:var(--color-text-muted); padding:6px 0; border-bottom:1px solid var(--color-border); line-height:var(--lead-normal); }
+    .model__col-item:last-child { border-bottom:none; }
+    @media(max-width:900px){ .model__grid{grid-template-columns:1fr;gap:var(--space-8)} .model__split{grid-template-columns:1fr} }
+
+    /* ── Layers ────────────────────────────────────────────────── */
+    .layers { background:var(--color-surface); }
+    .layers__stage { display:flex; gap:var(--space-8); align-items:flex-start; margin-top:var(--space-8); }
+    .layers__canvas-wrap { flex:0 0 520px; max-width:520px; position:relative; }
+    .layers__canvas-wrap canvas { width:100%; height:auto; display:block; border-radius:var(--radius-xl); }
+    .layers__a11y { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+    .layers__panel { flex:1; min-width:0; display:flex; flex-direction:column; justify-content:center; }
+    .layers__hint { padding:var(--space-5); border:1px solid var(--color-border); border-radius:var(--radius-xl); display:flex; flex-direction:column; gap:var(--space-3); }
+    .layers__hint-lbl { font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.18em; text-transform:uppercase; color:var(--color-text-muted); font-weight:var(--w-medium); }
+    .layers__hint-txt { font-family:var(--font-body); font-size:var(--text-body); color:var(--color-text-dim); line-height:var(--lead-relaxed); }
+    .layers__hint-codes { display:flex; flex-wrap:wrap; gap:var(--space-1); margin-top:var(--space-1); }
+    .layers__hcode { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-bold); letter-spacing:.08em; padding:4px var(--space-1); border-radius:var(--radius-sm); border:1px solid var(--color-border); cursor:pointer; transition:all var(--dur-micro) var(--ease-out); }
+    .layers__hcode:hover { border-color:var(--color-border-active); background:var(--color-surface-raised); }
+    .hc--mia{color:var(--layer-mia)} .hc--cia{color:var(--layer-cia)} .hc--ops{color:var(--layer-ops)}
+    .hc--ecom{color:var(--layer-ecom)} .hc--mkt{color:var(--layer-mkt)} .hc--log{color:var(--layer-log)} .hc--whs{color:var(--layer-whs)}
+
+    .layers__detail { opacity:0; transform:translateY(10px); transition:opacity var(--dur-enter) var(--ease-out),transform var(--dur-enter) var(--ease-out); pointer-events:none; display:none; }
+    .layers__detail.vis { opacity:1; transform:translateY(0); pointer-events:all; display:block; }
+    .layers__detail-inner { background:var(--color-surface-raised); border:1px solid var(--color-border); border-radius:var(--radius-xl); padding:var(--space-5); }
+    .ld__code { font-family:var(--font-mono); font-size:2rem; font-weight:var(--w-bold); letter-spacing:.08em; margin-bottom:var(--space-1); }
+    .ld__name { font-family:var(--font-heading); font-size:var(--text-subhead); font-weight:var(--w-bold); color:var(--color-text); margin-bottom:var(--space-4); }
+    .ld__row { margin-bottom:var(--space-3); }
+    .ld__row:last-child { margin-bottom:0; }
+    .ld__row-lbl { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-bold); letter-spacing:.18em; text-transform:uppercase; color:var(--color-text-dim); margin-bottom:var(--space-1); display:block; }
+    .ld__row-txt { font-family:var(--font-body); font-size:var(--text-body); color:var(--color-text-muted); line-height:var(--lead-relaxed); }
+    .ld__benefit { margin-top:var(--space-4); padding:var(--space-3) var(--space-4); border-radius:var(--radius-md); border:1px solid rgba(var(--accent-rgb),.15); background:rgba(var(--accent-rgb),.04); }
+    .ld__benefit-lbl { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-bold); letter-spacing:.18em; text-transform:uppercase; color:var(--color-accent); margin-bottom:var(--space-1); display:block; }
+    .ld__benefit-txt { font-family:var(--font-body); font-size:var(--text-body); color:var(--color-text); line-height:var(--lead-relaxed); }
+
+    .layers__mob { display:none; margin-top:var(--space-6); }
+    .layers__mob-card { background:var(--color-surface-raised); border:1px solid var(--color-border); border-radius:var(--radius-lg); padding:var(--space-4); margin-bottom:var(--space-2); }
+    .layers__mob-head { display:flex; align-items:center; gap:var(--space-3); margin-bottom:var(--space-2); }
+    .layers__mob-code { font-family:var(--font-mono); font-size:.85rem; font-weight:var(--w-bold); letter-spacing:.08em; }
+    .layers__mob-name { font-family:var(--font-heading); font-size:var(--text-body); font-weight:var(--w-semibold); color:var(--color-text); }
+    .layers__mob-txt { font-family:var(--font-body); font-size:var(--text-sm); color:var(--color-text-muted); line-height:var(--lead-relaxed); }
+    .lmc--ops{color:var(--layer-ops)} .lmc--mia{color:var(--layer-mia)} .lmc--cia{color:var(--layer-cia)}
+    .lmc--ecom{color:var(--layer-ecom)} .lmc--mkt{color:var(--layer-mkt)} .lmc--log{color:var(--layer-log)} .lmc--whs{color:var(--layer-whs)}
+    .lmb--ops{border-color:rgba(var(--layer-ops-rgb),.18)} .lmb--mia{border-color:rgba(var(--layer-mia-rgb),.18)}
+    .lmb--cia{border-color:rgba(var(--layer-cia-rgb),.18)} .lmb--ecom{border-color:rgba(var(--layer-ecom-rgb),.18)}
+    .lmb--mkt{border-color:rgba(var(--layer-mkt-rgb),.18)} .lmb--log{border-color:rgba(var(--layer-log-rgb),.18)} .lmb--whs{border-color:rgba(var(--layer-whs-rgb),.18)}
+
+    @media(max-width:960px){ .layers__stage{flex-direction:column} .layers__canvas-wrap{flex:none;max-width:100%;width:100%} }
+    @media(max-width:600px){ .layers__canvas-wrap,.layers__panel{display:none} .layers__mob{display:block} }
+
+    /* ── Specialists ───────────────────────────────────────────── */
+    .specialists { background:var(--color-bg); }
+    .spec__stats { display:grid; grid-template-columns:repeat(3,1fr); border:1px solid var(--color-border); border-radius:var(--radius-lg); overflow:hidden; margin-top:var(--space-8); margin-bottom:var(--space-10); }
+    .spec__stat { padding:var(--space-5) var(--space-6); border-right:1px solid var(--color-border); text-align:center; }
+    .spec__stat:last-child { border-right:none; }
+    .spec__stat-val { font-family:var(--font-heading); font-size:clamp(2rem,4vw,3rem); font-weight:var(--w-xbold); letter-spacing:-.03em; line-height:1; background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; display:block; margin-bottom:var(--space-1); }
+    .spec__stat-lbl { font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-dim); display:block; }
+    .spec__list { display:flex; flex-direction:column; border-top:1px solid var(--color-border); margin-bottom:var(--space-8); }
+    .spec__item { display:grid; grid-template-columns:120px 1fr; gap:var(--space-6); align-items:start; padding:var(--space-5) 0; border-bottom:1px solid var(--color-border); }
+    .spec__item:hover .spec__num { opacity:.22; }
+    .spec__num { font-family:var(--font-heading); font-size:clamp(4rem,7vw,5.5rem); font-weight:var(--w-xbold); color:var(--color-text); opacity:.08; line-height:1; letter-spacing:-.05em; transition:opacity var(--dur-enter) var(--ease-out); padding-top:var(--space-1); user-select:none; }
+    .spec__content { padding-top:var(--space-2); }
+    .spec__title { font-family:var(--font-heading); font-size:var(--text-subhead); font-weight:var(--w-bold); color:var(--color-text); margin-bottom:var(--space-2); line-height:var(--lead-snug); }
+    .spec__body { font-family:var(--font-body); font-size:var(--text-body); color:var(--color-text-muted); line-height:var(--lead-relaxed); max-width:56ch; }
+    .spec__earn { display:grid; grid-template-columns:1fr 1fr; gap:var(--space-6); align-items:center; padding:var(--space-6); border:1px solid rgba(var(--violet-rgb),.15); border-radius:var(--radius-xl); background:rgba(var(--violet-rgb),.02); margin-bottom:var(--space-8); }
+    .spec__earn-text h3 { font-family:var(--font-heading); font-size:var(--text-subhead); font-weight:var(--w-bold); color:var(--color-text); margin-bottom:var(--space-2); }
+    .spec__earn-text p { font-family:var(--font-body); font-size:var(--text-body); color:var(--color-text-muted); line-height:var(--lead-relaxed); }
+    .spec__earn-rows { display:flex; flex-direction:column; gap:var(--space-2); }
+    .spec__earn-row { display:flex; align-items:center; justify-content:space-between; padding:var(--space-2) var(--space-3); border-radius:var(--radius-md); border:1px solid var(--color-border); }
+    .spec__earn-lbl { font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted); }
+    .spec__earn-val { font-family:var(--font-mono); font-size:.8rem; font-weight:var(--w-bold); color:var(--color-violet); }
+    .spec__footer { display:flex; align-items:center; gap:var(--space-3); }
+    .spec__note { font-family:var(--font-mono); font-size:var(--text-label); color:var(--color-text-dim); letter-spacing:.1em; }
+    @media(max-width:768px){ .spec__stats{grid-template-columns:1fr} .spec__stat{border-right:none;border-bottom:1px solid var(--color-border)} .spec__stat:last-child{border-bottom:none} .spec__item{grid-template-columns:72px 1fr;gap:var(--space-3)} .spec__num{font-size:clamp(2.5rem,10vw,4rem)} .spec__earn{grid-template-columns:1fr} }
+
+    /* ── Why It Works — Bento ──────────────────────────────────── */
+    .why { background:var(--color-surface); }
+    .bento { display:grid; grid-template-columns:repeat(3,1fr); grid-template-rows:auto auto; gap:var(--space-3); margin-top:var(--space-10); }
+    .bento__cell { padding:var(--space-6); border-radius:var(--radius-xl); border:1px solid var(--color-border); background:var(--color-bg); transition:transform var(--dur-base) var(--ease-out),box-shadow var(--dur-base) var(--ease-out); }
+    .bento__cell:hover { transform:translateY(-3px); box-shadow:var(--shadow-md); }
+    .bento__cell--m { grid-column:span 2; border-color:rgba(var(--accent-rgb),.15); background:linear-gradient(135deg,rgba(var(--accent-rgb),.04) 0%,var(--color-bg) 60%); }
+    .bento__cell--s { border-color:rgba(var(--violet-rgb),.15); background:linear-gradient(135deg,rgba(var(--violet-rgb),.04) 0%,var(--color-bg) 60%); }
+    .bento__cell--f { grid-column:span 3; position:relative; overflow:hidden; }
+    .bento__cell--f::before { content:''; position:absolute; inset:0; border-radius:var(--radius-xl); padding:1px; background:var(--gradient-accent); -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0); mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0); -webkit-mask-composite:xor; mask-composite:exclude; pointer-events:none; }
+    .bento__lbl { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-bold); letter-spacing:.18em; text-transform:uppercase; margin-bottom:var(--space-2); display:block; }
+    .bento__cell--m .bento__lbl { color:var(--color-accent); }
+    .bento__cell--s .bento__lbl { color:var(--color-violet); }
+    .bento__cell--f .bento__lbl { background:var(--gradient-accent); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .bento__title { font-family:var(--font-heading); font-size:var(--text-subhead); font-weight:var(--w-bold); color:var(--color-text); margin-bottom:var(--space-4); line-height:var(--lead-snug); }
+    .bento__list { display:flex; flex-direction:column; }
+    .bento__item { font-family:var(--font-body); font-size:var(--text-sm); color:var(--color-text-muted); padding:10px 0; border-bottom:1px solid var(--color-border); line-height:var(--lead-normal); display:flex; gap:var(--space-2); }
+    .bento__item:last-child { border-bottom:none; }
+    .bento__item::before { content:'—'; font-family:var(--font-mono); font-size:var(--text-label); color:var(--color-text-dim); flex-shrink:0; padding-top:2px; }
+    .bento__fly-cols { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--space-6); }
+    .bento__fly-lbl { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-bold); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-dim); margin-bottom:var(--space-2); display:block; }
+    .bento__fly-item { font-family:var(--font-body); font-size:var(--text-sm); color:var(--color-text-muted); padding:8px 0; border-bottom:1px solid var(--color-border); line-height:var(--lead-normal); }
+    .bento__fly-item:last-child { border-bottom:none; }
+    @media(max-width:768px){ .bento{grid-template-columns:1fr} .bento__cell--m,.bento__cell--f{grid-column:span 1} .bento__fly-cols{grid-template-columns:1fr;gap:var(--space-4)} }
+
+    /* ── CTA ───────────────────────────────────────────────────── */
+    .cta { position:relative; overflow:hidden; text-align:center; background:var(--color-bg); }
+    .cta__canvas { position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.18; }
+    #cta-canvas { width:100%; height:100%; display:block; }
+    .cta__overlay { position:absolute; inset:0; background:radial-gradient(ellipse 70% 80% at 50% 50%,rgba(var(--bg-rgb),.55) 0%,rgba(var(--bg-rgb),.96) 70%); z-index:1; pointer-events:none; }
+    .cta__body { position:relative; z-index:2; max-width:580px; margin-inline:auto; padding-inline:var(--grid-pad); }
+    .cta__eye { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-medium); letter-spacing:.22em; text-transform:uppercase; color:var(--color-accent); display:block; margin-bottom:var(--space-4); }
+    .cta__h2 { font-family:var(--font-heading); font-size:var(--text-section); font-weight:var(--w-bold); line-height:var(--lead-snug); letter-spacing:-.02em; color:var(--color-text); margin-bottom:var(--space-4); }
+    .cta__sub { font-family:var(--font-body); font-size:var(--text-body-lg); color:var(--color-text-muted); line-height:var(--lead-relaxed); margin-bottom:var(--space-8); max-width:44ch; margin-inline:auto; }
+    .cta-form { display:flex; flex-direction:column; gap:var(--space-3); max-width:400px; margin-inline:auto; margin-bottom:var(--space-3); text-align:left; }
+    .cta-form__field { display:flex; flex-direction:column; gap:var(--space-1); }
+    .cta-form__lbl { font-family:var(--font-mono); font-size:var(--text-label); font-weight:var(--w-bold); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-dim); }
+    .cta-form__input,.cta-form__select { width:100%; height:48px; background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-sm); color:var(--color-text); font-family:var(--font-body); font-size:var(--text-sm); padding-inline:var(--space-3); outline:none; transition:border-color var(--dur-micro) var(--ease-out),box-shadow var(--dur-micro) var(--ease-out); }
+    .cta-form__input::placeholder { color:var(--color-text-dim); }
+    .cta-form__select option { background:var(--color-surface); }
+    .cta-form__input:focus,.cta-form__select:focus { border-color:var(--color-accent); box-shadow:var(--shadow-glow-accent); }
+    .cta-form__btn { height:52px; font-size:var(--text-body); letter-spacing:.04em; }
+    .cta__fine { font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.1em; color:var(--color-text-dim); display:block; margin-top:var(--space-1); text-align:center; }
+
+    /* ── Footer ────────────────────────────────────────────────── */
+    .footer { background:var(--color-bg); border-top:1px solid var(--color-border); padding-block:var(--space-8); }
+    .footer__inner { display:flex; align-items:center; justify-content:space-between; gap:var(--space-4); flex-wrap:wrap; }
+    .footer__word { font-family:var(--font-heading); font-size:1rem; font-weight:var(--w-xbold); letter-spacing:.14em; text-transform:uppercase; color:var(--color-text); }
+    .footer__tag { font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.1em; color:var(--color-text-dim); margin-top:4px; }
+    .footer__nav { display:flex; align-items:center; gap:var(--space-4); }
+    .footer__link { font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.12em; text-transform:uppercase; color:var(--color-text-muted); transition:color var(--dur-micro) var(--ease-out); }
+    .footer__link:hover { color:var(--color-text); }
+    .footer__legal { font-family:var(--font-mono); font-size:var(--text-label); letter-spacing:.08em; color:var(--color-text-dim); }
+    @media(max-width:768px){ .footer__inner{flex-direction:column;text-align:center} .footer__nav{flex-wrap:wrap;justify-content:center} }
+
+    /* ── GSAP states ───────────────────────────────────────────── */
+    .g-up { opacity:0; transform:translateY(30px); }
+    .g-in { opacity:0; }
+    .g-left { opacity:0; transform:translateX(-48px); }
+    .g-right { opacity:0; transform:translateX(48px); }
+
+    /* ── Reduced motion ────────────────────────────────────────── */
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; scroll-behavior:auto!important; }
+      .hero__cursor{animation:none;opacity:1} .nav__dot{animation:none}
+      .g-up,.g-in,.g-left,.g-right{opacity:1;transform:none}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-prog" id="scroll-prog" aria-hidden="true"></div>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ── Nav ─────────────────────────────────────────────────────────────── -->
+  <nav class="nav" id="nav" aria-label="Primary navigation">
+    <div class="nav__inner">
+      <a href="/" class="nav__word" aria-label="Orbit home">
+        ORBIT
+        <span class="nav__dot" aria-hidden="true"></span>
+      </a>
+      <ul class="nav__links" role="list">
+        <li><a href="#problem" class="nav__link">For Merchants</a></li>
+        <li><a href="#specialists" class="nav__link">For Specialists</a></li>
+        <li><a href="#cta" class="nav__link">Login</a></li>
+      </ul>
+      <div class="nav__cta">
+        <a href="#cta" class="btn btn--outline">Get Early Access</a>
+        <button class="nav__toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mob">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="nav__mob" id="nav-mob" role="dialog" aria-modal="true" aria-label="Navigation">
+    <button class="nav__mob-close" id="nav-mob-close" aria-label="Close menu">&#x2715;</button>
+    <ul class="nav__mob-list" role="list">
+      <li><a href="#problem" class="nav__link">For Merchants</a></li>
+      <li><a href="#specialists" class="nav__link">For Specialists</a></li>
+      <li><a href="#cta" class="nav__link">Login</a></li>
+      <li style="margin-top:var(--space-3)"><a href="#cta" class="btn btn--outline">Get Early Access</a></li>
+    </ul>
+  </div>
+
+  <main id="main">
+
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
+    <section class="hero" aria-label="Hero">
+
+      <div class="hero__left">
+        <span class="hero__term" id="hero-term">
+          orbit.infrastructure active<span class="hero__cursor" aria-hidden="true"></span>
+        </span>
+
+        <h1 class="hero__h1">
+          Your brand<br>
+          runs itself<br>
+          <span class="grad">now.</span>
+        </h1>
+
+        <p class="hero__sub">
+          Orbit is open infrastructure for commerce operations. Merchants bring
+          vision, taste, and product direction. Seven AI agents and a vetted
+          specialist network handle everything else — in parallel, continuously.
+        </p>
+
+        <div class="hero__actions">
+          <a href="#cta" class="btn btn--primary">Get Early Access</a>
+          <a href="#layers" class="btn btn--outline">See the System</a>
+        </div>
+
+        <div class="hero__stats">
+          <span class="hero__stat"><span class="hero__stat-dot" aria-hidden="true"></span>7 operational layers</span>
+          <span class="hero__stat"><span class="hero__stat-dot" aria-hidden="true"></span>AI + human hybrid</span>
+          <span class="hero__stat"><span class="hero__stat-dot" aria-hidden="true"></span>Cross-border ready</span>
+        </div>
+      </div>
+
+      <div class="hero__right" aria-hidden="true">
+        <div class="hero__canvas-wrap">
+          <canvas id="hero-canvas" width="480" height="480"></canvas>
+          <div class="hero__canvas-tag">Orbit System — 7 Layers Active</div>
+        </div>
+      </div>
+
+      <div class="hero__scroll" aria-hidden="true">
+        <div class="hero__scroll-line"></div>
+        <span class="hero__scroll-text">Scroll</span>
+      </div>
+
+    </section>
+
+    <!-- ── Marquee ────────────────────────────────────────────────────────── -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <div class="marquee__unit">
+          <span class="mc mc--mia">MIA</span><span class="ml">Market Intelligence</span><span class="md">·</span>
+          <span class="mc mc--cia">CIA</span><span class="ml">Compliance</span><span class="md">·</span>
+          <span class="mc mc--ops">OPS</span><span class="ml">Operations</span><span class="md">·</span>
+          <span class="mc mc--ecom">ECOM</span><span class="ml">E-commerce</span><span class="md">·</span>
+          <span class="mc mc--mkt">MKT</span><span class="ml">Marketing</span><span class="md">·</span>
+          <span class="mc mc--log">LOG</span><span class="ml">Logistics</span><span class="md">·</span>
+          <span class="mc mc--whs">WHS</span><span class="ml">Warehousing</span><span class="md">·</span>
+        </div>
+        <div class="marquee__unit" aria-hidden="true">
+          <span class="mc mc--mia">MIA</span><span class="ml">Market Intelligence</span><span class="md">·</span>
+          <span class="mc mc--cia">CIA</span><span class="ml">Compliance</span><span class="md">·</span>
+          <span class="mc mc--ops">OPS</span><span class="ml">Operations</span><span class="md">·</span>
+          <span class="mc mc--ecom">ECOM</span><span class="ml">E-commerce</span><span class="md">·</span>
+          <span class="mc mc--mkt">MKT</span><span class="ml">Marketing</span><span class="md">·</span>
+          <span class="mc mc--log">LOG</span><span class="ml">Logistics</span><span class="md">·</span>
+          <span class="mc mc--whs">WHS</span><span class="ml">Warehousing</span><span class="md">·</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Problem ────────────────────────────────────────────────────────── -->
+    <section class="section problem" id="problem" aria-labelledby="problem-title">
+      <div class="wrap">
+        <div class="eyebrow g-in">
+          <span class="eyebrow__num">001</span>
+          <span class="eyebrow__line" aria-hidden="true"></span>
+          <span class="eyebrow__label">The Ops Trap</span>
+        </div>
+        <h2 class="section-title g-up" id="problem-title">
+          Operations are eating<br>your brand alive.
+        </h2>
+        <p class="section-sub g-up">
+          Every merchant who started a brand because they had vision ends up managing
+          freelancers, chasing regulations, and doing the work they never signed up for.
+        </p>
+
+        <div class="brief g-up" role="region" aria-label="Before and after Orbit comparison">
+          <div class="brief__head">
+            <span class="brief__head-title">Situation Report — Commerce Operations</span>
+            <span class="brief__head-badge">Pre-Orbit / Post-Orbit</span>
+          </div>
+          <div class="brief__cols">
+            <div class="brief__col brief__col--b">
+              <span class="brief__col-head">Before Orbit</span>
+              <div class="brief-row"><span class="brief-row__icon" aria-hidden="true">✕</span><div><div class="brief-row__title">Scattered freelancers</div><div class="brief-row__desc">No coordination layer. Every vendor is a separate relationship, invoice, and context to maintain.</div></div></div>
+              <div class="brief-row"><span class="brief-row__icon" aria-hidden="true">✕</span><div><div class="brief-row__title">Merchant becomes the ops manager</div><div class="brief-row__desc">You become the connective tissue between every specialist. That wasn't the job.</div></div></div>
+              <div class="brief-row"><span class="brief-row__icon" aria-hidden="true">✕</span><div><div class="brief-row__title">Inconsistent quality, high overhead</div><div class="brief-row__desc">No shared standards. No shared tooling. No institutional baseline between vendors.</div></div></div>
+              <div class="brief-row"><span class="brief-row__icon" aria-hidden="true">✕</span><div><div class="brief-row__title">Custom integrations everywhere</div><div class="brief-row__desc">Logistics doesn't talk to e-commerce. Compliance doesn't talk to logistics. Everything is manual.</div></div></div>
+              <div class="brief-row"><span class="brief-row__icon" aria-hidden="true">✕</span><div><div class="brief-row__title">Knowledge lost between handoffs</div><div class="brief-row__desc">When a specialist leaves, institutional memory goes with them. The next one starts from zero.</div></div></div>
+            </div>
+            <div class="brief__col brief__col--a">
+              <span class="brief__col-head">After Orbit</span>
+              <div class="brief-row"><span class="brief-row__icon" aria-hidden="true">✓</span><div><div class="brief-row__title">Unified infrastructure</div><div class="brief-row__desc">Seven operational functions. One platform. Everything connected by design, not duct tape.</div></div></div>
+              <div class="brief-row"><span class="brief-row__icon" aria-hidden="true">✓</span><div><div class="brief-row__title">OPS agent routes everything</div><div class="brief-row__desc">The central orchestrator handles coordination, flags conflicts, and syncs every layer automatically.</div></div></div>
+              <div class="brief-row"><span class="brief-row__icon" aria-hidden="true">✓</span><div><div class="brief-row__title">Verified specialists, shared standards</div><div class="brief-row__desc">Platform-verified operators work within a standardized quality framework. Consistent by default.</div></div></div>
+              <div class="brief-row"><span class="brief-row__icon" aria-hidden="true">✓</span><div><div class="brief-row__title">Built-in integrations across all 7 layers</div><div class="brief-row__desc">Every function shares data with every other. The system thinks end-to-end.</div></div></div>
+              <div class="brief-row"><span class="brief-row__icon" aria-hidden="true">✓</span><div><div class="brief-row__title">Institutional memory via AI</div><div class="brief-row__desc">Context accumulates and persists. The platform learns your operations. Nothing is ever lost.</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Model ──────────────────────────────────────────────────────────── -->
+    <section class="section model" id="model" aria-labelledby="model-title">
+      <div class="model__wm" aria-hidden="true">80/20</div>
+      <div class="wrap model__grid">
+        <div class="model__text">
+          <div class="eyebrow g-in">
+            <span class="eyebrow__num">002</span>
+            <span class="eyebrow__line" aria-hidden="true"></span>
+            <span class="eyebrow__label">The Model</span>
+          </div>
+          <h2 class="section-title g-up" id="model-title">The 80/20 split<br>that changes everything.</h2>
+          <p class="g-up">
+            Merchants who thrive spend <strong>100% of their energy on brand, product, and creative</strong> —
+            the things only they can do. Traditional commerce forces them to spend 80% of their time on
+            operations they never wanted.
+          </p>
+          <p class="g-up">
+            Orbit inverts this. Merchants bring the 20% that matters most: vision, taste, product direction.
+            Orbit's infrastructure — seven AI agents, seven specialist roles, one coordinating layer —
+            handles everything else.
+          </p>
+          <div class="model__def g-up">
+            <div class="model__def-word">vibe-commerce</div>
+            <div class="model__def-text">/ n. / Operating a brand at full creative capacity<br>while infrastructure handles operational gravity.</div>
+          </div>
+        </div>
+
+        <div class="model__viz g-up">
+          <div class="model__bar-label">Operational split</div>
+          <div class="model__bar" role="img" aria-label="Bar showing 20% merchant, 80% Orbit">
+            <div class="model__bar-m" id="model-bar-m"><span class="model__bar-txt">20% — Merchant</span></div>
+            <div class="model__bar-o"><span class="model__bar-txt">80% — Orbit</span></div>
+          </div>
+          <div class="model__split">
+            <div class="model__col model__col--m">
+              <span class="model__col-head">Merchant brings — 20%</span>
+              <div class="model__col-items">
+                <div class="model__col-item">Brand vision and positioning</div>
+                <div class="model__col-item">Product decisions and direction</div>
+                <div class="model__col-item">Creative decisions and taste</div>
+                <div class="model__col-item">Strategic priorities</div>
+                <div class="model__col-item">Final approval on key outputs</div>
+              </div>
+            </div>
+            <div class="model__col model__col--o">
+              <span class="model__col-head">Orbit handles — 80%</span>
+              <div class="model__col-items">
+                <div class="model__col-item">Market intelligence and competitive analysis</div>
+                <div class="model__col-item">Compliance, tariffs, and regulatory ops</div>
+                <div class="model__col-item">E-commerce management across all channels</div>
+                <div class="model__col-item">Marketing execution and performance</div>
+                <div class="model__col-item">Logistics, supply chain, and warehousing</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Layers ─────────────────────────────────────────────────────────── -->
+    <section class="section layers" id="layers" aria-labelledby="layers-title">
+      <div class="wrap">
+        <div class="layers__header">
+          <div class="eyebrow g-in">
+            <span class="eyebrow__num">003</span>
+            <span class="eyebrow__line" aria-hidden="true"></span>
+            <span class="eyebrow__label">The 7 Layers</span>
+          </div>
+          <h2 class="section-title g-up" id="layers-title">Seven functions.<br>One orbital system.</h2>
+          <p class="section-sub g-up">
+            Each layer is an AI agent paired with a vetted human specialist.
+            Hover or click any node in the diagram to explore the layer.
+          </p>
+        </div>
+
+        <div class="layers__stage">
+          <div class="layers__canvas-wrap g-in">
+            <canvas id="layers-canvas" width="520" height="520" role="img" aria-label="Interactive orbital diagram of the 7 Orbit layers"></canvas>
+            <div class="layers__a11y" aria-hidden="false">
+              <button data-idx="0" tabindex="-1" aria-label="OPS — Central Operations Agent">OPS</button>
+              <button data-idx="1" tabindex="-1" aria-label="MIA — Market Intelligence Agent">MIA</button>
+              <button data-idx="2" tabindex="-1" aria-label="CIA — Compliance Intelligence Agent">CIA</button>
+              <button data-idx="3" tabindex="-1" aria-label="ECOM — E-commerce Agent">ECOM</button>
+              <button data-idx="4" tabindex="-1" aria-label="MKT — Marketing Agent">MKT</button>
+              <button data-idx="5" tabindex="-1" aria-label="LOG — Logistics Agent">LOG</button>
+              <button data-idx="6" tabindex="-1" aria-label="WHS — Warehousing Agent">WHS</button>
+            </div>
+          </div>
+
+          <div class="layers__panel">
+            <div class="layers__hint" id="layers-hint">
+              <span class="layers__hint-lbl">Select a layer</span>
+              <p class="layers__hint-txt">Each node is an AI agent running continuously — monitoring, executing, and adapting — paired with a human specialist who brings judgment and expertise.</p>
+              <div class="layers__hint-codes" role="list">
+                <button class="layers__hcode hc--ops" data-code="OPS" role="listitem">OPS</button>
+                <button class="layers__hcode hc--mia" data-code="MIA" role="listitem">MIA</button>
+                <button class="layers__hcode hc--cia" data-code="CIA" role="listitem">CIA</button>
+                <button class="layers__hcode hc--ecom" data-code="ECOM" role="listitem">ECOM</button>
+                <button class="layers__hcode hc--mkt" data-code="MKT" role="listitem">MKT</button>
+                <button class="layers__hcode hc--log" data-code="LOG" role="listitem">LOG</button>
+                <button class="layers__hcode hc--whs" data-code="WHS" role="listitem">WHS</button>
+              </div>
+            </div>
+            <div class="layers__detail" id="layers-detail" aria-live="polite" aria-atomic="true">
+              <div class="layers__detail-inner">
+                <div class="ld__code" id="ld-code"></div>
+                <div class="ld__name" id="ld-name"></div>
+                <div class="ld__row"><span class="ld__row-lbl">AI Agent Role</span><p class="ld__row-txt" id="ld-agent"></p></div>
+                <div class="ld__row"><span class="ld__row-lbl">Specialist Role</span><p class="ld__row-txt" id="ld-specialist"></p></div>
+                <div class="ld__benefit"><span class="ld__benefit-lbl">Merchant Gets</span><p class="ld__benefit-txt" id="ld-benefit"></p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile fallback -->
+        <div class="layers__mob" aria-label="All 7 layers">
+          <div class="layers__mob-card lmb--ops"><div class="layers__mob-head"><span class="layers__mob-code lmc--ops">OPS</span><span class="layers__mob-name">Operations Agent — Central Orchestrator</span></div><p class="layers__mob-txt">Routes tasks between all layers, manages workflows, and serves as the single command center. Merchant gets: one point of truth for all operations.</p></div>
+          <div class="layers__mob-card lmb--mia"><div class="layers__mob-head"><span class="layers__mob-code lmc--mia">MIA</span><span class="layers__mob-name">Market Intelligence Agent</span></div><p class="layers__mob-txt">Monitors trends, competitors, and pricing signals continuously. Merchant gets: live intelligence without hiring a research team.</p></div>
+          <div class="layers__mob-card lmb--cia"><div class="layers__mob-head"><span class="layers__mob-code lmc--cia">CIA</span><span class="layers__mob-name">Compliance Intelligence Agent</span></div><p class="layers__mob-txt">Tracks regulatory changes, tariffs, and import rules. Merchant gets: compliant operations without reading a regulation.</p></div>
+          <div class="layers__mob-card lmb--ecom"><div class="layers__mob-head"><span class="layers__mob-code lmc--ecom">ECOM</span><span class="layers__mob-name">E-commerce Agent</span></div><p class="layers__mob-txt">Manages listings, inventory sync, and platform optimization. Merchant gets: stores that run themselves.</p></div>
+          <div class="layers__mob-card lmb--mkt"><div class="layers__mob-head"><span class="layers__mob-code lmc--mkt">MKT</span><span class="layers__mob-name">Marketing Agent</span></div><p class="layers__mob-txt">Handles content, campaigns, and performance tracking. Merchant gets: a growth engine in the background.</p></div>
+          <div class="layers__mob-card lmb--log"><div class="layers__mob-head"><span class="layers__mob-code lmc--log">LOG</span><span class="layers__mob-name">Logistics Agent</span></div><p class="layers__mob-txt">Coordinates shipments, carriers, and delivery optimization. Merchant gets: supply chain on autopilot.</p></div>
+          <div class="layers__mob-card lmb--whs"><div class="layers__mob-head"><span class="layers__mob-code lmc--whs">WHS</span><span class="layers__mob-name">Warehousing Agent</span></div><p class="layers__mob-txt">Manages inventory positioning and fulfillment operations. Merchant gets: physical ops handled end to end.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Specialists ────────────────────────────────────────────────────── -->
+    <section class="section specialists" id="specialists" aria-labelledby="spec-title">
+      <div class="wrap">
+        <div class="eyebrow g-in">
+          <span class="eyebrow__num">004</span>
+          <span class="eyebrow__line" aria-hidden="true"></span>
+          <span class="eyebrow__label">For Specialists</span>
+        </div>
+        <h2 class="section-title g-up" id="spec-title">Stop building your<br>own infrastructure.</h2>
+        <p class="section-sub g-up">The best operators in compliance, logistics, marketing, and e-commerce spend half their time on admin, biz dev, and tooling they built themselves. Orbit eliminates all of that.</p>
+
+        <div class="spec__stats g-up">
+          <div class="spec__stat"><span class="spec__stat-val">60–70%</span><span class="spec__stat-lbl">More time on expert work</span></div>
+          <div class="spec__stat"><span class="spec__stat-val">Days</span><span class="spec__stat-lbl">Time to first engagement</span></div>
+          <div class="spec__stat"><span class="spec__stat-val">Zero</span><span class="spec__stat-lbl">Platform tech to build</span></div>
+        </div>
+
+        <div class="spec__list" role="list" aria-label="Reasons specialists choose Orbit">
+          <div class="spec__item" role="listitem"><span class="spec__num" aria-hidden="true">01</span><div class="spec__content"><h3 class="spec__title">Instant merchant pipeline</h3><p class="spec__body">Stop spending months on business development. Orbit matches you to merchants who need your exact specialty — when they need it, at the scale they need it.</p></div></div>
+          <div class="spec__item" role="listitem"><span class="spec__num" aria-hidden="true">02</span><div class="spec__content"><h3 class="spec__title">AI handles the operational burden</h3><p class="spec__body">Reporting, communication, task routing, documentation — your AI agent partner handles the administrative layer so you do only the expert work.</p></div></div>
+          <div class="spec__item" role="listitem"><span class="spec__num" aria-hidden="true">03</span><div class="spec__content"><h3 class="spec__title">Premium rates through platform efficiency</h3><p class="spec__body">Platform infrastructure reduces overhead on both sides. Specialists who earn through Orbit command higher effective rates — because they deliver more per engagement.</p></div></div>
+          <div class="spec__item" role="listitem"><span class="spec__num" aria-hidden="true">04</span><div class="spec__content"><h3 class="spec__title">Community and peer network</h3><p class="spec__body">Cross-functional peers in the same infrastructure. Logistics coordinators who know the compliance brokers. A professional network that actually works.</p></div></div>
+          <div class="spec__item" role="listitem"><span class="spec__num" aria-hidden="true">05</span><div class="spec__content"><h3 class="spec__title">Infrastructure you didn't have to build</h3><p class="spec__body">Client management, invoicing, knowledge management, AI tooling, merchant onboarding — all built. Plug in. Do your best work.</p></div></div>
+        </div>
+
+        <div class="spec__earn g-up">
+          <div class="spec__earn-text">
+            <h3>The earnings model</h3>
+            <p>Specialists on Orbit earn more by doing less admin. The platform handles coordination, reporting, and client communication — specialists focus purely on expert output.</p>
+          </div>
+          <div class="spec__earn-rows">
+            <div class="spec__earn-row"><span class="spec__earn-lbl">Time on expert work</span><span class="spec__earn-val">↑ 60–70%</span></div>
+            <div class="spec__earn-row"><span class="spec__earn-lbl">Admin &amp; biz dev overhead</span><span class="spec__earn-val">↓ Absorbed by platform</span></div>
+            <div class="spec__earn-row"><span class="spec__earn-lbl">Time to first engagement</span><span class="spec__earn-val">Days, not months</span></div>
+          </div>
+        </div>
+
+        <div class="spec__footer">
+          <a href="#cta" class="btn btn--outline">Join as a Specialist</a>
+          <span class="spec__note">Early access open now</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Why It Works ───────────────────────────────────────────────────── -->
+    <section class="section why" id="why" aria-labelledby="why-title">
+      <div class="wrap">
+        <div class="eyebrow g-in">
+          <span class="eyebrow__num">005</span>
+          <span class="eyebrow__line" aria-hidden="true"></span>
+          <span class="eyebrow__label">Why It Works</span>
+        </div>
+        <h2 class="section-title g-up" id="why-title">Three parties.<br>One compounding system.</h2>
+        <p class="section-sub g-up">Orbit creates value for merchants, specialists, and the platform simultaneously — and those benefits compound with scale.</p>
+
+        <div class="bento" role="list">
+          <div class="bento__cell bento__cell--m" role="listitem">
+            <span class="bento__lbl">For Merchants</span>
+            <h3 class="bento__title">Stay in your vibe zone.</h3>
+            <ul class="bento__list">
+              <li class="bento__item">Focus entirely on brand, product, and creative</li>
+              <li class="bento__item">One platform — all seven operations handled</li>
+              <li class="bento__item">AI + human specialist hybrid at every layer</li>
+              <li class="bento__item">Cross-border ready from day one</li>
+              <li class="bento__item">Scale without scaling headcount</li>
+            </ul>
+          </div>
+          <div class="bento__cell bento__cell--s" role="listitem">
+            <span class="bento__lbl">For Specialists</span>
+            <h3 class="bento__title">Do your best work.</h3>
+            <ul class="bento__list">
+              <li class="bento__item">Steady merchant pipeline from day one</li>
+              <li class="bento__item">AI-assisted workflow, near-zero admin</li>
+              <li class="bento__item">Premium positioning via platform quality</li>
+              <li class="bento__item">No tech stack to build or maintain</li>
+              <li class="bento__item">Community of cross-functional peers</li>
+            </ul>
+          </div>
+          <div class="bento__cell bento__cell--f" role="listitem">
+            <span class="bento__lbl">The Flywheel</span>
+            <h3 class="bento__title">Network effects compound.</h3>
+            <div class="bento__fly-cols">
+              <div>
+                <span class="bento__fly-lbl">Merchants</span>
+                <div class="bento__fly-item">More merchants attract more specialists</div>
+                <div class="bento__fly-item">Higher quality expectations raise the bar for all operators</div>
+                <div class="bento__fly-item">Data from each operation improves AI accuracy</div>
+              </div>
+              <div>
+                <span class="bento__fly-lbl">Specialists</span>
+                <div class="bento__fly-item">More specialists improve service quality for merchants</div>
+                <div class="bento__fly-item">Cross-functional peer network increases collective capability</div>
+                <div class="bento__fly-item">Specialists attract more merchants through quality output</div>
+              </div>
+              <div>
+                <span class="bento__fly-lbl">Platform</span>
+                <div class="bento__fly-item">AI agents learn from every operation across the network</div>
+                <div class="bento__fly-item">Data flywheel improves all seven agents simultaneously</div>
+                <div class="bento__fly-item">Infrastructure becomes the category standard</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA ───────────────────────────────────────────────────────────── -->
+    <section class="section cta" id="cta" aria-labelledby="cta-title">
+      <div class="cta__canvas" aria-hidden="true">
+        <canvas id="cta-canvas"></canvas>
+      </div>
+      <div class="cta__overlay" aria-hidden="true"></div>
+
+      <div class="cta__body">
+        <span class="cta__eye g-in">Early Access — 2026</span>
+        <h2 class="cta__h2 g-up" id="cta-title">
+          The infrastructure<br>is <span class="grad">ready.</span><br>Are you?
+        </h2>
+        <p class="cta__sub g-in">
+          Orbit is in early access. Merchants and specialists who join now shape
+          the platform's first cohort — and get preferred onboarding when we open
+          to the general market.
+        </p>
+
+        <form class="cta-form g-up" id="cta-form" novalidate>
+          <div class="cta-form__field">
+            <label class="cta-form__lbl" for="cta-email">Email address</label>
+            <input type="email" id="cta-email" name="email" class="cta-form__input" placeholder="you@brand.com" required autocomplete="email" />
+          </div>
+          <div class="cta-form__field">
+            <label class="cta-form__lbl" for="cta-role">I am a</label>
+            <select id="cta-role" name="role" class="cta-form__select" required>
+              <option value="" disabled selected>Select your role</option>
+              <option value="merchant">Merchant</option>
+              <option value="specialist">Specialist</option>
+              <option value="investor">Investor / Partner</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn--primary cta-form__btn">Request Early Access</button>
+        </form>
+
+        <span class="cta__fine g-in">No spam. Early access updates only.</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ────────────────────────────────────────────────────────────── -->
+  <footer class="footer" role="contentinfo">
+    <div class="wrap">
+      <div class="footer__inner">
+        <div>
+          <a href="/" class="footer__word" aria-label="Orbit home">ORBIT</a>
+          <div class="footer__tag">Vibe-commerce rails for the next generation of global merchants</div>
+        </div>
+        <nav class="footer__nav" aria-label="Footer">
+          <a href="#problem" class="footer__link">For Merchants</a>
+          <a href="#specialists" class="footer__link">For Specialists</a>
+          <a href="#cta" class="footer__link">Privacy</a>
+          <a href="#cta" class="footer__link">Terms</a>
+        </nav>
+        <div class="footer__legal">&copy; 2026 Orbit. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── Scripts ───────────────────────────────────────────────────────────── -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+  <script>
+  (() => {
+    'use strict';
+
+    /* ── Layer data ─────────────────────────────────────────────────────── */
+    const LAYERS = [
+      { code:'OPS', name:'Operations Agent', color:'#e8edf5', orbitR:.28, speed:.00025,
+        agent:'Central orchestrator of all layers. Routes tasks, manages workflows, flags conflicts, and keeps every layer synchronized.',
+        specialist:'Operations Coordinator — manages cross-functional delivery and ensures quality standards across all vendors.',
+        benefit:'One point of truth for all operations. One command center. Nothing falls through the cracks.' },
+      { code:'MIA', name:'Market Intelligence Agent', color:'#4af0c8', orbitR:.44, speed:.00038,
+        agent:'Monitors trends, competitors, and pricing signals continuously across global markets.',
+        specialist:'Market Researcher — provides strategic context, translates signals into actionable intelligence.',
+        benefit:'Live market intelligence without hiring an analyst. You always know what the market is doing.' },
+      { code:'CIA', name:'Compliance Intelligence Agent', color:'#4a9eff', orbitR:.50, speed:.00031,
+        agent:'Tracks regulatory changes, tariffs, import rules, and compliance requirements across all operating markets.',
+        specialist:'Compliance Broker — ensures filings, documentation, and processes meet regional legal standards.',
+        benefit:'Compliant operations without reading a single regulation. Compliance that keeps up automatically.' },
+      { code:'ECOM', name:'E-commerce Agent', color:'#8b5cf6', orbitR:.58, speed:.00044,
+        agent:'Manages product listings, inventory synchronization, and platform optimization across all sales channels.',
+        specialist:'E-commerce Manager — handles channel strategy, listing quality, and platform-specific optimization.',
+        benefit:'Stores that run themselves. Inventory synced. Listings optimized. Always.' },
+      { code:'MKT', name:'Marketing Agent', color:'#f472b6', orbitR:.64, speed:.00035,
+        agent:'Handles content creation, campaign execution, and performance tracking continuously.',
+        specialist:'Performance Marketer — drives growth strategy, creative direction, and channel optimization.',
+        benefit:'A growth engine running in the background. Marketing that compounds while you focus on brand.' },
+      { code:'LOG', name:'Logistics Agent', color:'#fb923c', orbitR:.70, speed:.00029,
+        agent:'Coordinates shipments, carrier selection, and delivery optimization across your supply chain.',
+        specialist:'Logistics Coordinator — manages carrier relationships, resolves exceptions, and optimizes routes.',
+        benefit:'Supply chain on autopilot. Shipments tracked. Delays handled. Carriers optimized.' },
+      { code:'WHS', name:'Warehousing Agent', color:'#a78bfa', orbitR:.76, speed:.00042,
+        agent:'Manages inventory positioning, fulfillment coordination, and warehouse operations.',
+        specialist:'Warehouse Operator — handles physical inventory, inbound/outbound processing, and space optimization.',
+        benefit:'Physical ops handled end to end. Inventory where it needs to be, when it needs to be there.' }
+    ];
+
+    /* ── Orbital Canvas ─────────────────────────────────────────────────── */
+    function initCanvas(canvasId, opts = {}) {
+      const el = document.getElementById(canvasId);
+      if (!el) return null;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const W = el.getAttribute('width') || 480;
+      const H = el.getAttribute('height') || 480;
+      el.width  = W * dpr;
+      el.height = H * dpr;
+      const ctx = el.getContext('2d');
+      ctx.scale(dpr, dpr);
+      const w = W, h = H, cx = w / 2, cy = h / 2;
+      let angles = LAYERS.map((_, i) => (i / LAYERS.length) * Math.PI * 2);
+      let raf;
+      let paused = false;
+      let hovered = -1; // index of hovered node
+
+      const io = new IntersectionObserver(entries => {
+        paused = !entries[0].isIntersecting;
+        if (!paused && !raf) draw();
+      }, { threshold: 0.1 });
+      io.observe(el);
+
+      function nodePos(i) {
+        const L = LAYERS[i];
+        const r = L.orbitR * Math.min(w, h) * 0.5;
+        const a = angles[i];
+        return { x: cx + r * Math.cos(a), y: cy + r * Math.sin(a) };
+      }
+
+      function draw() {
+        if (paused) { raf = null; return; }
+        raf = requestAnimationFrame(draw);
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Update angles
+        LAYERS.forEach((L, i) => { angles[i] += L.speed; });
+
+        const ambient = opts.ambient || false;
+        const faded   = opts.faded   || false;
+        const alpha   = faded ? 0.35 : 1;
+
+        ctx.globalAlpha = alpha;
+
+        // Draw orbit paths
+        LAYERS.forEach((L, i) => {
+          const r = L.orbitR * Math.min(w, h) * 0.5;
+          ctx.beginPath();
+          ctx.arc(cx, cy, r, 0, Math.PI * 2);
+          ctx.strokeStyle = 'rgba(74,158,255,0.06)';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        });
+
+        // Center node — MERCHANT
+        const pulse = 0.5 + 0.5 * Math.sin(Date.now() * 0.002);
+        const centerR = ambient ? 14 : 18;
+
+        // Glow
+        const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, centerR * 3);
+        grad.addColorStop(0, 'rgba(232,237,245,' + (0.18 + pulse * 0.08) + ')');
+        grad.addColorStop(1, 'rgba(232,237,245,0)');
+        ctx.beginPath();
+        ctx.arc(cx, cy, centerR * 3, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        // Core
+        ctx.beginPath();
+        ctx.arc(cx, cy, centerR, 0, Math.PI * 2);
+        ctx.fillStyle = '#e8edf5';
+        ctx.fill();
+
+        // Label
+        if (!ambient) {
+          ctx.font = 'bold 7px "Space Mono", monospace';
+          ctx.fillStyle = '#060a14';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText('MERCHANT', cx, cy);
+        }
+
+        // Connector lines
+        LAYERS.forEach((L, i) => {
+          const pos = nodePos(i);
+          const isHov = i === hovered;
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.lineTo(pos.x, pos.y);
+          ctx.strokeStyle = isHov ? L.color.replace(')', ',0.35)').replace('rgb', 'rgba').replace('#', '') : 'rgba(74,158,255,0.04)';
+          if (isHov) {
+            ctx.strokeStyle = L.color + '55';
+          }
+          ctx.lineWidth = isHov ? 1.5 : 0.8;
+          ctx.stroke();
+        });
+
+        // Layer nodes
+        LAYERS.forEach((L, i) => {
+          const pos = nodePos(i);
+          const isHov = i === hovered;
+          const nr = ambient ? 8 : (isHov ? 14 : 11);
+
+          // Glow
+          const g2 = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, nr * 2.5);
+          const c = L.color;
+          g2.addColorStop(0, c + (isHov ? 'aa' : '44'));
+          g2.addColorStop(1, c + '00');
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, nr * 2.5, 0, Math.PI * 2);
+          ctx.fillStyle = g2;
+          ctx.fill();
+
+          // Core
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, nr, 0, Math.PI * 2);
+          ctx.fillStyle = isHov ? L.color : L.color + 'cc';
+          ctx.fill();
+
+          // Label
+          if (!ambient) {
+            const fontSize = isHov ? 7.5 : 6.5;
+            ctx.font = `bold ${fontSize}px "Space Mono", monospace`;
+            ctx.fillStyle = '#060a14';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(L.code, pos.x, pos.y);
+          }
+        });
+
+        ctx.globalAlpha = 1;
+      }
+
+      draw();
+
+      // Hit detection
+      if (!ambient && !faded) {
+        el.addEventListener('mousemove', e => {
+          const rect = el.getBoundingClientRect();
+          const mx = (e.clientX - rect.left) * (W / rect.width);
+          const my = (e.clientY - rect.top)  * (H / rect.height);
+          let found = -1;
+          LAYERS.forEach((_, i) => {
+            const pos = nodePos(i);
+            const dist = Math.hypot(mx - pos.x, my - pos.y);
+            if (dist < 20) found = i;
+          });
+          hovered = found;
+          el.style.cursor = found >= 0 ? 'pointer' : 'default';
+        });
+
+        el.addEventListener('click', e => {
+          if (hovered >= 0) selectLayer(hovered);
+        });
+
+        el.addEventListener('mouseleave', () => { hovered = -1; });
+      }
+
+      return { canvas: el, nodePos, getAngles: () => angles };
+    }
+
+    /* ── Layer detail panel ─────────────────────────────────────────────── */
+    const hint   = document.getElementById('layers-hint');
+    const detail = document.getElementById('layers-detail');
+    let selectedLayer = -1;
+
+    function selectLayer(i) {
+      const L = LAYERS[i];
+      document.getElementById('ld-code').textContent = L.code;
+      document.getElementById('ld-code').style.color = L.color;
+      document.getElementById('ld-name').textContent = L.name;
+      document.getElementById('ld-agent').textContent = L.agent;
+      document.getElementById('ld-specialist').textContent = L.specialist;
+      document.getElementById('ld-benefit').textContent = L.benefit;
+      hint.style.display = 'none';
+      detail.classList.add('vis');
+      selectedLayer = i;
+    }
+
+    // Hint code buttons
+    document.querySelectorAll('.layers__hcode').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const code = btn.dataset.code;
+        const idx = LAYERS.findIndex(l => l.code === code);
+        if (idx >= 0) selectLayer(idx);
+      });
+    });
+
+    /* ── Init canvases ──────────────────────────────────────────────────── */
+    initCanvas('hero-canvas', { ambient: true });
+    initCanvas('layers-canvas', {});
+    initCanvas('cta-canvas', { faded: true });
+
+    /* ── 80/20 bar animation ────────────────────────────────────────────── */
+    const bar = document.getElementById('model-bar-m');
+    const barObs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        bar.style.width = '20%';
+        barObs.disconnect();
+      }
+    }, { threshold: 0.5 });
+    if (bar) barObs.observe(bar);
+
+    /* ── Scroll progress ────────────────────────────────────────────────── */
+    const prog = document.getElementById('scroll-prog');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      if (prog) prog.style.width = pct + '%';
+    }, { passive: true });
+
+    /* ── Nav scroll state ───────────────────────────────────────────────── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 48);
+    }, { passive: true });
+
+    /* ── Mobile nav ─────────────────────────────────────────────────────── */
+    const toggle = document.getElementById('nav-toggle');
+    const mob    = document.getElementById('nav-mob');
+    const close  = document.getElementById('nav-mob-close');
+
+    function openMob() { mob.classList.add('open'); toggle.setAttribute('aria-expanded','true'); document.body.style.overflow = 'hidden'; }
+    function closeMob() { mob.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow = ''; }
+
+    if (toggle) toggle.addEventListener('click', openMob);
+    if (close)  close.addEventListener('click', closeMob);
+    mob.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMob));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && mob.classList.contains('open')) closeMob(); });
+
+    /* ── Smooth anchor scroll ───────────────────────────────────────────── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+
+    /* ── GSAP + ScrollTrigger ───────────────────────────────────────────── */
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero entrance
+      const heroTl = gsap.timeline({ delay: 0.2 });
+      heroTl
+        .to('#hero-term',      { opacity:1, duration:.5, ease:'power2.out' })
+        .to('.hero__h1',       { opacity:1, duration:.7, ease:'power2.out' }, '-=.2')
+        .to('.hero__sub',      { opacity:1, duration:.6, ease:'power2.out' }, '-=.3')
+        .to('.hero__actions',  { opacity:1, duration:.5, ease:'power2.out' }, '-=.2')
+        .to('.hero__stats',    { opacity:1, duration:.5, ease:'power2.out' }, '-=.2')
+        .to('.hero__scroll',   { opacity:1, duration:.4, ease:'power2.out' }, '-=.1');
+
+      // Section reveals
+      document.querySelectorAll('.g-up').forEach(el => {
+        gsap.to(el, {
+          opacity:1, y:0, duration:.8, ease:'power2.out',
+          scrollTrigger: { trigger:el, start:'top 88%', toggleActions:'play none none none' }
+        });
+      });
+
+      document.querySelectorAll('.g-in').forEach(el => {
+        gsap.to(el, {
+          opacity:1, duration:.6, ease:'power2.out',
+          scrollTrigger: { trigger:el, start:'top 88%', toggleActions:'play none none none' }
+        });
+      });
+
+      // Bento stagger
+      gsap.from('.bento__cell', {
+        opacity:0, y:24, stagger:.12, duration:.7, ease:'power2.out',
+        scrollTrigger: { trigger:'.bento', start:'top 80%' }
+      });
+
+      // Specialists list stagger
+      gsap.from('.spec__item', {
+        opacity:0, x:-20, stagger:.1, duration:.6, ease:'power2.out',
+        scrollTrigger: { trigger:'.spec__list', start:'top 80%' }
+      });
+    } else {
+      // Fallback: IntersectionObserver if GSAP fails to load
+      document.querySelectorAll('.g-up,.g-in').forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      });
+      ['#hero-term','.hero__h1','.hero__sub','.hero__actions','.hero__stats','.hero__scroll'].forEach(s => {
+        const el = document.querySelector(s);
+        if (el) { el.style.opacity = '1'; el.style.transform = 'none'; }
+      });
+    }
+
+    /* ── Lenis smooth scroll ────────────────────────────────────────────── */
+    if (typeof Lenis !== 'undefined') {
+      const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+      lenis.on('scroll', () => {
+        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.update();
+      });
+      function lenisRaf(t) { lenis.raf(t); requestAnimationFrame(lenisRaf); }
+      requestAnimationFrame(lenisRaf);
+    }
+
+    /* ── CTA form ───────────────────────────────────────────────────────── */
+    const form = document.getElementById('cta-form');
+    if (form) {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const btn = form.querySelector('button[type="submit"]');
+        btn.textContent = 'Access requested ✓';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+      });
+    }
+
+  })();
+  </script>
+
+</body>
+</html>
