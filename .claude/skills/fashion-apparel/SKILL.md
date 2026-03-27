@@ -796,8 +796,8 @@ const products = data.collection.products.nodes;
 | Section | Animation Type | Trigger | Notes |
 |---|---|---|---|
 | Nav | Fade-in on load | DOMContentLoaded | Simple, no drama |
-| Hero copy | Stagger fade-up | Page load | eyebrow → headline → CTA |
-| Hero bg | Parallax scroll | Scrub | `yPercent: 20`, slow |
+| Hero copy | Word-split stagger (SplitText) | Page load | eyebrow → headline → CTA, with data-depth parallax |
+| Hero bg | Three.js particle field | Continuous rAF | Pause via IntersectionObserver when off-screen |
 | Editorial strip | Scale hover only | Hover | No scroll entrance |
 | Collections | Slide left + slide right | `top 75%` | Alternating per block |
 | Product grid | Stagger fade-up | `top 80%` | Cards at 0.06s stagger |
@@ -806,6 +806,173 @@ const products = data.collection.products.nodes;
 | Press bar | Fade-in stagger | `top 85%` | Logos left to right |
 | Social grid | Scale + fade | `top 85%` | Group entrance |
 | Footer | Fade-in | `top 92%` | Gentle, final |
+
+---
+
+## 3D Effects (Mandatory on Every Build)
+
+Three 3D effects must be implemented on every fashion build. All three are gated behind `prefers-reduced-motion`.
+
+### 0. Three.js Hero Particle Field
+
+When no campaign video is available (or while waiting for assets), the hero background is a Three.js particle field — not a CSS gradient. This is the default state for any build without a real video.
+
+**The visual:** Three depth layers of particles create a bokeh-like night atmosphere — fine dust grain in the back, branded champagne/rose/white points in the mid, and large out-of-focus blobs in the foreground. Layers rotate at different speeds. Camera tilts toward the cursor. Exponential fog fades everything into the background color.
+
+**Setup:**
+```html
+<!-- In <head> -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
+
+<!-- In hero section -->
+<canvas id="hero-canvas" class="hero__canvas" aria-hidden="true"></canvas>
+```
+
+```css
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+```
+
+**Three layers (build all three — single layer looks cheap):**
+```js
+// Dust — background grain, high count, tiny size, lower opacity
+buildLayer(2200, spread:140, ySpread:80, zSpread:80, size:0.12, opacity:0.55)
+
+// Mid — main visible particles, full brand colors, medium size
+buildLayer(900, spread:90, ySpread:55, zSpread:55, size:0.32, opacity:0.80)
+
+// Bokeh — large out-of-focus blobs, very transparent, in front
+buildLayer(130, spread:60, ySpread:40, zSpread:25, size:1.80, opacity:0.18)
+```
+
+**Key settings:**
+```js
+renderer.setClearColor(0x[brand-bg-dark], 1);          // match --color-bg-dark exactly
+scene.fog = new THREE.FogExp2(0x[brand-bg-dark], 0.014); // depth fade
+material.blending = THREE.AdditiveBlending;              // glow effect
+material.depthWrite = false;                             // no depth artifacts
+material.sizeAttenuation = true;                         // 3D size perspective
+
+// Layer rotation speeds (different per layer = depth illusion)
+dust.rotation.y  =  t * 0.025;
+mid.rotation.y   = -t * 0.018;  // counter-rotate for depth
+bokeh.rotation.y =  t * 0.008;  // slowest = furthest-feeling
+```
+
+**Camera mouse-tracking:**
+```js
+camX += (mouseX * 4  - camX) * 0.04;  // lag factor 0.04 = unhurried
+camY += (-mouseY * 3 - camY) * 0.04;
+camera.position.x = camX;
+camera.position.y = camY;
+camera.lookAt(scene.position);
+```
+
+**Always:** wrap in `IntersectionObserver` — stop the rAF loop when hero is off-screen.
+
+**When real campaign video is available:** replace the canvas with a `<video autoplay muted loop playsinline>` element and remove the Three.js init. Keep the comment in the HTML so the swap is documented.
+
+**Brand color palette for particles:**
+```js
+// Use the brand's accent, gold variant, near-white, deeper tone, and pure white
+// The palette should derive from the approved design system tokens
+// Example for Oh Polly (champagne rose):
+[0xc4967a, 0xe8c4a0, 0xfaf8f5, 0xa87858, 0xf0dcc0, 0xffffff]
+```
+
+---
+
+### 1. Hero Content Mouse Parallax
+
+Text layers float at different depths as the cursor moves — the canvas handles camera tilt, this handles the 2D text layer depth on top of it.
+
+**How it works:**
+- Assign `data-depth="[0.03–0.10]"` to each hero content element. Higher = moves more = appears closer.
+- On `mousemove`, normalise cursor position to `-0.5 → 0.5` relative to the hero bounds.
+- Use a `requestAnimationFrame` loop with `lerp(current, target, 0.07)` for smooth lag.
+- Move each layer: `x = normX * depth * 80`, `y = normY * depth * 80` via `gsap.set`.
+- Use `IntersectionObserver` to start/stop the rAF loop.
+
+**Depth assignments:**
+```
+eyebrow label:    data-depth="0.04"   (subtle float)
+headline:         data-depth="0.08"   (most movement — foreground)
+CTA button:       data-depth="0.03"   (barely moves — feels grounded)
+```
+
+Note: with a Three.js canvas behind it, do NOT counter-move the background via CSS — the canvas handles its own camera tilt. Remove the background counter-move from the parallax function.
+
+**Hero copy rules (critical — 3D effects amplify bad copy):**
+- Headline must be **4–6 words maximum**. Long tagline copy kills the cinematic effect.
+- Never use the brand tagline verbatim as the hero headline — it reads like a flyer.
+- Declarative, present-tense: "The night starts here." not "Dressed for the moment you've been waiting for."
+- Eyebrow: season code or collection name — never "New Collection 2026". Use "SS26", "The Wedding Edit", "New In".
+
+```
+✓ "The night starts here."    4 words, direct
+✓ "Wear the night."           3 words
+✓ "New in. On tonight."       5 words, dual meaning
+✗ "Dressed for the moment you've been waiting for."   tagline
+✗ "Summer 2026"               lazy, generic
+```
+
+---
+
+### 2. Product Card 3D Tilt
+
+Magnetic perspective tilt on each product card — the card rotates toward the cursor like a physical object being picked up.
+
+**CSS setup:**
+```css
+.product-grid,
+.bestsellers__grid {
+  perspective: 900px;
+}
+
+.product-card {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.product-card__images {
+  transform: translateZ(0);  /* keep images composited */
+}
+```
+
+**JS:**
+```js
+card.addEventListener('mousemove', function (e) {
+  const rect = card.getBoundingClientRect();
+  gsap.to(card, {
+    rotateX: -((e.clientY - rect.top)  / rect.height - 0.5) * 10,
+    rotateY:  ((e.clientX - rect.left) / rect.width  - 0.5) * 10,
+    transformPerspective: 900,
+    duration: 0.35,
+    ease: 'power2.out',
+    overwrite: 'auto',
+  });
+});
+
+card.addEventListener('mouseleave', function () {
+  gsap.to(card, {
+    rotateX: 0, rotateY: 0,
+    duration: 0.6,
+    ease: 'elastic.out(1, 0.5)',  // spring-back is non-negotiable
+    overwrite: 'auto',
+  });
+});
+```
+
+**Rules:**
+- Max 10–12 degrees. More feels broken.
+- Elastic spring-back on `mouseleave` is mandatory — makes the card feel physical.
+- Whole card tilts as one unit — never tilt image and info separately.
+- Disable on `@media (hover: none)` (touch devices).
 
 ---
 
@@ -878,6 +1045,10 @@ Claude must **NEVER** do the following on this project:
 - Use `display: none` on elements that need to animate — use `opacity: 0` or `visibility: hidden`
 - Skip `prefers-reduced-motion` fallback on any animation
 - Use lorem ipsum anywhere — ask for real brand copy or write specific placeholder copy in the brand's voice
+- Omit a favicon — every build must include `<link rel="icon">` and `<link rel="apple-touch-icon">`. If no brand favicon asset is available, generate an inline SVG favicon using the brand's dark background + accent color with the brand initials in an italic serif. Never ship a page with no favicon.
+- Use a CSS gradient as the hero background — when no video is available, use the Three.js particle field. A gradient hero looks like a placeholder; the particle field looks intentional.
+- Use a long tagline as the hero headline — hero copy must be 4–6 words, declarative, present tense. The 3D effects amplify bad copy; terse copy makes the effects land.
+- Add placeholder/random Unsplash images to production builds — Unsplash is for prototypes only. All image slots must reference real brand photography before launch. Document missing assets clearly with `<!-- ASSET NEEDED: filename.webp — spec -->` comments.
 
 ---
 
@@ -890,6 +1061,11 @@ npm install @shopify/storefront-api-client
 
 # Animation
 npm install gsap lenis
+
+# 3D hero (when no campaign video is available)
+npm install three
+# OR load via CDN in plain HTML builds:
+# <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
 
 # State (cart)
 npm install zustand

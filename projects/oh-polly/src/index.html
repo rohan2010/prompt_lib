@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Oh Polly — Occasion and going-out wear built for your best nights. Free US shipping over $80. Duties paid. Shop new arrivals." />
+  <meta name="theme-color" content="#0a0a0a" />
+
+  <title>Oh Polly — Dressed for the moment you've been waiting for.</title>
+
+  <!-- Favicon — inline SVG (no file needed; swap for /favicon.ico when brand asset is available) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2C serif' font-style='italic' font-size='11' font-weight='400' fill='%23c4967a' letter-spacing='-0.5'%3Eop%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%230a0a0a'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2C serif' font-style='italic' font-size='72' font-weight='400' fill='%23c4967a'%3Eop%3C/text%3E%3C/svg%3E" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Oh Polly — Dressed for the moment you've been waiting for." />
+  <meta property="og:description" content="Occasion wear for women who dress for the night, not the wardrobe. Shop new arrivals." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://us.ohpolly.com" />
+
+  <!-- Preconnect to Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Google Fonts — Playfair Display, Raleway, Cormorant -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:wght@300;400;500;600&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'"
+  />
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:wght@300;400;500;600&display=swap"
+    />
+  </noscript>
+
+  <!-- Three.js — hero canvas particle field -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
+
+  <!-- Site Styles -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+  <!-- Skip to content — first focusable element -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 1: ANNOUNCEMENT BAR
+       STYLE: Dark bar, warm cream text, accent CTA link
+       ANIMATION TYPE: none (sticky bar, no scroll animation)
+       LAYOUT: Single centered line, dismiss X on right
+       TOKENS: --color-bg-dark, --color-text-light, --color-accent, --bar-h
+  ════════════════════════════════════════════════════ -->
+  <div
+    id="announcement-bar"
+    class="announcement-bar"
+    role="banner"
+    aria-label="Site announcement"
+  >
+    <div class="announcement-bar__inner">
+      <p class="announcement-bar__text">
+        Free US shipping over $80&nbsp;&middot;&nbsp;Duties paid&nbsp;&middot;&nbsp;
+        <a
+          href="https://us.ohpolly.com/collections/new-in"
+          class="announcement-bar__link"
+          aria-label="Shop new arrivals"
+        >Shop Now &rarr;</a>
+      </p>
+      <button
+        id="bar-dismiss"
+        class="announcement-bar__dismiss"
+        aria-label="Dismiss announcement"
+        type="button"
+      >
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M1 1l10 10M11 1L1 11" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 2: NAVIGATION
+       STYLE: Transparent over hero, solid on scroll
+       ANIMATION TYPE: Fade-in on page load
+       LAYOUT: centered logo, left nav links, right actions
+       TOKENS: --nav-h, --color-text-light, --color-bg-rgb, --color-accent
+  ════════════════════════════════════════════════════ -->
+  <nav id="site-nav" class="site-nav" aria-label="Main navigation">
+    <div class="site-nav__inner">
+
+      <!-- Left links -->
+      <ul class="site-nav__links site-nav__links--left" role="list">
+        <li>
+          <a href="https://us.ohpolly.com/collections/new-in" class="site-nav__link">New In</a>
+        </li>
+        <li>
+          <a href="https://us.ohpolly.com/collections" class="site-nav__link">Collections</a>
+        </li>
+        <li>
+          <a href="https://us.ohpolly.com/collections/the-wedding-edit" class="site-nav__link">Wedding Edit</a>
+        </li>
+        <li>
+          <a href="https://us.ohpolly.com/collections/going-out" class="site-nav__link">Going Out</a>
+        </li>
+      </ul>
+
+      <!-- Centered wordmark logo -->
+      <a href="https://us.ohpolly.com" class="site-nav__logo" aria-label="Oh Polly — home">
+        <span class="site-nav__logo-wordmark">oh <em>POLLY</em></span>
+      </a>
+
+      <!-- Right actions -->
+      <div class="site-nav__links site-nav__links--right">
+        <a
+          href="https://us.ohpolly.com/pages/size-guide"
+          class="site-nav__link"
+          aria-label="Size Guide — UK to US conversion"
+        >Size Guide</a>
+        <a
+          href="https://us.ohpolly.com/cart"
+          class="site-nav__cart-link"
+          aria-label="Shopping cart"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4zM3 6h18M16 10a4 4 0 01-8 0" />
+          </svg>
+        </a>
+
+        <!-- Mobile hamburger -->
+        <button
+          id="nav-hamburger"
+          class="site-nav__hamburger"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          type="button"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Mobile overlay menu -->
+  <div
+    id="mobile-menu"
+    class="mobile-menu"
+    aria-hidden="true"
+    role="dialog"
+    aria-label="Navigation menu"
+  >
+    <button
+      id="mobile-menu-close"
+      class="mobile-menu__close"
+      aria-label="Close navigation menu"
+      type="button"
+    >
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M2 2l16 16M18 2L2 18" />
+      </svg>
+    </button>
+    <a href="https://us.ohpolly.com/collections/new-in" class="mobile-menu__link">New In</a>
+    <a href="https://us.ohpolly.com/collections" class="mobile-menu__link">Collections</a>
+    <a href="https://us.ohpolly.com/collections/the-wedding-edit" class="mobile-menu__link">Wedding Edit</a>
+    <a href="https://us.ohpolly.com/collections/going-out" class="mobile-menu__link">Going Out</a>
+    <a href="https://us.ohpolly.com/pages/size-guide" class="mobile-menu__link">Size Guide</a>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <main id="main-content">
+
+    <!-- ═══════════════════════════════════════════════════
+         SECTION 3: HERO
+         STYLE: Full-viewport dark with animated ambient gradient
+         ANIMATION TYPE: word-split (SplitText, headline words stagger in)
+         LAYOUT: Content at flex-end (bottom-left, Jacquemus pattern)
+         TOKENS: --color-bg-dark, --color-text-light, --color-accent, --text-display
+    ════════════════════════════════════════════════════ -->
+    <section class="hero" aria-label="Campaign hero">
+
+      <!-- Background: Three.js particle field (replace with campaign video when available) -->
+      <div class="hero__bg">
+        <canvas id="hero-canvas" class="hero__canvas" aria-hidden="true"></canvas>
+        <!--
+          SWAP TO VIDEO: when campaign video is ready, remove the canvas above and uncomment:
+          <video
+            autoplay muted loop playsinline
+            poster="/images/hero/hero-campaign-poster.webp"
+            width="1920" height="1080"
+            aria-hidden="true"
+          >
+            <source src="/images/hero/hero-campaign-video.mp4" type="video/mp4" />
+          </video>
+        -->
+      </div>
+
+      <!-- Gradient overlay -->
+      <div class="hero__overlay" aria-hidden="true"></div>
+
+      <!-- Hero content -->
+      <div class="hero__content" style="max-width: var(--grid-max); margin-inline: auto; width: 100%;">
+        <span class="hero__eyebrow gsap-anim" data-depth="0.04">New Collection &middot; SS26</span>
+        <h1 class="hero__headline gsap-anim" data-depth="0.08">
+          The night<br>starts here.
+        </h1>
+        <a
+          href="https://us.ohpolly.com/collections/new-in"
+          class="btn btn--hero hero__cta gsap-anim"
+          aria-label="Shop new arrivals at Oh Polly"
+          data-depth="0.03"
+        >Shop New In &rarr;</a>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         SECTION 4: NEW ARRIVALS
+         STYLE: Warm cream background, editorial product grid
+         ANIMATION TYPE: stagger-up (cards 0.06s stagger)
+         LAYOUT: 4-col grid (→ 3 tablet → 2 mobile)
+         TOKENS: --color-bg, --color-surface, --space-12, --space-2
+    ════════════════════════════════════════════════════ -->
+    <section class="new-arrivals" aria-labelledby="new-arrivals-title">
+
+      <div class="new-arrivals__header gsap-anim">
+        <div>
+          <span class="section-label">New In</span>
+          <h2 class="new-arrivals__title" id="new-arrivals-title">New in. Worn tonight.</h2>
+        </div>
+        <a
+          href="https://us.ohpolly.com/collections/new-in"
+          class="btn btn--ghost"
+          aria-label="Shop all new arrivals"
+        >Shop New In &rarr;</a>
+      </div>
+
+      <div class="new-arrivals__grid" role="list" aria-label="New arrivals product grid">
+
+        <!-- Product Card 1 -->
+        <article class="product-card gsap-anim" role="listitem">
+          <a href="https://us.ohpolly.com/collections/new-in" class="product-card" aria-label="Satin Cowl-Neck Midi Dress — $119">
+            <div class="product-card__images">
+              <div
+                class="product-card__img-placeholder"
+                style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=800&fit=crop&crop=top&auto=format&q=80');"
+                role="img"
+                aria-label="Oh Polly Satin Cowl-Neck Midi Dress in dusty rose, worn on model"
+              ></div>
+              <div
+                class="product-card__img-placeholder product-card__img-placeholder--hover"
+                style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&h=800&fit=crop&crop=bottom&auto=format&q=80');"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__name">Satin Cowl-Neck Midi Dress</span>
+              <span class="product-card__price">$119.00 USD</span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Product Card 2 -->
+        <article class="product-card gsap-anim" role="listitem">
+          <a href="https://us.ohpolly.com/collections/new-in" class="product-card" aria-label="Bandeau Ruched Mini Dress — $89">
+            <div class="product-card__images">
+              <div
+                class="product-card__img-placeholder"
+                style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&h=800&fit=crop&crop=top&auto=format&q=80');"
+                role="img"
+                aria-label="Oh Polly Bandeau Ruched Mini Dress in midnight navy, worn on model"
+              ></div>
+              <div
+                class="product-card__img-placeholder product-card__img-placeholder--hover"
+                style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&h=800&fit=crop&crop=center&auto=format&q=80');"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__name">Bandeau Ruched Mini Dress</span>
+              <span class="product-card__price">$89.00 USD</span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Product Card 3 -->
+        <article class="product-card gsap-anim" role="listitem">
+          <a href="https://us.ohpolly.com/collections/new-in" class="product-card" aria-label="Lace-Trim Backless Midi — $109">
+            <div class="product-card__images">
+              <div
+                class="product-card__img-placeholder"
+                style="background-image: url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&h=800&fit=crop&crop=top&auto=format&q=80');"
+                role="img"
+                aria-label="Oh Polly Lace-Trim Backless Midi in cream, worn on model"
+              ></div>
+              <div
+                class="product-card__img-placeholder product-card__img-placeholder--hover"
+                style="background-image: url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&h=800&fit=crop&crop=bottom&auto=format&q=80');"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__name">Lace-Trim Backless Midi</span>
+              <span class="product-card__price">$109.00 USD</span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Product Card 4 -->
+        <article class="product-card gsap-anim" role="listitem">
+          <a href="https://us.ohpolly.com/collections/new-in" class="product-card" aria-label="Plunge Asymmetric Bodycon — $99">
+            <div class="product-card__images">
+              <div
+                class="product-card__img-placeholder"
+                style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=800&fit=crop&crop=top&auto=format&q=80');"
+                role="img"
+                aria-label="Oh Polly Plunge Asymmetric Bodycon in deep plum, worn on model"
+              ></div>
+              <div
+                class="product-card__img-placeholder product-card__img-placeholder--hover"
+                style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&h=800&fit=crop&crop=center&auto=format&q=80');"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__name">Plunge Asymmetric Bodycon</span>
+              <span class="product-card__price">$99.00 USD</span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Product Card 5 -->
+        <article class="product-card gsap-anim" role="listitem">
+          <a href="https://us.ohpolly.com/collections/new-in" class="product-card" aria-label="Ruffle-Hem Halter Mini — $95">
+            <div class="product-card__images">
+              <div
+                class="product-card__img-placeholder"
+                style="background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=800&fit=crop&crop=top&auto=format&q=80');"
+                role="img"
+                aria-label="Oh Polly Ruffle-Hem Halter Mini in champagne rose, worn on model"
+              ></div>
+              <div
+                class="product-card__img-placeholder product-card__img-placeholder--hover"
+                style="background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=600&h=800&fit=crop&crop=bottom&auto=format&q=80');"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__name">Ruffle-Hem Halter Mini</span>
+              <span class="product-card__price">$95.00 USD</span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Product Card 6 -->
+        <article class="product-card gsap-anim" role="listitem">
+          <a href="https://us.ohpolly.com/collections/new-in" class="product-card" aria-label="Cut-Out Corset Maxi — $135">
+            <div class="product-card__images">
+              <div
+                class="product-card__img-placeholder"
+                style="background-image: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&crop=top&auto=format&q=80');"
+                role="img"
+                aria-label="Oh Polly Cut-Out Corset Maxi in black, worn on model"
+              ></div>
+              <div
+                class="product-card__img-placeholder product-card__img-placeholder--hover"
+                style="background-image: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&h=800&fit=crop&crop=center&auto=format&q=80');"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__name">Cut-Out Corset Maxi</span>
+              <span class="product-card__price">$135.00 USD</span>
+            </div>
+          </a>
+        </article>
+
+      </div><!-- /.new-arrivals__grid -->
+
+      <div class="new-arrivals__footer">
+        <a
+          href="https://us.ohpolly.com/collections/new-in"
+          class="btn btn--text"
+          aria-label="See all new arrivals"
+        >See all new arrivals &rarr;</a>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         SECTION 5: EDITORIAL COLLECTIONS
+         STYLE: Alternating image/copy blocks, min 80vh each
+         ANIMATION TYPE: slide-left (block A image) / slide-right (block B image)
+         LAYOUT: 2-col grid, alternating direction — copy on right then left
+         TOKENS: --color-bg, --color-surface, --space-16, --grid-pad
+    ════════════════════════════════════════════════════ -->
+    <section class="editorial-collections" aria-label="Featured collections">
+
+      <!-- Collection Block A: The Wedding Edit — image left, copy right -->
+      <div class="collection-block" aria-labelledby="collection-wedding-title">
+
+        <div class="collection-block__image gsap-anim">
+          <!--
+            ASSET NEEDED: wedding-edit-editorial.webp
+            Spec: Full-height portrait, editorial quality, 960×1200 min
+            Drop in: /images/collections/
+          -->
+          <div
+            class="collection-block__img-placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1594938298603-c8148c4b4357?w=960&h=1200&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="The Wedding Edit — editorial campaign image, model in ivory gown"
+          ></div>
+        </div>
+
+        <div class="collection-block__copy gsap-anim">
+          <span class="section-label">The Collection</span>
+          <h2 class="collection-block__title" id="collection-wedding-title">
+            The Wedding Edit.<br />Guest-approved.
+          </h2>
+          <p class="collection-block__desc">
+            You're not the bride. You're the one everyone asks about at the reception.
+            Fluid silhouettes, considered cuts, and lengths that move the way a wedding day does — slowly,
+            then all at once. Rehearsal dinner to last dance, the look holds.
+          </p>
+          <a
+            href="https://us.ohpolly.com/collections/the-wedding-edit"
+            class="btn btn--text"
+            aria-label="Shop The Wedding Edit collection"
+          >Explore the Wedding Edit &rarr;</a>
+        </div>
+
+      </div>
+
+      <!-- Collection Block B: Going Out — copy left, image right (reversed) -->
+      <div class="collection-block collection-block--reversed collection-block--surface" aria-labelledby="collection-going-out-title">
+
+        <div class="collection-block__image gsap-anim">
+          <!--
+            ASSET NEEDED: going-out-editorial.webp
+            Spec: Full-height portrait, editorial quality, 960×1200 min, night-out vibe
+            Drop in: /images/collections/
+          -->
+          <div
+            class="collection-block__img-placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1509631179647-0177331693ae?w=960&h=1200&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="Going Out collection — editorial campaign image, model in black bodycon dress"
+          ></div>
+        </div>
+
+        <div class="collection-block__copy gsap-anim" style="background-color: var(--color-surface);">
+          <span class="section-label">The Night</span>
+          <h2 class="collection-block__title" id="collection-going-out-title">
+            Built for your best nights.
+          </h2>
+          <p class="collection-block__desc">
+            The table is booked. The reservation is yours. Going Out is the edit for the occasions
+            that live in your camera roll long after the night ends — bodycon fits, backless cuts,
+            and the kind of dress that clears a path across a room.
+          </p>
+          <a
+            href="https://us.ohpolly.com/collections/going-out"
+            class="btn btn--text"
+            aria-label="Shop the Going Out collection"
+          >Explore Going Out &rarr;</a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         SECTION 6: BESTSELLERS
+         STYLE: Warm surface background, signature pieces grid
+         ANIMATION TYPE: scale-up (cards scale from 0.88)
+         LAYOUT: 4-col grid (→ 2 mobile)
+         TOKENS: --color-surface, --space-12
+    ════════════════════════════════════════════════════ -->
+    <section class="bestsellers" aria-labelledby="bestsellers-title">
+
+      <div class="bestsellers__header gsap-anim">
+        <span class="section-label">Signature</span>
+        <h2 class="bestsellers__title" id="bestsellers-title">Built for your best nights.</h2>
+      </div>
+
+      <div class="bestsellers__grid" role="list" aria-label="Bestselling products">
+
+        <!-- Bestseller 1 -->
+        <article class="product-card gsap-anim" role="listitem">
+          <a href="https://us.ohpolly.com/collections/bestsellers" class="product-card" aria-label="Velvet Strappy Midi Dress — $125">
+            <div class="product-card__images">
+              <div
+                class="product-card__img-placeholder"
+                style="background-image: url('https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&h=800&fit=crop&crop=top&auto=format&q=80');"
+                role="img"
+                aria-label="Oh Polly Velvet Strappy Midi Dress in deep violet, worn on model"
+              ></div>
+              <div
+                class="product-card__img-placeholder product-card__img-placeholder--hover"
+                style="background-image: url('https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=600&h=800&fit=crop&crop=center&auto=format&q=80');"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__name">Velvet Strappy Midi Dress</span>
+              <span class="product-card__price">$125.00 USD</span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Bestseller 2 -->
+        <article class="product-card gsap-anim" role="listitem">
+          <a href="https://us.ohpolly.com/collections/bestsellers" class="product-card" aria-label="Square-Neck Bodycon Mini — $85">
+            <div class="product-card__images">
+              <div
+                class="product-card__img-placeholder"
+                style="background-image: url('https://images.unsplash.com/photo-1539109136081-3d6e1b9b6867?w=600&h=800&fit=crop&crop=top&auto=format&q=80');"
+                role="img"
+                aria-label="Oh Polly Square-Neck Bodycon Mini in bordeaux red, worn on model"
+              ></div>
+              <div
+                class="product-card__img-placeholder product-card__img-placeholder--hover"
+                style="background-image: url('https://images.unsplash.com/photo-1539109136081-3d6e1b9b6867?w=600&h=800&fit=crop&crop=center&auto=format&q=80');"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__name">Square-Neck Bodycon Mini</span>
+              <span class="product-card__price">$85.00 USD</span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Bestseller 3 -->
+        <article class="product-card gsap-anim" role="listitem">
+          <a href="https://us.ohpolly.com/collections/bestsellers" class="product-card" aria-label="Satin Column Maxi — $145">
+            <div class="product-card__images">
+              <div
+                class="product-card__img-placeholder"
+                style="background-image: url('https://images.unsplash.com/photo-1485462537746-965f3b9b9284?w=600&h=800&fit=crop&crop=top&auto=format&q=80');"
+                role="img"
+                aria-label="Oh Polly Satin Column Maxi in champagne, worn on model"
+              ></div>
+              <div
+                class="product-card__img-placeholder product-card__img-placeholder--hover"
+                style="background-image: url('https://images.unsplash.com/photo-1485462537746-965f3b9b9284?w=600&h=800&fit=crop&crop=center&auto=format&q=80');"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__name">Satin Column Maxi</span>
+              <span class="product-card__price">$145.00 USD</span>
+            </div>
+          </a>
+        </article>
+
+        <!-- Bestseller 4 -->
+        <article class="product-card gsap-anim" role="listitem">
+          <a href="https://us.ohpolly.com/collections/bestsellers" class="product-card" aria-label="Wrap-Front Ruched Midi — $105">
+            <div class="product-card__images">
+              <div
+                class="product-card__img-placeholder"
+                style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop&crop=top&auto=format&q=80');"
+                role="img"
+                aria-label="Oh Polly Wrap-Front Ruched Midi in forest green, worn on model"
+              ></div>
+              <div
+                class="product-card__img-placeholder product-card__img-placeholder--hover"
+                style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop&crop=center&auto=format&q=80');"
+                aria-hidden="true"
+              ></div>
+            </div>
+            <div class="product-card__info">
+              <span class="product-card__name">Wrap-Front Ruched Midi</span>
+              <span class="product-card__price">$105.00 USD</span>
+            </div>
+          </a>
+        </article>
+
+      </div><!-- /.bestsellers__grid -->
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         SECTION 7: LOOKBOOK
+         STYLE: Full-bleed editorial, no text on images
+         ANIMATION TYPE: clip-reveal (inset 100%→0% per image)
+         LAYOUT: Alternating full-width (16/9) and two half-width (4/5) images
+         TOKENS: --color-bg, --space-12, 2px gap
+    ════════════════════════════════════════════════════ -->
+    <section class="lookbook" aria-labelledby="lookbook-title">
+
+      <div class="lookbook__header">
+        <span class="section-label gsap-anim">RSVP: The Wedding Edit</span>
+        <h2 class="lookbook__title gsap-anim" id="lookbook-title">The night before<br /><em>the night.</em></h2>
+      </div>
+
+      <div class="lookbook__grid" role="list" aria-label="Lookbook campaign images">
+
+        <!-- Full-width image 1 -->
+        <div class="lookbook__item lookbook__item--full gsap-anim" role="listitem">
+          <!--
+            ASSET NEEDED: lookbook-wedding-01.webp
+            Spec: Horizontal editorial, 1920×1080 min, "RSVP: The Wedding Edit" campaign
+            Drop in: /images/lookbook/
+          -->
+          <div
+            class="lookbook__item-placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1920&h=1080&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="The Wedding Edit lookbook — campaign editorial"
+          ></div>
+        </div>
+
+        <!-- Two half-width images -->
+        <div class="lookbook__item lookbook__item--half gsap-anim" role="listitem">
+          <div
+            class="lookbook__item-placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=960&h=1200&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="The Wedding Edit lookbook — editorial portrait"
+          ></div>
+        </div>
+
+        <div class="lookbook__item lookbook__item--half gsap-anim" role="listitem">
+          <div
+            class="lookbook__item-placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=960&h=1200&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="The Wedding Edit lookbook — editorial portrait"
+          ></div>
+        </div>
+
+        <!-- Full-width image 2 -->
+        <div class="lookbook__item lookbook__item--full gsap-anim" role="listitem">
+          <div
+            class="lookbook__item-placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1920&h=1080&fit=crop&crop=center&auto=format&q=80');"
+            role="img"
+            aria-label="The Wedding Edit lookbook — wide campaign shot"
+          ></div>
+        </div>
+
+        <!-- Two half-width images -->
+        <div class="lookbook__item lookbook__item--half gsap-anim" role="listitem">
+          <div
+            class="lookbook__item-placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=960&h=1200&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="The Wedding Edit lookbook — editorial portrait"
+          ></div>
+        </div>
+
+        <div class="lookbook__item lookbook__item--half gsap-anim" role="listitem">
+          <div
+            class="lookbook__item-placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1485462537746-965f3b9b9284?w=960&h=1200&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="The Wedding Edit lookbook — editorial portrait"
+          ></div>
+        </div>
+
+      </div><!-- /.lookbook__grid -->
+
+    </section>
+
+    <!-- ═════��═════════════════════════════════════════════
+         SECTION 8: UGC FEED
+         STYLE: Warm cream background, square creator grid
+         ANIMATION TYPE: fade-up (group entrance)
+         LAYOUT: 6-col square grid (→ 3 mobile)
+         TOKENS: --color-bg, 2px gap, 1:1 aspect ratio
+    ════════════════════════════════════════════════════ -->
+    <section class="ugc-feed" aria-labelledby="ugc-title">
+
+      <div class="ugc-feed__header gsap-anim">
+        <h2 class="ugc-feed__title" id="ugc-title">Worn by you.</h2>
+        <p class="ugc-feed__handle">@ohpolly</p>
+      </div>
+
+      <div class="ugc-feed__grid" role="list" aria-label="Creator and customer photos">
+
+        <!-- UGC Item 1 -->
+        <a
+          href="https://www.instagram.com/ohpolly/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ugc-item gsap-anim"
+          role="listitem"
+          aria-label="View @emilykatebarker's Oh Polly look on Instagram"
+        >
+          <div
+            class="ugc-item__placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1524504388267-9f00d9e3b3ee?w=600&h=600&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="Creator @emilykatebarker wearing Oh Polly dress"
+          ></div>
+          <div class="ugc-item__overlay">
+            <span class="ugc-item__handle">@emilykatebarker</span>
+          </div>
+        </a>
+
+        <!-- UGC Item 2 -->
+        <a
+          href="https://www.instagram.com/ohpolly/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ugc-item gsap-anim"
+          role="listitem"
+          aria-label="View @jadenicolestyle's Oh Polly look on Instagram"
+        >
+          <div
+            class="ugc-item__placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=600&h=600&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="Creator @jadenicolestyle wearing Oh Polly dress"
+          ></div>
+          <div class="ugc-item__overlay">
+            <span class="ugc-item__handle">@jadenicolestyle</span>
+          </div>
+        </a>
+
+        <!-- UGC Item 3 -->
+        <a
+          href="https://www.instagram.com/ohpolly/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ugc-item gsap-anim"
+          role="listitem"
+          aria-label="View @briannadunbar's Oh Polly look on Instagram"
+        >
+          <div
+            class="ugc-item__placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=600&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="Creator @briannadunbar wearing Oh Polly dress"
+          ></div>
+          <div class="ugc-item__overlay">
+            <span class="ugc-item__handle">@briannadunbar</span>
+          </div>
+        </a>
+
+        <!-- UGC Item 4 -->
+        <a
+          href="https://www.instagram.com/ohpolly/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ugc-item gsap-anim"
+          role="listitem"
+          aria-label="View @oliviaraecarter's Oh Polly look on Instagram"
+        >
+          <div
+            class="ugc-item__placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=600&h=600&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="Creator @oliviaraecarter wearing Oh Polly dress"
+          ></div>
+          <div class="ugc-item__overlay">
+            <span class="ugc-item__handle">@oliviaraecarter</span>
+          </div>
+        </a>
+
+        <!-- UGC Item 5 -->
+        <a
+          href="https://www.instagram.com/ohpolly/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ugc-item gsap-anim"
+          role="listitem"
+          aria-label="View @sophiamariefashion's Oh Polly look on Instagram"
+        >
+          <div
+            class="ugc-item__placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1509967419530-da38b4704bc6?w=600&h=600&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="Creator @sophiamariefashion wearing Oh Polly dress"
+          ></div>
+          <div class="ugc-item__overlay">
+            <span class="ugc-item__handle">@sophiamariefashion</span>
+          </div>
+        </a>
+
+        <!-- UGC Item 6 -->
+        <a
+          href="https://www.instagram.com/ohpolly/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ugc-item gsap-anim"
+          role="listitem"
+          aria-label="View @kaylacookstyle's Oh Polly look on Instagram"
+        >
+          <div
+            class="ugc-item__placeholder"
+            style="background-image: url('https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&h=600&fit=crop&crop=top&auto=format&q=80');"
+            role="img"
+            aria-label="Creator @kaylacookstyle wearing Oh Polly dress"
+          ></div>
+          <div class="ugc-item__overlay">
+            <span class="ugc-item__handle">@kaylacookstyle</span>
+          </div>
+        </a>
+
+      </div><!-- /.ugc-feed__grid -->
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         SECTION 9: PRESS STRIP
+         STYLE: Cream background, bordered top and bottom
+         ANIMATION TYPE: stagger-up (names left to right)
+         LAYOUT: Centered horizontal flex, text-based press names
+         TOKENS: --color-border, --space-8, --color-text-muted
+    ════════════════════════════════════════════════════ -->
+    <section class="press-strip" aria-label="Press and media coverage">
+
+      <div class="press-strip__inner">
+        <p class="press-strip__label">As seen in</p>
+        <div class="press-strip__logos" role="list" aria-label="Press and media features">
+
+          <span class="press-name gsap-anim" role="listitem" aria-label="Featured in Vogue UK">Vogue UK</span>
+          <span class="press-name gsap-anim" role="listitem" aria-label="Featured in ASOS">ASOS</span>
+          <span class="press-name gsap-anim" role="listitem" aria-label="Featured in Revolve">Revolve</span>
+          <span class="press-name gsap-anim" role="listitem" aria-label="Featured in Who What Wear">Who What Wear</span>
+          <span class="press-name gsap-anim" role="listitem" aria-label="Featured in Cosmopolitan">Cosmopolitan</span>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════
+         SECTION 10: EMAIL CAPTURE
+         STYLE: Near-black background, full-width, Klaviyo form
+         ANIMATION TYPE: slide-right (content from x: 60)
+         LAYOUT: Centered single column, max 680px
+         TOKENS: --color-bg-dark, --color-text-light, --color-accent, --radius-pill
+    ════════════════════════════════════════════════════ -->
+    <section class="email-capture" aria-labelledby="email-capture-title">
+
+      <div class="email-capture__inner">
+
+        <span class="email-capture__eyebrow gsap-anim">Exclusive access</span>
+
+        <h2 class="email-capture__title gsap-anim" id="email-capture-title">
+          Be first for<br />new drops.
+        </h2>
+
+        <p class="email-capture__subtitle gsap-anim">
+          New arrivals, exclusive edits, and the moments worth dressing for.
+          Join over 1.8 million women who never miss a drop.
+        </p>
+
+        <form
+          class="email-capture__form gsap-anim"
+          method="post"
+          action="#"
+          aria-label="Email signup form"
+          novalidate
+        >
+          <label for="email-signup" class="visually-hidden">Your email address</label>
+          <input
+            id="email-signup"
+            class="email-capture__input"
+            type="email"
+            name="email"
+            placeholder="Your email address"
+            required
+            autocomplete="email"
+            aria-label="Email address"
+          />
+          <button
+            class="email-capture__submit"
+            type="submit"
+            aria-label="Sign up for Oh Polly emails"
+          >Join</button>
+        </form>
+
+        <p class="email-capture__legal gsap-anim">
+          By subscribing you agree to our
+          <a href="https://us.ohpolly.com/pages/privacy-policy" style="color: var(--color-accent); text-decoration: underline;">Privacy Policy</a>.
+          Unsubscribe any time.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 11: FOOTER
+       STYLE: Near-black, three-column nav, US signals
+       ANIMATION TYPE: fade-up (gentle final entrance)
+       LAYOUT: 2-col (brand + nav cols), 3-col nav
+       TOKENS: --color-bg-dark, --color-text-light, --color-text-muted
+  ════════════════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+
+    <div class="footer__top wrap gsap-anim">
+
+      <!-- Brand column -->
+      <div class="footer__brand-col">
+
+        <a href="https://us.ohpolly.com" class="footer__logo" aria-label="Oh Polly — home">
+          oh <em>POLLY</em>
+        </a>
+
+        <p class="footer__origin">Glasgow, Scotland &middot; Est. 2015</p>
+
+        <!-- US-specific signals -->
+        <div class="footer__us-signals" aria-label="US shipping and returns information">
+          <p class="footer__signal">Free US shipping over $80</p>
+          <p class="footer__signal">Duties paid on all US orders</p>
+          <p class="footer__signal">
+            <a
+              href="https://us.ohpolly.com/pages/returns"
+              class="footer__link"
+              aria-label="View US returns policy"
+            >US returns policy</a>
+          </p>
+          <p class="footer__signal">
+            <a
+              href="https://us.ohpolly.com/pages/size-guide"
+              class="footer__link"
+              aria-label="UK to US size conversion guide"
+            >Size Guide — UK &rarr; US</a>
+          </p>
+        </div>
+
+        <!-- Social -->
+        <div class="footer__social" aria-label="Social media links">
+          <a
+            href="https://www.instagram.com/ohpolly/"
+            class="footer__social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Oh Polly on Instagram"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+            Instagram
+          </a>
+          <a
+            href="https://www.tiktok.com/@ohpolly"
+            class="footer__social-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Oh Polly on TikTok"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.67a8.18 8.18 0 004.78 1.54V6.73a4.85 4.85 0 01-1.01-.04z"/>
+            </svg>
+            TikTok
+          </a>
+        </div>
+
+        <!-- Footer newsletter (simplified) -->
+        <div class="footer__newsletter">
+          <span class="footer__newsletter-label">Stay in the loop</span>
+          <form class="footer__newsletter-form" method="post" action="#" aria-label="Footer email signup" novalidate>
+            <label for="footer-email" class="visually-hidden">Email address</label>
+            <input
+              id="footer-email"
+              class="footer__newsletter-input"
+              type="email"
+              name="email"
+              placeholder="your@email.com"
+              required
+              autocomplete="email"
+            />
+            <button class="footer__newsletter-btn" type="submit" aria-label="Subscribe to Oh Polly emails">Join</button>
+          </form>
+        </div>
+
+      </div><!-- /.footer__brand-col -->
+
+      <!-- Navigation columns -->
+      <nav class="footer__nav-cols" aria-label="Footer navigation">
+
+        <div>
+          <span class="footer__col-title">Shop</span>
+          <ul class="footer__col-links" role="list">
+            <li><a href="https://us.ohpolly.com/collections/new-in" class="footer__link">New Arrivals</a></li>
+            <li><a href="https://us.ohpolly.com/collections/the-wedding-edit" class="footer__link">The Wedding Edit</a></li>
+            <li><a href="https://us.ohpolly.com/collections/going-out" class="footer__link">Going Out</a></li>
+            <li><a href="https://us.ohpolly.com/collections/bestsellers" class="footer__link">Bestsellers</a></li>
+            <li><a href="https://us.ohpolly.com/collections" class="footer__link">All Collections</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <span class="footer__col-title">Info</span>
+          <ul class="footer__col-links" role="list">
+            <li><a href="https://us.ohpolly.com/pages/about" class="footer__link">About Oh Polly</a></li>
+            <li><a href="https://us.ohpolly.com/pages/sustainability" class="footer__link">Sustainability</a></li>
+            <li><a href="https://us.ohpolly.com/pages/careers" class="footer__link">Careers</a></li>
+            <li><a href="https://us.ohpolly.com/pages/press" class="footer__link">Press</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <span class="footer__col-title">Help</span>
+          <ul class="footer__col-links" role="list">
+            <li><a href="https://us.ohpolly.com/pages/shipping" class="footer__link">Shipping to the US</a></li>
+            <li><a href="https://us.ohpolly.com/pages/returns" class="footer__link">Returns</a></li>
+            <li><a href="https://us.ohpolly.com/pages/size-guide" class="footer__link">Size Guide (UK &rarr; US)</a></li>
+            <li><a href="https://us.ohpolly.com/pages/contact" class="footer__link">Contact Us</a></li>
+            <li><a href="https://us.ohpolly.com/pages/faq" class="footer__link">FAQ</a></li>
+          </ul>
+        </div>
+
+      </nav><!-- /.footer__nav-cols -->
+
+    </div><!-- /.footer__top -->
+
+    <!-- Footer bottom bar -->
+    <div class="footer__bottom wrap">
+      <p class="footer__copyright">&copy; 2026 Oh Polly. All rights reserved.</p>
+      <nav class="footer__legal-links" aria-label="Legal">
+        <a href="https://us.ohpolly.com/pages/privacy-policy" class="footer__link">Privacy Policy</a>
+        <a href="https://us.ohpolly.com/pages/terms-of-service" class="footer__link">Terms of Service</a>
+        <a href="https://us.ohpolly.com/pages/cookie-policy" class="footer__link">Cookies</a>
+      </nav>
+    </div>
+
+  </footer>
+
+  <!-- Visually hidden utility class — used for screen-reader-only labels -->
+  <style>
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+  </style>
+
+  <!-- CDN Scripts — loaded at end of body -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/SplitText.min.js"></script>
+
+  <!-- Site JS -->
+  <script src="js/main.js"></script>
+
+</body>
+</html>
