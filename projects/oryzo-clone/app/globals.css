@@ -1,0 +1,191 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ─── Oryzo Design Tokens ─── */
+:root {
+  --color-white: #ffedd7;
+  --color-white-transparent: #ffedd700;
+  --color-black: #100904;
+  --color-black-transparent: #10090400;
+  --color-grey-brown: #6c5f51;
+  --color-green: #445231;
+  --color-green-light: #5d6c49;
+  --color-green-lightest: #f6e0c6;
+  --color-pure-white: #fff;
+  --color-pure-black: #000;
+  --color-orange: #dc5000;
+  --color-brown: #382416;
+
+  --font-display: var(--font-display, 'Plus Jakarta Sans', sans-serif);
+  --site-padding-x: 3.125vw;
+  --grid-columns: 16;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar { display: none; }
+
+body {
+  font-family: var(--font-display);
+  background: var(--color-black);
+  color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ─── Typography Scale ─── */
+.display-hero {
+  font-size: clamp(5rem, 15vw, 16rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+.display-large {
+  font-size: clamp(2.5rem, 7vw, 8rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  text-transform: uppercase;
+}
+.display-medium {
+  font-size: clamp(1.5rem, 4vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+}
+.label-caps {
+  font-size: clamp(0.65rem, 1vw, 0.85rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.body-text {
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+/* ─── Layout Utilities ─── */
+.o-container {
+  width: 100%;
+  padding: 0 var(--site-padding-x);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* ─── Section Base ─── */
+.section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ─── Scroll Reveal ─── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-d1 { transition-delay: 0.1s; }
+.reveal-d2 { transition-delay: 0.2s; }
+.reveal-d3 { transition-delay: 0.3s; }
+
+/* ─── Nav dot underline ─── */
+.nav-link {
+  position: relative;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.nav-link:hover { opacity: 1; }
+.nav-link.active { opacity: 1; }
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-white);
+}
+
+/* ─── Button ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: var(--color-white);
+  color: var(--color-black);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: #ffe0b2; transform: scale(1.03); }
+
+.btn-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 100px;
+  background: var(--color-black);
+  color: var(--color-white);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,237,215,0.2);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-dark:hover { background: #1a110a; transform: scale(1.03); }
+
+/* ─── Horizontal scroll strip ─── */
+.h-scroll-track {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.h-scroll-track::-webkit-scrollbar { display: none; }
+
+/* ─── Keyframes ─── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 20s linear infinite; display: flex; gap: 0; width: max-content; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
